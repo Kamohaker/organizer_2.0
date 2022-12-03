@@ -47,6 +47,7 @@ const NotebookEdit = ({route, navigation }) => {
   const [daneNazwa,setNazwa] = useState('');
   const [daneOpis,setOpis] = useState('');
 
+  
   useEffect(()=>{
     const focusHandler = navigation.addListener('focus', () => {
       axios.get(url).then(response =>{
@@ -76,13 +77,16 @@ const NotebookEdit = ({route, navigation }) => {
   }
 
 const deleteData = () =>{
-  console.log('1usunięto:','1nazwa:',route.params.nazwa,'1opis:',route.params.opis),
+ 
     axios.delete(url,{
 
-      nazwa: daneNazwa,
-      opis: daneOpis
-      }).then(response => console.log('usunięto:','nazwa:',route.params.nazwa,'opis:',route.params.opis),
-      navigation.navigate('Notatnik'),
+      nazwa: route.params.nazwa,
+      opis:  route.params.opis
+      }).then(response => {
+      console.log('usunięto:','nazwa:',route.params.nazwa,'opis:', route.params.opis),
+
+      navigation.navigate('Notatnik')
+    }
      ).catch(err=>console.log(err))
      
       
