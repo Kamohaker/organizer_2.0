@@ -15,6 +15,8 @@ import WalletScreen from "../../scenes/wallet";
 import NotebookScreen from "../../scenes/notebook";
 import NotebookPageScreen from "../../scenes/notebook/notebookPage";
 import NotebookEditScreen from "../../scenes/notebook/NotebookEdit";
+import WalletEditScreen from "../../scenes/wallet/walletEdit";
+import WalletPageScreen from "../../scenes/wallet/walletPage";
 
 const Drawer = createDrawerNavigator();
 
@@ -32,11 +34,15 @@ export function DrawerNavigator  ()  {
         routeNames: props.state.routeNames.filter(
          (routeName) => routeName !== 'NotatnikStrona',
          (routeName) => routeName !== 'NotatnikEdytuj',
+         (routeName) => routeName !== 'PortfelEdytuj',
+         (routeName) => routeName !== 'PortfelStorna',
         ),
         routes: props.state.routes.filter(
           (route) =>
             route.name !== 'NotatnikStrona' &&
-            route.name !== 'NotatnikEdytuj' 
+            route.name !== 'NotatnikEdytuj' &&
+            route.name !== 'PortfelEdytuj' &&
+            route.name !== 'PortfelStrona'
         ),
       },
     };
@@ -145,6 +151,16 @@ export function DrawerNavigator  ()  {
       name="NotatnikEdytuj"
       
       component={NotebookEditScreen}
+      />
+       <Drawer.Screen
+      name="PortfelEdytuj"
+      
+      component={WalletEditScreen}
+      />
+       <Drawer.Screen
+      name="PortfelStrona"
+      
+      component={WalletPageScreen}
       />
    
    

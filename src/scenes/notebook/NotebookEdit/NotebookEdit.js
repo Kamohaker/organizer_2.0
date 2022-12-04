@@ -124,7 +124,7 @@ data:{
         end={{ x: 1, y: 1 }}
       >
 
-    <TextArea   defaultValue= {route.params.nazwa} h={50} fontSize={20}  onChangeText={text => setNazwa(text)} />
+    <TextArea   defaultValue= {route.params.nazwa} h={50} fontSize={20}  onChangeText={text => setNazwa(text)} isDisabled/>
     <TextArea  defaultValue= {route.params.opis } shadow={2} h={600}  fontSize={15}  onChangeText={text => setOpis(text)} />
     <Fab  shadow={4} right={50} bgColor={'#002851'} onPress={deleteData
         }

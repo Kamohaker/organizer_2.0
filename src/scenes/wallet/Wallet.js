@@ -1,6 +1,6 @@
 import React  from "react";
 import { PropTypes } from "prop-types";
-import { Modal,FormControl,Input,Button, Box,Flex,View,Divider, FlatList,Avatar, HStack, VStack, Fab,Text, Icon,NativeBaseProvider } from "native-base";
+import { Modal,FormControl,Input,Button,Pressable, Box,Flex,View,Divider, FlatList,Avatar, HStack, VStack, Fab,Text, Icon,NativeBaseProvider } from "native-base";
 import {StyleSheet} from "react-native"
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useState ,useEffect} from "react";
@@ -16,8 +16,9 @@ const styles = StyleSheet.create({
    
   },
   title: {
-    fontSize: 44,
-    marginBottom: 20,
+    fontSize: 20,
+    marginTop: 10,
+    marginBottom:10
   },
 });
 
@@ -25,7 +26,8 @@ const Wallet = ({route,navigation}) => {
   const from = route?.params?.from
 
  //const url = 'http://192.168.0.186/organizer/index_wallet.php';//dom
-  const url = 'http://192.168.1.209/organizer/index_wallet.php';//aka
+ // const url = 'http://192.168.1.209/organizer/index_wallet.php';//aka
+  const url = 'http://192.168.0.156/organizer/index_wallet.php';//dom_KOMP
 
   const [showModal, setShowModal] = useState(false);
   const [data, setData] = useState([]);
@@ -34,16 +36,6 @@ const Wallet = ({route,navigation}) => {
   const [daneNumKon,setNumKon] = useState('');
 
 
-  function axiosGet(){
-    axios.get(url).then(response =>{
-    
-      setData(response.data) 
-      console.log(response.data)
-        })
-      .catch(err=> console.log(err))
-  }
-  
-  
  function getFirstLetterFrom(value) {
   return value.slice(0, 1).toUpperCase();
 }
@@ -54,9 +46,17 @@ function randomColor() {
 
   return color;
 }
+
+
 useEffect(()=>{
   const focusHandler = navigation.addListener('focus', () => {
-   axiosGet()
+    axios.get(url).then(response =>{
+  
+      setData(response.data) 
+     // console.log(response.data)
+  
+        })
+      .catch(err=> console.log(err))
 } ); 
 return (focusHandler)
 },[])
@@ -87,19 +87,41 @@ const postData = () =>{
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
-      
-      <Box>
+      <HStack space={[2, 3]} justifyContent="space-between">
+        <Text style= {styles.title}>
+          nazwa
+        </Text>
+        <Divider orientation="vertical" mx="3" _light={{
+          bg: "muted.800"
+        }}  />
+        <Text style= {styles.title}>
+          numer telefonu
+        </Text>
+        <Divider orientation="vertical" mx="3" _light={{
+          bg: "muted.800"
+        }}  />
+        <Text style= {styles.title}>
+          numer konta
+        </Text>
+       
+      </HStack>
+      <Divider orientation="horizontal" my="3" _light={{
+          bg: "muted.800"
+        }}  />
+     
         <FlatList data={data} renderItem={({item}) => 
-          <Box borderBottomWidth="2" 
-             borderColor="muted.800" 
-             py="3">
+          <VStack>
             <HStack space={[2, 3]} justifyContent="space-between">
-              <Avatar size="60px" backgroundColor={randomColor()}>{getFirstLetterFrom(item.nazwa)}</Avatar>
-              <VStack>
-              <Flex mx="5" direction="row" h="60">
+              
+            
+              <Avatar size="60px" mx="4" backgroundColor={randomColor()}>{getFirstLetterFrom(item.nazwa)}</Avatar>
+             <Pressable onPress={() =>
+          navigation.navigate('PortfelEdytuj',{nazwa:item.nazwa , num_konta:item.num_konta, num_telefonu:item.num_telefonu})
+        }>
                 <Text  color="#ea580c" bold>
                   {item.nazwa}
                 </Text>
+                </Pressable>
                 <Divider orientation="vertical" mx="4" _light={{
           bg: "muted.800"
         }}  />
@@ -115,55 +137,20 @@ const postData = () =>{
                   {item.num_konta}
             
                 </Text>
-                </Flex>
-              </VStack>
+
+             
             </HStack>
-          </Box>} keyExtractor={item => item.id} />
+            <Divider orientation="horizontal" mx="4" my="3" _light={{
+          bg: "muted.800"
+        }}  />
+            </VStack>
+          } keyExtractor={item => item.id} />
+
           <Fab  shadow={4} bgColor={'#002851'} 
-          onPress={() => setShowModal(true)}
+          onPress={()=>{navigation.navigate('PortfelStrona')}}
           icon={<Icon color="#a3e635" as={AntDesign} name="plus" size="lg" />} />
           
-          <Modal isOpen={showModal} onClose={() => setShowModal(false)} >
-        <Modal.Content maxWidth="400px">
-          <Modal.CloseButton />
-          <Modal.Header bgColor={'#002851'} _text={{
-      fontSize: "20",
-      fontWeight: "medium",
-      color: "#a3e635",
-      letterSpacing: "lg",
-    }}>Nowy kontakt</Modal.Header>
-          <Modal.Body bgColor={'#0c4a6e'}>
-            <FormControl>
-              <FormControl.Label>Nazwa</FormControl.Label>
-              <Input value={daneNazwa} onChangeText={text => setNazwa(text)} />
-            </FormControl>
-            <FormControl mt="3">
-              <FormControl.Label>Numer telefonu</FormControl.Label>
-              <Input  value={daneNumTel} onChangeText={text => setNumTel(text)} />
-            </FormControl>
-            <FormControl mt="3">
-              <FormControl.Label>Numer konta</FormControl.Label>
-              <Input  value={daneNumKon} onChangeText={text => setNumKon(text)}  />
-            </FormControl>
-          </Modal.Body>
-          <Modal.Footer bgColor={'#0c4a6e'}>
-            <Button.Group space={2}>
-              <Button variant="ghost" colorScheme="red" onPress={() => {
-                setShowModal(false);
-            
-            }}>
-                Anuluj
-              </Button>
-              <Button onPress={() => {
-               postData()
-            }}>
-                Dodaj
-              </Button>
-            </Button.Group>
-          </Modal.Footer>
-        </Modal.Content>
-      </Modal>
-    </Box>
+   
     </LinearGradient>
     </NativeBaseProvider>
     )

@@ -41,8 +41,9 @@ const styles = StyleSheet.create({
 
 const NotebookPage = ({route, navigation }) => {
   const from = route?.params?.from
-  const url = 'http://192.168.0.186/organizer/index_notebook.php';//dom
+ // const url = 'http://192.168.0.186/organizer/index_notebook.php';//dom
   //const url = 'http://192.168.1.209/organizer/index_notebook.php';//aka
+  const url = 'http://192.168.0.156/organizer/index_notebook.php';//dom_KOMP
   const [data, setData] = useState([]);
   const [daneNazwa,setNazwa] = useState('');
   const [daneOpis,setOpis] = useState('');
