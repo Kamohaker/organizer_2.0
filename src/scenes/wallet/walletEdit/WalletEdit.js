@@ -41,28 +41,6 @@ const WalletEdit = ({route,navigation}) => {
   const [daneNumKon,setNumKon] = useState('');
 
 
-  
-function randomColor() {
-  let hex = Math.floor(Math.random() * 0xFFFFFF);
-  let color = "#" + hex.toString(16);
-
-  return color;
-}
-
-const postData = () =>{
-  
-  axios.post(url,{
-    nazwa:daneNazwa,
-    num_telefonu:daneNumTel,
-    num_konta:daneNumKon
-  }).then(response => console.log('dodano:',daneNazwa,daneNumTel,daneNumKon),
-   setNazwa(''),
-   setNumTel(''),
-   setNumKon(''),
-   navigation.navigate('Portfel'),
-  ).catch(err=>console.log(err))
-}
-
 const putData = () =>{
     
   axios.put(url,{
@@ -83,11 +61,12 @@ const deleteData = () =>{
   axios.delete(url,{
 data:{
     nazwa: route.params.nazwa,
-    opis:  route.params.opis}
+    num_konta:  route.params.num_konta,
+    num_telefonu:route.params.num_telefonu}
     }).then(response => {
-    console.log('usunięto:','nazwa:',route.params.nazwa,'opis:', route.params.opis),
+    console.log('usunięto:','nazwa:',route.params.nazwa,'num_k:', route.params.num_konta,'num:',route.params.num_telefonu),
 
-    navigation.navigate('Notatnik')
+    navigation.navigate('Portfel')
   }
    ).catch(err=>console.log(err))
    
@@ -152,7 +131,7 @@ data:{
         placeholderTextColor: "#a3e635"
         }} >
         </Input>
-    <Fab  bgColor={'#002851'} 
+    <Fab  bgColor={'#002851'} onPress={deleteData}
      icon={<Icon color="#dc2626" as={AntDesign} name="delete" size="lg" />}
     />
     </LinearGradient>

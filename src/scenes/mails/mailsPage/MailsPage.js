@@ -1,12 +1,12 @@
 import React  from "react";
 import { PropTypes } from "prop-types";
-import { Modal,FormControl,Input,Button,IconButton, Box,Flex,View,Divider, FlatList,Avatar, HStack, VStack, Fab,Text, NativeBaseProvider } from "native-base";
+import { Modal,Link,FormControl,Input,Button,IconButton, Box,Flex,View,Divider, FlatList, Heading, Avatar, HStack, VStack, Fab,Text, Icon, Center, NativeBaseProvider } from "native-base";
 import {StyleSheet} from "react-native"
 import AntDesign from "react-native-vector-icons/AntDesign";
-import Icon  from "react-native-vector-icons/AntDesign";
 import { useState ,useEffect} from "react";
 import axios from "axios";
 import { LinearGradient } from "expo-linear-gradient";
+import Icons  from "react-native-vector-icons/AntDesign";
 
 const styles = StyleSheet.create({
   root: {
@@ -17,9 +17,20 @@ const styles = StyleSheet.create({
    
   },
   title: {
-    fontSize: 20,
-    marginTop: 10,
-    marginBottom:10
+    fontSize: 44,
+    marginBottom: 20,
+  },
+
+  boxes: {
+    borderBottomWidth:2 ,
+    borderTopWidth:2,
+    borderLeftWidth:2,
+    borderRightWidth:2,
+    borderRadius:30,
+    borderColor:"#701a75" ,
+    backgroundColor:"#701a75",
+    marginTop:10
+
   },
   ico: {
     alignItems: "flex-start",
@@ -27,36 +38,33 @@ const styles = StyleSheet.create({
   },
 });
 
-const WalletPage = ({route,navigation}) => {
+
+const MailsPage = ({route,navigation}) => {
   const from = route?.params?.from
-
- //const url = 'http://192.168.0.186/organizer/index_wallet.php';//dom
- // const url = 'http://192.168.1.209/organizer/index_wallet.php';//aka
-  const url = 'http://192.168.0.156/organizer/index_wallet.php';//dom_KOMP
-
+ 
+  //const url = 'http://192.168.0.186/organizer/index_links.php';//dpm
+  //const url = 'http://192.168.1.209/organizer/index_links.php';//aka
+  const url = 'http://192.168.0.156/organizer/index_mails.php';//dom_KOMP
   const [showModal, setShowModal] = useState(false);
   const [data, setData] = useState([]);
   const [daneNazwa,setNazwa] = useState('');
-  const [daneNumTel,setNumTel] = useState('');
-  const [daneNumKon,setNumKon] = useState('');
+  const [daneMail,setMail] = useState('');
+ 
 
-
-const postData = () =>{
+  const postData = () =>{
   
-  axios.post(url,{
-    nazwa:daneNazwa,
-    num_telefonu:daneNumTel,
-    num_konta:daneNumKon
-  }).then(response => console.log('dodano:',daneNazwa,daneNumTel,daneNumKon),
-   setNazwa(''),
-   setNumTel(''),
-   setNumKon(''),
-   navigation.navigate('Portfel'),
-  ).catch(err=>console.log(err))
-}
+    axios.post(url,{
+      nazwa:daneNazwa,
+      email:daneMail
+    }).then(response => console.log('dodano:',daneNazwa,daneMail),
+    navigation.navigate('Maile'),
+    setNazwa(''),
+    setMail(''),
+    ).catch(err=>console.log(err))
+  }
 
   return (
-  <NativeBaseProvider>
+    <NativeBaseProvider>
     <View style={styles.ico}>
       <HStack space={300}>
     <IconButton
@@ -67,7 +75,7 @@ const postData = () =>{
         size:8
       }}
       onPress={() => {
-        navigation.navigate('Portfel')
+        navigation.navigate('Maile')
   }}></IconButton>
   <IconButton
        _icon={{
@@ -87,38 +95,31 @@ const postData = () =>{
         end={{ x: 1, y: 1 }}
       >
         <Avatar my= "5" size={150} background="#002851">
-         <Icon name="adduser" size={70} color="#a3e635" /> 
+         <Icons name="plus" size={70} color="#a3e635" /> 
          </Avatar>
         
-        <Input value={daneNazwa} variant="rounded" mx="3" my= "5" placeholder="Nazwa" 
+        <Input  value={daneNazwa} variant="rounded" mx="3" my= "5" placeholder="Nazwa" 
         w="50%" backgroundColor="#0c4a6e" borderColor="#a3e635" 
         onChangeText={text => setNazwa(text)} 
         _light={{
         placeholderTextColor: "#a3e635"
         }} >
         </Input>
-        <Input value={daneNumTel} variant="rounded" mx="3" my= "5" 
-        placeholder="Numer telefonu" w="50%" backgroundColor="#0c4a6e" 
+        <Input value={daneMail} variant="rounded" mx="3" my= "5" 
+        placeholder="Mail" w="50%" backgroundColor="#0c4a6e" 
         borderColor="#a3e635" 
-        onChangeText={text => setNumTel(text)} 
+        onChangeText={text => setMail(text)} 
         _light={{
         placeholderTextColor: "#a3e635"
         }} >
         </Input>
-        <Input value={daneNumKon} variant="rounded" mx="3" my= "5"
-         placeholder="Numer konta" w="50%" backgroundColor="#0c4a6e"
-          borderColor="#a3e635" 
-          onChangeText={text => setNumKon(text)} 
-        _light={{
-        placeholderTextColor: "#a3e635"
-        }} >
-        </Input>
+        
     
     </LinearGradient>
     </NativeBaseProvider>
     )
 };
-WalletPage.propTypes = {
+MailsPage.propTypes = {
   route: PropTypes.shape({
     params: PropTypes.shape({ from: PropTypes.string }),
   }),
@@ -127,9 +128,9 @@ WalletPage.propTypes = {
   }),
 };
 
-WalletPage.defaultProps = {
+MailsPage.defaultProps = {
   route: { params: { from: '' } },
   navigation: { navigate: () => null },
 };
 
-export default WalletPage;
+export default MailsPage;

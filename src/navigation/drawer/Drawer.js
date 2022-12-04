@@ -17,6 +17,10 @@ import NotebookPageScreen from "../../scenes/notebook/notebookPage";
 import NotebookEditScreen from "../../scenes/notebook/NotebookEdit";
 import WalletEditScreen from "../../scenes/wallet/walletEdit";
 import WalletPageScreen from "../../scenes/wallet/walletPage";
+import LinksPageScreen from "../../scenes/links/linksPage";
+import LinksEditScreen from "../../scenes/links/linksEdit";
+import MailsPageScreen from "../../scenes/mails/mailsPage";
+import MailsEditScreen from "../../scenes/mails/mailsEdit";
 
 const Drawer = createDrawerNavigator();
 
@@ -36,13 +40,21 @@ export function DrawerNavigator  ()  {
          (routeName) => routeName !== 'NotatnikEdytuj',
          (routeName) => routeName !== 'PortfelEdytuj',
          (routeName) => routeName !== 'PortfelStorna',
+         (routeName) => routeName !== 'LinkiStrona',
+         (routeName) => routeName !== 'LinkiEdytuj',
+         (routeName) => routeName !== 'MailStrona',
+         (routeName) => routeName !== 'MailEdytuj',
         ),
         routes: props.state.routes.filter(
           (route) =>
             route.name !== 'NotatnikStrona' &&
             route.name !== 'NotatnikEdytuj' &&
             route.name !== 'PortfelEdytuj' &&
-            route.name !== 'PortfelStrona'
+            route.name !== 'PortfelStrona' &&
+            route.name !== 'LinkiStrona' &&
+            route.name !== 'LinkiEdytuj' &&
+            route.name !== 'MailStrona' &&
+            route.name !== 'MailEdytuj'
         ),
       },
     };
@@ -161,6 +173,26 @@ export function DrawerNavigator  ()  {
       name="PortfelStrona"
       
       component={WalletPageScreen}
+      />
+       <Drawer.Screen
+      name="LinkiStrona"
+      
+      component={LinksPageScreen}
+      />
+       <Drawer.Screen
+      name="LinkiEdytuj"
+      
+      component={LinksEditScreen}
+      />
+      <Drawer.Screen
+      name="MailStrona"
+      
+      component={MailsPageScreen}
+      />
+    <Drawer.Screen
+      name="MailEdytuj"
+      
+      component={MailsEditScreen}
       />
    
    

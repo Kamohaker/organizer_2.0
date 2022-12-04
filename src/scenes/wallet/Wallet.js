@@ -47,7 +47,6 @@ function randomColor() {
   return color;
 }
 
-
 useEffect(()=>{
   const focusHandler = navigation.addListener('focus', () => {
     axios.get(url).then(response =>{
@@ -61,22 +60,6 @@ useEffect(()=>{
 return (focusHandler)
 },[])
 
-
-const postData = () =>{
-  
-  axios.post(url,{
-    nazwa:daneNazwa,
-    num_telefonu:daneNumTel,
-    num_konta:daneNumKon
-  }).then(response => console.log('dodano:',daneNazwa,daneNumTel,daneNumKon),
-  
-   setShowModal(false),
-   setNazwa(''),
-   setNumTel(''),
-   setNumKon(''),
-   axiosGet()
-  ).catch(err=>console.log(err))
-}
 
   return (
   <NativeBaseProvider>
@@ -118,21 +101,21 @@ const postData = () =>{
              <Pressable onPress={() =>
           navigation.navigate('PortfelEdytuj',{nazwa:item.nazwa , num_konta:item.num_konta, num_telefonu:item.num_telefonu})
         }>
-                <Text  color="#ea580c" bold>
+                <Text  numberOfLines={1} ellipsizeMode='tail' color="#ea580c" bold>
                   {item.nazwa}
                 </Text>
                 </Pressable>
                 <Divider orientation="vertical" mx="4" _light={{
           bg: "muted.800"
         }}  />
-                <Text >
+                <Text numberOfLines={1} ellipsizeMode='tail'>
                   {item.num_telefonu}
             
                 </Text>
                 <Divider orientation="vertical" mx="4" _light={{
           bg: "muted.800"
         }}  />
-                <Text >
+                <Text numberOfLines={1} ellipsizeMode='tail'>
             
                   {item.num_konta}
             
