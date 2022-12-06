@@ -21,6 +21,9 @@ import LinksPageScreen from "../../scenes/links/linksPage";
 import LinksEditScreen from "../../scenes/links/linksEdit";
 import MailsPageScreen from "../../scenes/mails/mailsPage";
 import MailsEditScreen from "../../scenes/mails/mailsEdit";
+import LecturesPageScreen from "../../scenes/lecturers/lecturesPage";
+import LecturesEditScreen from "../../scenes/lecturers/lecturesEdit";
+import ToDoPageScreen from "../../scenes/todo/todoPage";
 
 const Drawer = createDrawerNavigator();
 
@@ -44,6 +47,9 @@ export function DrawerNavigator  ()  {
          (routeName) => routeName !== 'LinkiEdytuj',
          (routeName) => routeName !== 'MailStrona',
          (routeName) => routeName !== 'MailEdytuj',
+         (routeName) => routeName !== 'ProwadzacyStrona',
+         (routeName) => routeName !== 'ProwadzacyEdytuj',
+         (routeName) => routeName !== 'ToDoStorna',
         ),
         routes: props.state.routes.filter(
           (route) =>
@@ -54,7 +60,11 @@ export function DrawerNavigator  ()  {
             route.name !== 'LinkiStrona' &&
             route.name !== 'LinkiEdytuj' &&
             route.name !== 'MailStrona' &&
-            route.name !== 'MailEdytuj'
+            route.name !== 'MailEdytuj' &&
+            route.name !== 'ProwadzacyStrona' &&
+            route.name !== 'ProwadzacyEdytuj' &&
+            route.name !== 'ToDoStrona' 
+
         ),
       },
     };
@@ -74,6 +84,7 @@ export function DrawerNavigator  ()  {
     headerStyle: {
        backgroundColor: '#002851'
     }
+    
   }}>
     
     <Drawer.Screen
@@ -193,6 +204,21 @@ export function DrawerNavigator  ()  {
       name="MailEdytuj"
       
       component={MailsEditScreen}
+      />
+      <Drawer.Screen
+      name="ProwadzacyEdytuj"
+      
+      component={LecturesEditScreen}
+      />
+      <Drawer.Screen
+      name="ProwadzacyStrona"
+      
+      component={LecturesPageScreen}
+      />
+      <Drawer.Screen
+      name="ToDoStrona"
+      
+      component={ToDoPageScreen}
       />
    
    

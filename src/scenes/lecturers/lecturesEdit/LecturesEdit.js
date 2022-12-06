@@ -39,38 +39,28 @@ const styles = StyleSheet.create({
 });
 
 
-const LinksEdit = ({route,navigation}) => {
+const LecturesEdit = ({route,navigation}) => {
   const from = route?.params?.from
  
-  //const url = 'http://192.168.0.186/organizer/index_links.php';//dpm
-  const url = 'http://192.168.1.209/organizer/index_links.php';//aka
-  //const url = 'http://192.168.0.156/organizer/index_links.php';//dom_KOMP
+  //const url = 'http://192.168.0.186/organizer/index_lectures.php';//dpm
+  const url = 'http://192.168.1.209/organizer/index_lectures.php';//aka
+  //const url = 'http://192.168.0.156/organizer/index_lectures.php';//dom_KOMP
   const [showModal, setShowModal] = useState(false);
   const [data, setData] = useState([]);
   const [daneNazwa,setNazwa] = useState('');
-  const [daneLink,setLink] = useState('');
+  const [daneStopien,setStopien] = useState('');
+  const [daneNumPok,setNumPok] = useState('');
  
-  useEffect(()=>{
-    const focusHandler = navigation.addListener('focus', () => {
-      axios.get(url).then(response =>{
-    
-        setData(response.data) 
-       // console.log(response.data)
-    
-          })
-        .catch(err=> console.log(err))
-  } ); 
-  return (focusHandler)
-  },[])
-
+  
   const putData = () =>{
     
     axios.put(url,{
   
       nazwa: route.params.nazwa,
-      links: daneLink
-      }).then(response => console.log('zmieniono:','nazwa:',route.params.nazwa,'link:',daneLink),
-      navigation.navigate('Linki'),
+      stopien:daneStopien,
+      num_pokoju:daneNumPok
+      }).then(response => console.log('zmieniono:','nazwa:',route.params.nazwa,'mail:',daneStopien),
+      navigation.navigate('Prowadzący'),
      
      ).catch(err=>console.log(err))
      
@@ -81,12 +71,12 @@ const LinksEdit = ({route,navigation}) => {
     axios.delete(url,{
   data:{
       nazwa: route.params.nazwa,
-      links:  route.params.link,
+      stopien:  route.params.stopien,
      }
       }).then(response => {
-      console.log('usunięto:','nazwa:',route.params.nazwa,'link:', route.params.link),
+      console.log('usunięto:','nazwa:',route.params.nazwa,'mail:', route.params.stopien),
   
-      navigation.navigate('Linki')
+      navigation.navigate('Prowadzący')
     }
      ).catch(err=>console.log(err))
      
@@ -105,7 +95,7 @@ const LinksEdit = ({route,navigation}) => {
         size:8
       }}
       onPress={() => {
-        navigation.navigate('Linki')
+        navigation.navigate('Prowadzący')
   }}></IconButton>
   <IconButton
        _icon={{
@@ -135,10 +125,18 @@ const LinksEdit = ({route,navigation}) => {
         placeholderTextColor: "#a3e635"
         }} >
         </Input>
-        <Input defaultValue= {route.params.link} variant="rounded" mx="3" my= "5" 
-        placeholder="Link" w="50%" backgroundColor="#0c4a6e" 
+        <Input defaultValue= {route.params.stopien} variant="rounded" mx="3" my= "5" 
+        placeholder="Stopień" w="50%" backgroundColor="#0c4a6e" 
         borderColor="#a3e635" 
-        onChangeText={text => setLink(text)} 
+        onChangeText={text => setStopien(text)} 
+        _light={{
+        placeholderTextColor: "#a3e635"
+        }} >
+        </Input>
+        <Input defaultValue= {route.params.num_pok} variant="rounded" mx="3" my= "5" 
+        placeholder="Numer pokoju" w="50%" backgroundColor="#0c4a6e" 
+        borderColor="#a3e635" 
+        onChangeText={text => setNumPok(text)} 
         _light={{
         placeholderTextColor: "#a3e635"
         }} >
@@ -151,7 +149,7 @@ const LinksEdit = ({route,navigation}) => {
     </NativeBaseProvider>
     )
 };
-LinksEdit.propTypes = {
+LecturesEdit.propTypes = {
   route: PropTypes.shape({
     params: PropTypes.shape({ from: PropTypes.string }),
   }),
@@ -160,9 +158,9 @@ LinksEdit.propTypes = {
   }),
 };
 
-LinksEdit.defaultProps = {
+LecturesEdit.defaultProps = {
   route: { params: { from: '' } },
   navigation: { navigate: () => null },
 };
 
-export default LinksEdit;
+export default LecturesEdit;

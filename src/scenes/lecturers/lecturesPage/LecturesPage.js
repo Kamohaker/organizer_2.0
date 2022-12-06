@@ -39,58 +39,31 @@ const styles = StyleSheet.create({
 });
 
 
-const LinksEdit = ({route,navigation}) => {
+const LecturesPage = ({route,navigation}) => {
   const from = route?.params?.from
  
-  //const url = 'http://192.168.0.186/organizer/index_links.php';//dpm
-  const url = 'http://192.168.1.209/organizer/index_links.php';//aka
-  //const url = 'http://192.168.0.156/organizer/index_links.php';//dom_KOMP
+  //const url = 'http://192.168.0.186/organizer/index_lectures.php';//dpm
+  const url = 'http://192.168.1.209/organizer/index_lectures.php';//aka
+  //const url = 'http://192.168.0.156/organizer/index_lectures.php';//dom_KOMP
   const [showModal, setShowModal] = useState(false);
   const [data, setData] = useState([]);
   const [daneNazwa,setNazwa] = useState('');
-  const [daneLink,setLink] = useState('');
+  const [daneStopien,setStopien] = useState('');
+  const [daneNumPok,setNumPok] = useState('');
  
-  useEffect(()=>{
-    const focusHandler = navigation.addListener('focus', () => {
-      axios.get(url).then(response =>{
-    
-        setData(response.data) 
-       // console.log(response.data)
-    
-          })
-        .catch(err=> console.log(err))
-  } ); 
-  return (focusHandler)
-  },[])
 
-  const putData = () =>{
-    
-    axios.put(url,{
+  const postData = () =>{
   
-      nazwa: route.params.nazwa,
-      links: daneLink
-      }).then(response => console.log('zmieniono:','nazwa:',route.params.nazwa,'link:',daneLink),
-      navigation.navigate('Linki'),
-     
-     ).catch(err=>console.log(err))
-     
-  }
-  
-  const deleteData = () =>{
-  
-    axios.delete(url,{
-  data:{
-      nazwa: route.params.nazwa,
-      links:  route.params.link,
-     }
-      }).then(response => {
-      console.log('usunięto:','nazwa:',route.params.nazwa,'link:', route.params.link),
-  
-      navigation.navigate('Linki')
-    }
-     ).catch(err=>console.log(err))
-     
-      
+    axios.post(url,{
+      nazwa:daneNazwa,
+      stopien:daneStopien,
+      num_pokoju:daneNumPok
+    }).then(response => console.log('dodano:',daneNazwa,daneStopien,daneNumPok),
+    navigation.navigate('Prowadzący'),
+    setNazwa(''),
+    setStopien(''),
+    setNumPok('')
+    ).catch(err=>console.log(err))
   }
 
   return (
@@ -105,7 +78,7 @@ const LinksEdit = ({route,navigation}) => {
         size:8
       }}
       onPress={() => {
-        navigation.navigate('Linki')
+        navigation.navigate('Maile')
   }}></IconButton>
   <IconButton
        _icon={{
@@ -114,7 +87,7 @@ const LinksEdit = ({route,navigation}) => {
         name: "check",
         size:8
       }}
-      onPress={putData}
+      onPress={postData}
       ></IconButton>
   </HStack>
     </View>
@@ -125,33 +98,39 @@ const LinksEdit = ({route,navigation}) => {
         end={{ x: 1, y: 1 }}
       >
         <Avatar my= "5" size={150} background="#002851">
-         <Icons name="edit" size={70} color="#a3e635" /> 
+         <Icons name="plus" size={70} color="#a3e635" /> 
          </Avatar>
         
-        <Input  defaultValue= {route.params.nazwa} variant="rounded" mx="3" my= "5" placeholder="Nazwa" 
+        <Input  value={daneNazwa} variant="rounded" mx="3" my= "5" placeholder="Nazwa" 
         w="50%" backgroundColor="#0c4a6e" borderColor="#a3e635" 
         onChangeText={text => setNazwa(text)} 
         _light={{
         placeholderTextColor: "#a3e635"
         }} >
         </Input>
-        <Input defaultValue= {route.params.link} variant="rounded" mx="3" my= "5" 
-        placeholder="Link" w="50%" backgroundColor="#0c4a6e" 
+        <Input value={daneStopien} variant="rounded" mx="3" my= "5" 
+        placeholder="Stopien" w="50%" backgroundColor="#0c4a6e" 
         borderColor="#a3e635" 
-        onChangeText={text => setLink(text)} 
+        onChangeText={text => setStopien(text)} 
         _light={{
         placeholderTextColor: "#a3e635"
         }} >
         </Input>
-        <Fab  bgColor={'#002851'} onPress={deleteData}
-     icon={<Icon color="#dc2626" as={AntDesign} name="delete" size="lg" />}
-    />
+        <Input value={daneNumPok} variant="rounded" mx="3" my= "5" 
+        placeholder="Numer pokoju" w="50%" backgroundColor="#0c4a6e" 
+        borderColor="#a3e635" 
+        onChangeText={text => setNumPok(text)} 
+        _light={{
+        placeholderTextColor: "#a3e635"
+        }} >
+        </Input>
+        
     
     </LinearGradient>
     </NativeBaseProvider>
     )
 };
-LinksEdit.propTypes = {
+LecturesPage.propTypes = {
   route: PropTypes.shape({
     params: PropTypes.shape({ from: PropTypes.string }),
   }),
@@ -160,9 +139,9 @@ LinksEdit.propTypes = {
   }),
 };
 
-LinksEdit.defaultProps = {
+LecturesPage.defaultProps = {
   route: { params: { from: '' } },
   navigation: { navigate: () => null },
 };
 
-export default LinksEdit;
+export default LecturesPage;

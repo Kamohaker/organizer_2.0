@@ -1,6 +1,6 @@
 import React  from "react";
 import { PropTypes } from "prop-types";
-import { Modal,Link,FormControl,Input,Button, Box,Flex,View,Divider, FlatList, Heading, Avatar, HStack, VStack, Fab,Text, Icon, Center, NativeBaseProvider } from "native-base";
+import { Modal,Link,FormControl,Pressable, Input,Button, Box,Flex,View,Divider, FlatList, Heading, Avatar, HStack, VStack, Fab,Text, Icon, Center, NativeBaseProvider } from "native-base";
 import {StyleSheet} from "react-native"
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useState ,useEffect} from "react";
@@ -42,38 +42,26 @@ const Lectures = ({route,navigation}) => {
   }
 
  
-  function axiosGet(){
-    axios.get(url).then(response =>{
-    
-      setData(response.data) 
-      console.log(response.data)
-        })
-      .catch(err=> console.log(err))
-  }
-  
   function randomColor() {
     let hex = Math.floor(Math.random() * 0xFFFFFF);
     let color = "#" + hex.toString(16);
   
     return color;
   }
+ 
+  
   useEffect(()=>{
-  axiosGet()
-  },[])
-
-  
-  const postData = () =>{
-  
-    axios.post(url,{
-      nazwa:daneNazwa,
-      stopien:daneStopien,
-      num_pokoju:danePokuj
-    }).then(response => console.log('dodano:',daneNazwa,daneStopien,danePokuj),
-     setShowModal(false),
-     axiosGet()
+    const focusHandler = navigation.addListener('focus', () => {
+      axios.get(url).then(response =>{
     
-    ).catch(err=>console.log(err))
-  }
+        setData(response.data) 
+    
+          })
+        .catch(err=> console.log(err))
+  } ); 
+  return (focusHandler)
+  },[])
+  
   
   return (
   <NativeBaseProvider>
@@ -102,16 +90,16 @@ const Lectures = ({route,navigation}) => {
         </Text>
         </HStack>
          </Box>
-      <Box >
+      
         <FlatList data={data}  renderItem={({item}) => 
           <Box style={styles.boxes}>
             <HStack >
-              <Avatar backgroundColor={randomColor()} size="60px" >{getFirstLetterFrom(item.nazwa)}</Avatar> 
-              <VStack>
-              <Flex mx="7" direction="row" h="60">
+              <Avatar mx='5' backgroundColor={randomColor()} size="60px" >{getFirstLetterFrom(item.nazwa)}</Avatar> 
+                <Pressable onPress={()=>{navigation.navigate('ProwadzacyEdytuj',{nazwa:item.nazwa,stopien:item.stopien,num_pok:item.num_pokoju})}}>
                 <Text  color="#ea580c" bold>
                   {item.nazwa}
                 </Text>
+                </Pressable>
                 <Divider orientation="vertical" mx="10" _light={{
           bg: "muted.800"
         }}  />
@@ -129,53 +117,15 @@ const Lectures = ({route,navigation}) => {
          <Text  color="#ea580c" bold>
                   {item.num_pokoju}
                 </Text>
-                </Flex>
-              </VStack>
+
             </HStack>
           </Box>} keyExtractor={item => item.id} />
           <Fab  shadow={4} bgColor={'#002851'} 
-          onPress={() => setShowModal(true)}
+          onPress={() => navigation.navigate('ProwadzacyStrona')}
           icon={<Icon color="#a3e635" as={AntDesign} name="plus" size="lg" />} />
           
-          <Modal isOpen={showModal} onClose={() => setShowModal(false)} >
-        <Modal.Content maxWidth="400px">
-          <Modal.CloseButton />
-          <Modal.Header bgColor={'#002851'} _text={{
-      fontSize: "20",
-      fontWeight: "medium",
-      color: "#a3e635",
-      letterSpacing: "lg",
-    }}>Nowy prowadzący</Modal.Header>
-          <Modal.Body bgColor={'#0c4a6e'}>
-            <FormControl>
-              <FormControl.Label>Imie</FormControl.Label>
-              <Input color={'#a3e635'} value={daneNazwa} onChangeText={(text)=>setNazwa(text)}
-             />
-            </FormControl>
-            <FormControl mt="3">
-              <FormControl.Label>Stopień</FormControl.Label>
-              <Input  color={'#a3e635'} value={daneStopien} onChangeText={(text)=>setStopien(text)} />
-            </FormControl>
-            <FormControl mt="3">
-              <FormControl.Label>Numer pokoju</FormControl.Label>
-              <Input  color={'#a3e635'} value={danePokuj} onChangeText={(text)=>setPokuj(text)} />
-            </FormControl>
-          </Modal.Body>
-          <Modal.Footer bgColor={'#0c4a6e'}>
-            <Button.Group space={2}>
-              <Button variant="ghost" colorScheme="red" onPress={() => {
-              setShowModal(false);
-            }}>
-                Anuluj
-              </Button>
-              <Button onPress={postData} >
-                Dodaj
-              </Button>
-            </Button.Group>
-          </Modal.Footer>
-        </Modal.Content>
-      </Modal>
-    </Box>
+         
+    
     </LinearGradient>
     </NativeBaseProvider>
     )

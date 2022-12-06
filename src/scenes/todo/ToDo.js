@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { StyleSheet, View, StatusBar } from "react-native";
-import { NativeBaseProvider,Pressable,Icon, Box,VStack, Button, Image, Text,ScrollView, FlatList, HStack } from "native-base";
+import { NativeBaseProvider,Pressable,Icon, Box,VStack, Button, Image, Text,ScrollView, FlatList, HStack, Fab } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 import { Calendar,Agenda } from "react-native-calendars";
 import { useState ,useEffect} from "react";
@@ -149,7 +149,11 @@ const renderItem = (item) => {
                 renderItem={renderItem}
             />
       
-
+      <Fab  shadow={4} bgColor={'#002851'} 
+          onPress={() => navigation.navigate('ToDoStrona')}
+          icon={<Icon color="#a3e635" as={AntDesign} name="plus" size="lg" />} />
+          
+          
    </LinearGradient>
   </NativeBaseProvider>
 )};
