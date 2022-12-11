@@ -22,15 +22,15 @@ const styles = StyleSheet.create({
   },
   text_box: {
     fontSize: 18,
-    marginBottom: 20,
+    marginBottom: 16,
     color:"#ea580c",
     marginLeft:10
   },
   boxes:{
-    borderBottomWidth:20,
-    borderTopWidth:20,
-    borderLeftWidth:20,
-    borderRightWidth:20,
+    borderBottomWidth:18,
+    borderTopWidth:18,
+    borderLeftWidth:18,
+    borderRightWidth:18,
     borderRadius:20,
     borderColor:"#0c4a6e" ,
     backgroundColor:"#0c4a6e",
@@ -47,20 +47,21 @@ const timeToString = (time) => {
 
 const ToDo = ({ route,navigation }) => {
   const from = route?.params?.from
-  //const url = 'http://192.168.0.186/organizer/index_todo.php';//dom
-  const url = 'http://192.168.1.209/organizer/index_todo.php';//aka
+  const url = 'http://192.168.0.186/organizer/index_todo.php';//dom
+  //const url = 'http://192.168.1.209/organizer/index_todo.php';//aka
 
   const [data, setData] = useState([]);
   const [daneNazwa,setNazwa] = useState('');
   const [daneDaty,setDaty] = useState('');
-  const [items, setItems] = React.useState({});
-
+  const [items, setItems] = useState({});
+  const [filter, setFilter] = useState('');
  
   useEffect(()=>{
     const focusHandler = navigation.addListener('focus', () => {
       axios.get(url).then(response =>{
-    
+        console.log(response.data)
         setData(response.data) 
+       
     
           })
         .catch(err=> console.log(err))
@@ -68,18 +69,7 @@ const ToDo = ({ route,navigation }) => {
   return (focusHandler)
   },[])
 
-  
-    
-    const postData = () =>{
-    
-      axios.post(url,{
-        nazwa:daneNazwa,
-        kiedy:daneDaty
-      }).then(response => console.log('dodano:',daneNazwa,daneDaty),
-       setShowModal(false)
-      
-      ).catch(err=>console.log(err))
-    }
+ 
 
   const loadItems = (day) => {
 
@@ -87,15 +77,18 @@ const ToDo = ({ route,navigation }) => {
         for (let i = -15; i < 85; i++) {
             const time = day.timestamp + i * 24 * 60 * 60 * 1000;
             const strTime = timeToString(time);
-
+          
             if (!items[strTime]) {
                 items[strTime] = [];
+              
 
-                const numItems = Math.floor(Math.random() * 3 + 1);
+                const numItems = Math.floor(Math.random() + 1);
+
                 for (let j = 0; j < numItems; j++) {
                     items[strTime].push({
-                        name: 'Item for ' + strTime + ' #' + j+data,
-                        
+                        name:  strTime ,
+                       
+      
                     });
                 }
             }
@@ -108,28 +101,26 @@ const ToDo = ({ route,navigation }) => {
     }, 1000);
 }
 
+
 const renderItem = (item) => {
-    return (
-       <View >
-        
-            <FlatList data={data}  renderItem={({item}) => 
-             <Box style={styles.boxes}>
-              <HStack space={10}>
-            <Text style={styles.text_box} > {item.nazwa}</Text>
-            <Icon as={AntDesign} name="edit" size='2xl' color="#facc15" _dark={{
-        color: "warmGray.50"
-      }} />
-       <Icon as={AntDesign} name="delete" size='2xl' color="#dc2626" _dark={{
-         color: "warmGray.50"
-             }} />
-           </HStack>
-            </Box> }
-            keyExtractor={item => item.id} 
-            
-            />         
-        
-        </View>
-    );
+  return (
+     <View>
+     
+      
+          <FlatList  data={data.filter(obj=>obj.kiedy==item.name)} renderItem={({item}) => 
+           <Box style={styles.boxes}>
+            <HStack space={10}>
+          <Text style={styles.text_box} > {item.nazwa}</Text>
+          <Text style={styles.text_box} > {item.kiedy}</Text>
+          
+         </HStack>
+          </Box> }
+          keyExtractor={item => item.id} 
+          
+          />         
+      
+      </View>
+  );
 }
 
   return(
@@ -145,7 +136,7 @@ const renderItem = (item) => {
                 items={items}
                 loadItemsForMonth={loadItems}
                 showClosingKnob={true}
-               // refreshing={false}
+                refreshing={true}
                 renderItem={renderItem}
             />
       

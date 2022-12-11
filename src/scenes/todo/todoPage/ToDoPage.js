@@ -30,28 +30,26 @@ const styles = StyleSheet.create({
 const ToDoPage = ({route,navigation}) => {
   const from = route?.params?.from
 
- //const url = 'http://192.168.0.186/organizer/index_todo.php';//dom
-  const url = 'http://192.168.1.209/organizer/index_todo.php';//aka
+ const url = 'http://192.168.0.186/organizer/index_todo.php';//dom
+ // const url = 'http://192.168.1.209/organizer/index_todo.php';//aka
  // const url = 'http://192.168.0.156/organizer/index_todo.php';//dom_KOMP
 
   const [showModal, setShowModal] = useState(false);
   const [data, setData] = useState([]);
   const [daneNazwa,setNazwa] = useState('');
-  const [daneNumTel,setNumTel] = useState('');
-  const [daneNumKon,setNumKon] = useState('');
+  const [daneKiedy,setKiedy] = useState('');
+
 
 
 const postData = () =>{
   
   axios.post(url,{
     nazwa:daneNazwa,
-    num_telefonu:daneNumTel,
-    num_konta:daneNumKon
-  }).then(response => console.log('dodano:',daneNazwa,daneNumTel,daneNumKon),
+    kiedy:daneKiedy
+  }).then(response => console.log('dodano:',daneNazwa,daneKiedy),
    setNazwa(''),
-   setNumTel(''),
-   setNumKon(''),
-   navigation.navigate('Portfel'),
+   setKiedy(''),
+   navigation.navigate('To do'),
   ).catch(err=>console.log(err))
 }
 
@@ -67,7 +65,7 @@ const postData = () =>{
         size:8
       }}
       onPress={() => {
-        navigation.navigate('Portfel')
+        navigation.navigate('To do')
   }}></IconButton>
   <IconButton
        _icon={{
@@ -93,6 +91,13 @@ const postData = () =>{
         <Input value={daneNazwa} variant="rounded" mx="3" my= "5" placeholder="Nazwa" 
         w="50%" backgroundColor="#0c4a6e" borderColor="#a3e635" 
         onChangeText={text => setNazwa(text)} 
+        _light={{
+        placeholderTextColor: "#a3e635"
+        }} >
+        </Input>
+        <Input value={daneKiedy} variant="rounded" mx="3" my= "5" placeholder="Data" 
+        w="50%" backgroundColor="#0c4a6e" borderColor="#a3e635" 
+        onChangeText={text => setKiedy(text)} 
         _light={{
         placeholderTextColor: "#a3e635"
         }} >
