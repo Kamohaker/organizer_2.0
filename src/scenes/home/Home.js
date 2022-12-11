@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { StyleSheet, View,SafeAreaView} from "react-native";
-import { NativeBaseProvider, Checkbox ,HStack, Button, Image, Text,ScrollView,Box, } from "native-base";
+import { NativeBaseProvider, Checkbox,FlatList ,HStack, Button, Image, Text,ScrollView,Box, } from "native-base";
 import Icon from "react-native-vector-icons/AntDesign";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -25,9 +25,9 @@ const Home = ({ navigation }) => (
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
-      
+        <FlatList></FlatList>
     <ScrollView>
-      
+    
       <Box alignSelf="center" width="80" height="40" bg="primary.500" _text={{
       fontSize: "40",
       fontWeight: "medium",
@@ -37,36 +37,7 @@ const Home = ({ navigation }) => (
     rounded="xl"
     >
        Kolos</Box>
-        <Box alignSelf="center" bg="primary.500" _text={{
-      fontSize: "md",
-      fontWeight: "medium",
-      color: "warmGray.50",
-      letterSpacing: "lg"
-    }}
-    p="12"
-    rounded="xl"
-    >
-        This is a Box 2</Box>
-        <Box alignSelf="center" bg="primary.500" _text={{
-      fontSize: "md",
-      fontWeight: "medium",
-      color: "warmGray.50",
-      letterSpacing: "lg"
-    }}
-    p="12"
-    rounded="xl"
-    >
-        This is a Box3</Box>
-        <Box alignSelf="center" bg="primary.500" _text={{
-      fontSize: "md",
-      fontWeight: "medium",
-      color: "warmGray.50",
-      letterSpacing: "lg"
-    }}
-    p="12"
-    rounded="xl"
-    >
-        This is a Box3</Box>
+       
 
         <Text>
         Home Screen 

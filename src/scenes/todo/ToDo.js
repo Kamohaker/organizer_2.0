@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { StyleSheet, View, StatusBar } from "react-native";
-import { NativeBaseProvider,Pressable,Icon, Box,VStack, Button, Image, Text,ScrollView, FlatList, HStack, Fab } from "native-base";
+import { NativeBaseProvider,Pressable,Checkbox, Icon, Box,VStack, Button, Image, Text,ScrollView, FlatList, HStack, Fab } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 import { Calendar,Agenda } from "react-native-calendars";
 import { useState ,useEffect} from "react";
@@ -26,15 +26,19 @@ const styles = StyleSheet.create({
     color:"#ea580c",
     marginLeft:10
   },
-  boxes:{
-    borderBottomWidth:18,
-    borderTopWidth:18,
-    borderLeftWidth:18,
-    borderRightWidth:18,
+  
+  boxes: {
+    borderBottomWidth:10,
+    borderTopWidth:10,
+    borderLeftWidth:10,
+    borderRightWidth:10,
     borderRadius:20,
     borderColor:"#0c4a6e" ,
     backgroundColor:"#0c4a6e",
-    marginTop:10,
+    marginTop:20,
+    width:'95%',
+    height:70,
+    alignItems:'center'
   }
 });
 
@@ -106,15 +110,18 @@ const renderItem = (item) => {
   return (
      <View>
      
-      
           <FlatList  data={data.filter(obj=>obj.kiedy==item.name)} renderItem={({item}) => 
+    
            <Box style={styles.boxes}>
             <HStack space={10}>
+              <Checkbox  accessibilityLabel="Checkbox" ></Checkbox>
           <Text style={styles.text_box} > {item.nazwa}</Text>
           <Text style={styles.text_box} > {item.kiedy}</Text>
-          
+ 
          </HStack>
-          </Box> }
+          </Box>
+       
+           }
           keyExtractor={item => item.id} 
           
           />         

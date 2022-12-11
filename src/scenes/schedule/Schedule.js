@@ -47,8 +47,8 @@ const timeToString = (time) => {
 
 const Shedule = ({ route,navigation }) => {
   const from = route?.params?.from
-  //const url = 'http://192.168.0.186/organizer/index_schedule.php';//dom
-  const url = 'http://192.168.1.209/organizer/index_schedule.php';//aka
+  const url = 'http://192.168.0.186/organizer/index_schedule.php';//dom
+  //const url = 'http://192.168.1.209/organizer/index_schedule.php';//aka
 
   const [data, setData] = useState([]);
   const [daneNazwa,setNazwa] = useState('');
@@ -91,7 +91,7 @@ const Shedule = ({ route,navigation }) => {
                 const numItems = Math.floor(Math.random() * 3 + 1);//num zdarzen
                 for (let j = 0; j < numItems; j++) {
                     items[strTime].push({
-                        name: 'Item for ' + strTime + ' #' + j ,
+                        name:  strTime ,
                       
                     });
                     
@@ -110,7 +110,7 @@ const renderItem = (item) => {
   return (
      <View >
       
-          <FlatList data={data}  renderItem={({item}) => 
+          <FlatList data={data.filter(obj=>obj.kiedy==item.name)}  renderItem={({item}) => 
            <Box style={styles.boxes}>
             <HStack space={10}>
           <Text style={styles.text_box} > {item.nazwa}</Text>
@@ -144,7 +144,7 @@ const renderItem = (item) => {
                 items={items}
                 loadItemsForMonth={loadItems}
                 showClosingKnob={true}
-               // refreshing={false}
+                refreshing={true}
                 renderItem={renderItem}
             />
       

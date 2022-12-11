@@ -97,6 +97,7 @@ const postData = () =>{
         </Input>
         <Input value={daneKiedy} variant="rounded" mx="3" my= "5" placeholder="Data" 
         w="50%" backgroundColor="#0c4a6e" borderColor="#a3e635" 
+        keyboardType = 'numeric'
         onChangeText={text => setKiedy(text)} 
         _light={{
         placeholderTextColor: "#a3e635"
