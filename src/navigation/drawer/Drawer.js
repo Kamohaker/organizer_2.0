@@ -2,7 +2,6 @@ import React from "react";
 import {createDrawerNavigator,DrawerContentScrollView,DrawerItemList,DrawerItem,} from '@react-navigation/drawer';
 import TabNavigator from "../tabs/Tabs";
 import { Image,NativeBaseProvider } from "native-base";
-import { LinearGradient } from "expo-linear-gradient";
 import logo from "../../../assets/logos.png"
 import Icon from "react-native-vector-icons/AntDesign";
 import MailsSctreen from "../../scenes/mails/Mails";
@@ -24,6 +23,7 @@ import MailsEditScreen from "../../scenes/mails/mailsEdit";
 import LecturesPageScreen from "../../scenes/lecturers/lecturesPage";
 import LecturesEditScreen from "../../scenes/lecturers/lecturesEdit";
 import ToDoPageScreen from "../../scenes/todo/todoPage";
+import {colors} from "../../theme";
 
 const Drawer = createDrawerNavigator();
 
@@ -80,9 +80,9 @@ export function DrawerNavigator  ()  {
 
   }}
   screenOptions={{
-    headerTintColor: '#a3e635',
+    headerTintColor: colors.limone,
     headerStyle: {
-       backgroundColor: '#002851'
+       backgroundColor: colors.darkGreyBlue
     }
     
   }}>
@@ -92,7 +92,7 @@ export function DrawerNavigator  ()  {
       component={TabNavigator}
       options={{
         drawerIcon: ({  }) => (
-          <Icon name="home" size={30} color="#db2777" /> )
+          <Icon name="home" size={30} color={colors.pink} /> )
       }}
       />
        <Drawer.Screen
@@ -100,7 +100,7 @@ export function DrawerNavigator  ()  {
       options={{
         
         drawerIcon: ({  }) => (
-          <Icon name="mail" size={30} color="#ea580c" /> )
+          <Icon name="mail" size={30} color={colors.orange} /> )
       }}
       component={MailsSctreen}
       />
@@ -108,7 +108,7 @@ export function DrawerNavigator  ()  {
       name="To do"
       options={{
         drawerIcon: ({  }) => (
-          <Icon name="carryout" size={30} color="#dc2626" /> )
+          <Icon name="carryout" size={30} color={colors.red}/> )
       }}
       component={ToDoScreen}
       />
@@ -116,7 +116,7 @@ export function DrawerNavigator  ()  {
       name="Prowadzący"
       options={{
         drawerIcon: ({  }) => (
-          <Icon name="contacts" size={30} color="#facc15" /> )
+          <Icon name="contacts" size={30} color={colors.yellow} /> )
       }}
       component={LecturersScreen }
       />
@@ -124,7 +124,7 @@ export function DrawerNavigator  ()  {
       name="Plan zajęć"
       options={{
         drawerIcon: ({  }) => (
-          <Icon name="calendar" size={30} color="#16a34a" /> )
+          <Icon name="calendar" size={30} color={colors.green} /> )
       }}
       
       component={ScheduleScreen}
@@ -133,7 +133,7 @@ export function DrawerNavigator  ()  {
       name="Terminarz"
       options={{
         drawerIcon: ({  }) => (
-          <Icon name="form" size={30} color="#1a91ff" /> )
+          <Icon name="form" size={30} color={colors.blue} /> )
       }}
       
       component={TimetableScreen}
@@ -142,7 +142,7 @@ export function DrawerNavigator  ()  {
       name="Linki"
       options={{
         drawerIcon: ({  }) => (
-          <Icon name="link" size={30} color="#e879f9" /> )
+          <Icon name="link" size={30} color={colors.violet}/> )
       }}
       
       component={LinksScreen}
@@ -151,7 +151,7 @@ export function DrawerNavigator  ()  {
       name="Portfel"
       options={{
         drawerIcon: ({  }) => (
-          <Icon name="wallet" size={30} color="#22d3ee" /> )
+          <Icon name="wallet" size={30} color={colors.lightBlue} /> )
       }}
       
       component={WalletScreen}
@@ -160,7 +160,7 @@ export function DrawerNavigator  ()  {
       name="Notatnik"
       options={{
         drawerIcon: ({  }) => (
-          <Icon name="filetext1" size={30} color="#a3e635" /> )
+          <Icon name="filetext1" size={30} color={colors.limone} /> )
       }}
       
       component={NotebookScreen}

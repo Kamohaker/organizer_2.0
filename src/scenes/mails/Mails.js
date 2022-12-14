@@ -1,18 +1,19 @@
 import React  from "react";
 import { PropTypes } from "prop-types";
-import { Modal,Link,FormControl,Input,Button,Pressable, Box,Flex,View,Divider, FlatList, Heading, Avatar, HStack, VStack, Fab,Text, Icon, Center, NativeBaseProvider } from "native-base";
+import { Link,FormControl,Input,Button,Pressable, Box,Flex,View,Divider, FlatList, Avatar, HStack, VStack, Fab,Text, Icon, Center, NativeBaseProvider } from "native-base";
 import {StyleSheet} from "react-native"
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useState ,useEffect} from "react";
 import axios from "axios";
 import { LinearGradient } from "expo-linear-gradient";
+import {colors} from "../../theme";
 
 const styles = StyleSheet.create({
   root: {
     flex: 1,
     flexDirection: "column",
     alignItems: "center",
-    backgroundColor: "#0c4a6e"
+ 
    
   },
   title: {
@@ -20,17 +21,18 @@ const styles = StyleSheet.create({
     marginBottom: 2,
   },
   boxes: {
-    borderBottomWidth:20,
-    borderTopWidth:20,
-    borderLeftWidth:20,
-    borderRightWidth:20,
+    borderBottomWidth:5,
+    borderTopWidth:5,
+    borderLeftWidth:5,
+    borderRightWidth:5,
     borderRadius:30,
-    borderColor:"#e879f9" ,
-    backgroundColor:"#e879f9",
-    marginTop:10,
-    width:320,
+    borderColor:colors.orange,
+    backgroundColor:colors.lightOrange,
+    marginTop:12,
+    width:'100%',
     height:100,
-    alignItems:'center'
+    alignItems:'center',
+    
   }
 });
 
@@ -73,12 +75,12 @@ const Maile = ({route,navigation}) => {
   return (
   <NativeBaseProvider>
    <LinearGradient
-        colors={['#0c4a6e', '#7dd3fc']}
+        colors={[colors.grayBlue, colors.whiteBlue]}
         style={styles.root}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
-         <Box >
+         <Box marginTop = '5' marginBottom = '5'>
           <HStack>
         <Text style={styles.title}>
           Nazwa
@@ -91,20 +93,20 @@ const Maile = ({route,navigation}) => {
         </Text>
         </HStack>
          </Box>
-      <Box >
+      <Box>
         <FlatList data={data}  renderItem={({item}) => 
         <Pressable onPress={()=>{navigation.navigate('MailEdytuj',{nazwa:item.nazwa,mail:item.email})}}>
           <Box style={styles.boxes}>
-            <HStack >
-              <Avatar mx='5' backgroundColor={randomColor()} size="60px" >{getFirstLetterFrom(item.nazwa)}</Avatar> 
+            <HStack>
+              <Avatar my= '3' mx='4' backgroundColor={randomColor()} size="60px" >{getFirstLetterFrom(item.nazwa)}</Avatar> 
               
-               <Text  color="#ea580c" bold>
+               <Text my= '7' mx='4'  bold>
                   {item.nazwa}
                 </Text>
-                <Divider orientation="vertical" mx="10" _light={{
+                <Divider orientation="vertical" mx="8" my="1" _light={{
           bg: "muted.800"
         }}  />
-                <Text >
+                <Text my= '7' mx='4'>
              <Link href="https://mail.google.com" isExternal _text={{
         color: "#002851"
       }}>
@@ -116,9 +118,9 @@ const Maile = ({route,navigation}) => {
             </HStack>
           </Box>
           </Pressable>} keyExtractor={item => item.id} />
-          <Fab  shadow={4} bgColor={'#002851'} 
+          <Fab  shadow={4} bgColor={colors.darkGreyBlue} 
           onPress={() => navigation.navigate('MailStrona')}
-          icon={<Icon color="#a3e635" as={AntDesign} name="plus" size="lg" />} />
+          icon={<Icon color={colors.limone} as={AntDesign} name="plus" size="lg" />} />
           
           
     </Box>

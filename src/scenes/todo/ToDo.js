@@ -7,6 +7,7 @@ import { Calendar,Agenda } from "react-native-calendars";
 import { useState ,useEffect} from "react";
 import axios from "axios";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import { colors } from "../../theme";
 
 const styles = StyleSheet.create({
   root: {
@@ -23,21 +24,21 @@ const styles = StyleSheet.create({
   text_box: {
     fontSize: 18,
     marginBottom: 16,
-    color:"#ea580c",
+    
     marginLeft:10
   },
   
   boxes: {
-    borderBottomWidth:10,
-    borderTopWidth:10,
-    borderLeftWidth:10,
-    borderRightWidth:10,
+    borderBottomWidth:5,
+    borderTopWidth:5,
+    borderLeftWidth:5,
+    borderRightWidth:5,
     borderRadius:20,
-    borderColor:"#0c4a6e" ,
-    backgroundColor:"#0c4a6e",
+    borderColor:colors.darkRed ,
+    backgroundColor:colors.red,
     marginTop:20,
     width:'95%',
-    height:70,
+    height:80,
     alignItems:'center'
   }
 });
@@ -51,8 +52,8 @@ const timeToString = (time) => {
 
 const ToDo = ({ route,navigation }) => {
   const from = route?.params?.from
-  const url = 'http://192.168.0.186/organizer/index_todo.php';//dom
-  //const url = 'http://192.168.1.209/organizer/index_todo.php';//aka
+  //const url = 'http://192.168.0.186/organizer/index_todo.php';//dom
+  const url = 'http://192.168.1.209/organizer/index_todo.php';//aka
 
   const [data, setData] = useState([]);
   const [daneNazwa,setNazwa] = useState('');
@@ -113,7 +114,7 @@ const renderItem = (item) => {
           <FlatList  data={data.filter(obj=>obj.kiedy==item.name)} renderItem={({item}) => 
     
            <Box style={styles.boxes}>
-            <HStack space={10}>
+            <HStack space={10} my='5'>
               <Checkbox  accessibilityLabel="Checkbox" ></Checkbox>
           <Text style={styles.text_box} > {item.nazwa}</Text>
           <Text style={styles.text_box} > {item.kiedy}</Text>
