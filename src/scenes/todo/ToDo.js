@@ -142,7 +142,7 @@ const renderItem = (item) => {
       >
        <Agenda
                
-           
+               theme={{ calendarBackground:colors.grayBlue}}
                 items={items}
                 loadItemsForMonth={loadItems}
                 showClosingKnob={true}

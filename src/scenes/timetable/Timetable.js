@@ -53,8 +53,8 @@ const timeToString = (time) => {
 
 const Timetable = ({ route,navigation }) => {
   const from = route?.params?.from
-  const url = 'http://192.168.0.128/organizer/index_todo.php';//dom
-  //const url = 'http://192.168.1.209/organizer/index_todo.php';//aka
+  const url = 'http://192.168.0.128/organizer/index_timetable.php';//dom
+  //const url = 'http://192.168.1.209/organizer/index_timetable.php';//aka
 
   const [data, setData] = useState([]);
   const [daneNazwa,setNazwa] = useState('');
@@ -141,6 +141,7 @@ const renderItem = (item) => {
         end={{ x: 1, y: 1 }}
       >
        <Agenda
+        theme={{ calendarBackground:colors.grayBlue}}
                
                 items={items}
                 loadItemsForMonth={loadItems}

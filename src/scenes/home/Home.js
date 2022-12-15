@@ -37,10 +37,12 @@ const styles = StyleSheet.create({
     borderColor:colors.darkGreyBlue,
     backgroundColor:colors.blue,
     marginTop:20,
+    marginLeft:32,
     width:'100%',
     height:80,
     alignItems:'center',
     paddingTop:18
+
   }
 });
 
@@ -53,8 +55,8 @@ const timeToString = (time) => {
 
 const Home = ({ route,navigation }) => {
   const from = route?.params?.from
-  const url = 'http://192.168.0.128/organizer/index_todo.php';//dom
-  //const url = 'http://192.168.1.209/organizer/index_todo.php';//aka
+  const url = 'http://192.168.0.128/organizer/index_home.php';//dom
+  //const url = 'http://192.168.1.209/organizer/index_home.php';//aka
 
   const [data, setData] = useState([]);
   const [daneNazwa,setNazwa] = useState('');
@@ -110,8 +112,8 @@ const Home = ({ route,navigation }) => {
 
 const renderItem = (item) => {
   return (
-     <View>
-     
+     <NativeBaseProvider>
+     <View style={styles.root}>
           <FlatList  data={data.filter(obj=>obj.kiedy==item.name)} renderItem={({item}) => 
     
            <Box style={styles.boxes}>
@@ -127,8 +129,8 @@ const renderItem = (item) => {
           keyExtractor={item => item.id} 
           
           />         
-      
       </View>
+      </NativeBaseProvider>
   );
 }
 
@@ -141,9 +143,24 @@ const renderItem = (item) => {
         end={{ x: 1, y: 1 }}
       >
        <Agenda
+               theme={{ 
+                calendarBackground:colors.calendar,
+                textSectionTitleColor: colors.darkGreyBlue,
+                selectedDayBackgroundColor: colors.selector,
+                selectedDayTextColor: colors.limone,
+                dayTextColor: 'white', 
+                dotColor: colors.darkGreyBlue,
+                selectedDotColor: colors.limone,
+                monthTextColor: 'white',
+
+                 
+                agendaDayNumColor: 'white',
+                agendaTodayColor: colors.limone,
+              
                
+              }}
                 items={items}
-                loadItemsForMonth={loadItems}
+                loadItemsForMonth={loadItems }
                 showClosingKnob={true}
                 refreshing={true}
                 renderItem={renderItem}

@@ -31,9 +31,9 @@ const styles = StyleSheet.create({
 const TimetablePage = ({route,navigation}) => {
   const from = route?.params?.from
 
- const url = 'http://192.168.0.128/organizer/index_todo.php';//dom
- //const url = 'http://192.168.1.209/organizer/index_todo.php';//aka
- // const url = 'http://192.168.0.156/organizer/index_todo.php';//dom_KOMP
+ const url = 'http://192.168.0.128/organizer/index_timetable.php';//dom
+ //const url = 'http://192.168.1.209/organizer/index_timetable.php';//aka
+
 
   const [showModal, setShowModal] = useState(false);
   const [data, setData] = useState([]);

@@ -16,7 +16,9 @@ const colors = {
     violet:"#e879f9",
     darkViolet:'#d946ef',
     lightBlue:"#22d3ee",
-    whiteBlue:"#7dd3fc"
+    whiteBlue:"#7dd3fc",
+    selector:'#0891b2',
+    calendar:'#075985'
 
   }
   
