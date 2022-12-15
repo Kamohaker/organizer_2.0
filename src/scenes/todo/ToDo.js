@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     borderColor:colors.darkRed ,
     backgroundColor:colors.red,
     marginTop:20,
-    width:'95%',
+    width:'100%',
     height:80,
     alignItems:'center'
   }
@@ -52,8 +52,8 @@ const timeToString = (time) => {
 
 const ToDo = ({ route,navigation }) => {
   const from = route?.params?.from
-  //const url = 'http://192.168.0.186/organizer/index_todo.php';//dom
-  const url = 'http://192.168.1.209/organizer/index_todo.php';//aka
+  const url = 'http://192.168.0.128/organizer/index_todo.php';//dom
+  //const url = 'http://192.168.1.209/organizer/index_todo.php';//aka
 
   const [data, setData] = useState([]);
   const [daneNazwa,setNazwa] = useState('');
@@ -114,8 +114,9 @@ const renderItem = (item) => {
           <FlatList  data={data.filter(obj=>obj.kiedy==item.name)} renderItem={({item}) => 
     
            <Box style={styles.boxes}>
-            <HStack space={10} my='5'>
-              <Checkbox  accessibilityLabel="Checkbox" ></Checkbox>
+            <HStack space={10} my='4'>
+            <Checkbox value="test" accessibilityLabel="This is a dummy checkbox" />
+
           <Text style={styles.text_box} > {item.nazwa}</Text>
           <Text style={styles.text_box} > {item.kiedy}</Text>
  
@@ -141,6 +142,7 @@ const renderItem = (item) => {
       >
        <Agenda
                
+           
                 items={items}
                 loadItemsForMonth={loadItems}
                 showClosingKnob={true}

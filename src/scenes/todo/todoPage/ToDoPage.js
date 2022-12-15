@@ -7,6 +7,7 @@ import Icon  from "react-native-vector-icons/AntDesign";
 import { useState ,useEffect} from "react";
 import axios from "axios";
 import { LinearGradient } from "expo-linear-gradient";
+import { colors } from "../../../theme";
 
 const styles = StyleSheet.create({
   root: {
@@ -30,8 +31,8 @@ const styles = StyleSheet.create({
 const ToDoPage = ({route,navigation}) => {
   const from = route?.params?.from
 
- //const url = 'http://192.168.0.186/organizer/index_todo.php';//dom
- const url = 'http://192.168.1.209/organizer/index_todo.php';//aka
+ const url = 'http://192.168.0.128/organizer/index_todo.php';//dom
+ //const url = 'http://192.168.1.209/organizer/index_todo.php';//aka
  // const url = 'http://192.168.0.156/organizer/index_todo.php';//dom_KOMP
 
   const [showModal, setShowModal] = useState(false);
@@ -84,8 +85,8 @@ const postData = () =>{
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
-        <Avatar my= "5" size={150} background="#002851">
-         <Icon name="adduser" size={70} color="#a3e635" /> 
+        <Avatar my= "5" size={150} background={colors.red}>
+         <Icon name="plus" size={70}  /> 
          </Avatar>
         
         <Input value={daneNazwa} variant="rounded" mx="3" my= "5" placeholder="Nazwa" 

@@ -6,7 +6,7 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import { useState ,useEffect} from "react";
 import axios from "axios";
 import { LinearGradient } from "expo-linear-gradient";
-
+import { colors } from "../../theme";
 const styles = StyleSheet.create({
   root: {
     flex: 1,
@@ -20,13 +20,27 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom:10
   },
+  boxes:{
+    borderBottomWidth:5,
+    borderTopWidth:5,
+    borderLeftWidth:5,
+    borderRightWidth:5,
+    borderRadius:20,
+    borderColor:colors.blue ,
+    backgroundColor:colors.lightBlue,
+    marginTop:20,
+    width:'100%',
+    height:80,
+    alignItems:'center',
+    
+  }
 });
 
 const Wallet = ({route,navigation}) => {
   const from = route?.params?.from
 
- //const url = 'http://192.168.0.186/organizer/index_wallet.php';//dom
-  const url = 'http://192.168.1.209/organizer/index_wallet.php';//aka
+ const url = 'http://192.168.0.128/organizer/index_wallet.php';//dom
+ // const url = 'http://192.168.1.209/organizer/index_wallet.php';//aka
  // const url = 'http://192.168.0.156/organizer/index_wallet.php';//dom_KOMP
 
   const [showModal, setShowModal] = useState(false);
@@ -93,7 +107,8 @@ return (focusHandler)
         }}  />
      
         <FlatList data={data} renderItem={({item}) => 
-          <VStack>
+        <Box style={styles.boxes}>
+         
             <HStack space={[2, 3]} justifyContent="space-between">
               
             
@@ -123,10 +138,9 @@ return (focusHandler)
 
              
             </HStack>
-            <Divider orientation="horizontal" mx="4" my="3" _light={{
-          bg: "muted.800"
-        }}  />
-            </VStack>
+           
+         
+            </Box>
           } keyExtractor={item => item.id} />
 
           <Fab  shadow={4} bgColor={'#002851'} 

@@ -6,6 +6,7 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import { useState ,useEffect} from "react";
 import axios from "axios";
 import { LinearGradient } from "expo-linear-gradient";
+import { colors } from "../../theme";
 
 const styles = StyleSheet.create({
   root: {
@@ -20,16 +21,24 @@ const styles = StyleSheet.create({
     marginBottom: 2,
   },
   boxes:{
-    borderBottomWidth:2, 
-    borderColor:"#262626", 
-    paddingVertical:10
+    borderBottomWidth:5,
+    borderTopWidth:5,
+    borderLeftWidth:5,
+    borderRightWidth:5,
+    borderRadius:20,
+    borderColor:colors.darkYellow ,
+    backgroundColor:colors.yellow,
+    marginTop:20,
+    width:400,
+    height:80,
+   
   }
 });
 
 const Lectures = ({route,navigation}) => {
   const from = route?.params?.from
- // const url = 'http://192.168.0.186/organizer/index_lectures.php';//dom
-  const url = 'http://192.168.1.209/organizer/index_lectures.php';//aka
+ const url = 'http://192.168.0.128/organizer/index_lectures.php';//dom
+ // const url = 'http://192.168.1.209/organizer/index_lectures.php';//aka
 
   const [showModal, setShowModal] = useState(false);
   const [data, setData] = useState([]);
@@ -71,7 +80,7 @@ const Lectures = ({route,navigation}) => {
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
-         <Box style={styles.boxes} >
+         <Box my='2'>
           <HStack>
         <Text style={styles.title}>
           Nazwa
@@ -96,25 +105,23 @@ const Lectures = ({route,navigation}) => {
             <HStack >
               <Avatar mx='5' backgroundColor={randomColor()} size="60px" >{getFirstLetterFrom(item.nazwa)}</Avatar> 
                 <Pressable onPress={()=>{navigation.navigate('ProwadzacyEdytuj',{nazwa:item.nazwa,stopien:item.stopien,num_pok:item.num_pokoju})}}>
-                <Text  color="#ea580c" bold>
+                <Text  bold my='4'>
                   {item.nazwa}
                 </Text>
                 </Pressable>
-                <Divider orientation="vertical" mx="10" _light={{
+                <Divider orientation="vertical" mx="10" my='1' _light={{
           bg: "muted.800"
         }}  />
-                <Text >
-             <Link href="https://mail.google.com" isExternal _text={{
-        color: "blue.400"
-      }}>
+                <Text my='4'>
+             
      
                   {item.stopien}
-                  </Link>
-                </Text>
-                <Divider orientation="vertical" mx="10" _light={{
+                  
+                </Text >
+                <Divider orientation="vertical" mx="10"my='1' _light={{
           bg: "muted.800"
         }}  />
-         <Text  color="#ea580c" bold>
+         <Text   bold my='4'>
                   {item.num_pokoju}
                 </Text>
 

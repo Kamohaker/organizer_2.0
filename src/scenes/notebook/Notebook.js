@@ -6,7 +6,7 @@ import axios from 'axios';
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useState ,useEffect} from "react";
 import { LinearGradient } from "expo-linear-gradient";
-
+import { colors } from "../../theme";
 const styles = StyleSheet.create({
   root: {
     flex: 1,
@@ -21,25 +21,26 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   boxes: {
-    borderBottomWidth:20,
-    borderTopWidth:20,
-    borderLeftWidth:20,
-    borderRightWidth:20,
+    borderBottomWidth:5,
+    borderTopWidth:5,
+    borderLeftWidth:5,
+    borderRightWidth:5,
     borderRadius:30,
-    borderColor:"#a3e635" ,
-    backgroundColor:"#a3e635",
+    borderColor:colors.darkLimone ,
+    backgroundColor:colors.limone,
     marginTop:10,
     width:220,
     height:120,
-    alignItems:'center'
+    alignItems:'center',
+    paddingTop:12
   }
 });
 
 const Notebook = ({ route, navigation }) => {
   const from = route?.params?.from
   const [data, setData] = useState([]);
-//const url = 'http://192.168.0.186/organizer/index_notebook.php';//dom
-  const url = 'http://192.168.1.209/organizer/index_notebook.php';//aka
+const url = 'http://192.168.0.128/organizer/index_notebook.php';//dom
+ // const url = 'http://192.168.1.209/organizer/index_notebook.php';//aka
 // const url = 'http://192.168.0.156/organizer/index_notebook.php';//dom_KOMP
 
   

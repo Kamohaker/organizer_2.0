@@ -7,6 +7,7 @@ import { Calendar,Agenda } from "react-native-calendars";
 import { useState ,useEffect} from "react";
 import axios from "axios";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import { colors } from "../../theme";
 
 const styles = StyleSheet.create({
   root: {
@@ -23,22 +24,23 @@ const styles = StyleSheet.create({
   text_box: {
     fontSize: 18,
     marginBottom: 16,
-    color:"#ea580c",
+   
     marginLeft:10
   },
   
-  boxes: {
-    borderBottomWidth:10,
-    borderTopWidth:10,
-    borderLeftWidth:10,
-    borderRightWidth:10,
+  boxes:{
+    borderBottomWidth:5,
+    borderTopWidth:5,
+    borderLeftWidth:5,
+    borderRightWidth:5,
     borderRadius:20,
-    borderColor:"#0c4a6e" ,
-    backgroundColor:"#0c4a6e",
+    borderColor:colors.darkGreyBlue,
+    backgroundColor:colors.blue,
     marginTop:20,
-    width:'95%',
-    height:70,
-    alignItems:'center'
+    width:'100%',
+    height:80,
+    alignItems:'center',
+    paddingTop:18
   }
 });
 
@@ -51,7 +53,7 @@ const timeToString = (time) => {
 
 const Timetable = ({ route,navigation }) => {
   const from = route?.params?.from
-  const url = 'http://192.168.0.186/organizer/index_todo.php';//dom
+  const url = 'http://192.168.0.128/organizer/index_todo.php';//dom
   //const url = 'http://192.168.1.209/organizer/index_todo.php';//aka
 
   const [data, setData] = useState([]);

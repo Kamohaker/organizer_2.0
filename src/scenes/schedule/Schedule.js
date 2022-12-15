@@ -1,12 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { StyleSheet, View, StatusBar } from "react-native";
-import { NativeBaseProvider,Pressable,Icon, Box,VStack, Button, Image, Text,ScrollView, FlatList, HStack } from "native-base";
+import { NativeBaseProvider,Pressable,Icon, Box,VStack,Fab, Button, Image, Text,ScrollView, FlatList, HStack } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 import { Calendar,Agenda } from "react-native-calendars";
 import { useState ,useEffect} from "react";
 import axios from "axios";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import { colors } from "../../theme";
 
 const styles = StyleSheet.create({
   root: {
@@ -23,18 +24,22 @@ const styles = StyleSheet.create({
   text_box: {
     fontSize: 18,
     marginBottom: 20,
-    color:"#ea580c",
+    
     marginLeft:10
   },
   boxes:{
-    borderBottomWidth:20,
-    borderTopWidth:20,
-    borderLeftWidth:20,
-    borderRightWidth:20,
+    borderBottomWidth:5,
+    borderTopWidth:5,
+    borderLeftWidth:5,
+    borderRightWidth:5,
     borderRadius:20,
-    borderColor:"#0c4a6e" ,
-    backgroundColor:"#0c4a6e",
-    marginTop:10,
+    borderColor:colors.darkGreen,
+    backgroundColor:colors.green,
+    marginTop:20,
+    width:'100%',
+    height:80,
+    alignItems:'center',
+    paddingTop:18
   }
 });
 
@@ -47,7 +52,7 @@ const timeToString = (time) => {
 
 const Shedule = ({ route,navigation }) => {
   const from = route?.params?.from
-  const url = 'http://192.168.0.186/organizer/index_schedule.php';//dom
+  const url = 'http://192.168.0.128/organizer/index_schedule.php';//dom
   //const url = 'http://192.168.1.209/organizer/index_schedule.php';//aka
 
   const [data, setData] = useState([]);
@@ -88,7 +93,7 @@ const Shedule = ({ route,navigation }) => {
             if (!items[strTime]) {
                 items[strTime] = [];
 
-                const numItems = Math.floor(Math.random() * 3 + 1);//num zdarzen
+                const numItems = Math.floor(Math.random()  + 1);//num zdarzen
                 for (let j = 0; j < numItems; j++) {
                     items[strTime].push({
                         name:  strTime ,
@@ -114,12 +119,7 @@ const renderItem = (item) => {
            <Box style={styles.boxes}>
             <HStack space={10}>
           <Text style={styles.text_box} > {item.nazwa}</Text>
-          <Icon as={AntDesign} name="edit" size='2xl' color="#facc15" _dark={{
-      color: "warmGray.50"
-    }} />
-     <Icon as={AntDesign} name="delete" size='2xl' color="#dc2626" _dark={{
-       color: "warmGray.50"
-           }} />
+          <Text style={styles.text_box} > {item.kiedy}</Text>
          </HStack>
           </Box> }
           keyExtractor={item => item.id} 
@@ -147,7 +147,11 @@ const renderItem = (item) => {
                 refreshing={true}
                 renderItem={renderItem}
             />
-      
+       <Fab  shadow={4} bgColor={'#002851'} 
+         
+          icon={<Icon color="#a3e635" as={AntDesign} name="plus" size="lg" />} />
+          
+        
 
    </LinearGradient>
   </NativeBaseProvider>

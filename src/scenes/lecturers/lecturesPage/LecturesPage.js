@@ -7,6 +7,7 @@ import { useState ,useEffect} from "react";
 import axios from "axios";
 import { LinearGradient } from "expo-linear-gradient";
 import Icons  from "react-native-vector-icons/AntDesign";
+import { colors } from "../../../theme";
 
 const styles = StyleSheet.create({
   root: {
@@ -78,7 +79,7 @@ const LecturesPage = ({route,navigation}) => {
         size:8
       }}
       onPress={() => {
-        navigation.navigate('Maile')
+        navigation.navigate('Prowadzący')
   }}></IconButton>
   <IconButton
        _icon={{
@@ -97,8 +98,8 @@ const LecturesPage = ({route,navigation}) => {
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
-        <Avatar my= "5" size={150} background="#002851">
-         <Icons name="plus" size={70} color="#a3e635" /> 
+        <Avatar my= "5" size={150} background={colors.yellow}>
+         <Icons name="adduser" size={70}  /> 
          </Avatar>
         
         <Input  value={daneNazwa} variant="rounded" mx="3" my= "5" placeholder="Nazwa" 

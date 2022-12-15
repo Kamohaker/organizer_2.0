@@ -38,8 +38,8 @@ const styles = StyleSheet.create({
 
 const Maile = ({route,navigation}) => {
   const from = route?.params?.from
-  //const url = 'http://192.168.0.186/organizer/index_mails.php';//dom
-  const url = 'http://192.168.1.209/organizer/index_mails.php';//aka
+  const url = 'http://192.168.0.128/organizer/index_mails.php';//dom
+ // const url = 'http://192.168.1.209/organizer/index_mails.php';//aka
   //const url = 'http://192.168.0.156/organizer/index_mails.php';//dom_KOMP
 
   const [showModal, setShowModal] = useState(false);
