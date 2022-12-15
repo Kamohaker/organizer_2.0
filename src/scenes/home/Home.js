@@ -1,60 +1,159 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StyleSheet, View,SafeAreaView} from "react-native";
-import { NativeBaseProvider, Checkbox,FlatList ,HStack, Button, Image, Text,ScrollView,Box, } from "native-base";
-import Icon from "react-native-vector-icons/AntDesign";
+import { StyleSheet, View, StatusBar } from "react-native";
+import { NativeBaseProvider,Pressable,Checkbox, Icon, Box,VStack, Button, Image, Text,ScrollView, FlatList, HStack, Fab } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
+import { Calendar,Agenda } from "react-native-calendars";
+import { useState ,useEffect} from "react";
+import axios from "axios";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import { colors } from "../../theme";
 
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    flexDirection: "column",
+    flexDirection: "row",
     alignItems: "center",
+    backgroundColor: "#0c4a6e"
+   
   },
   title: {
     fontSize: 44,
     marginBottom: 20,
   },
+  text_box: {
+    fontSize: 18,
+    marginBottom: 16,
+   
+    marginLeft:10
+  },
+  
+  boxes:{
+    borderBottomWidth:5,
+    borderTopWidth:5,
+    borderLeftWidth:5,
+    borderRightWidth:5,
+    borderRadius:20,
+    borderColor:colors.darkGreyBlue,
+    backgroundColor:colors.blue,
+    marginTop:20,
+    width:'100%',
+    height:80,
+    alignItems:'center',
+    paddingTop:18
+  }
 });
 
-const Home = ({ navigation }) => (
+
+const timeToString = (time) => {
+  const date = new Date(time);
+  return date.toISOString().split('T')[0];
+}
+
+
+const Home = ({ route,navigation }) => {
+  const from = route?.params?.from
+  const url = 'http://192.168.0.128/organizer/index_todo.php';//dom
+  //const url = 'http://192.168.1.209/organizer/index_todo.php';//aka
+
+  const [data, setData] = useState([]);
+  const [daneNazwa,setNazwa] = useState('');
+  const [daneDaty,setDaty] = useState('');
+  const [items, setItems] = useState({});
+  const [filter, setFilter] = useState('');
+ 
+  useEffect(()=>{
+    const focusHandler = navigation.addListener('focus', () => {
+      axios.get(url).then(response =>{
+        console.log(response.data)
+        setData(response.data) 
+       
+    
+          })
+        .catch(err=> console.log(err))
+  } ); 
+  return (focusHandler)
+  },[])
+
+ 
+
+  const loadItems = (day) => {
+
+    setTimeout(() => {
+        for (let i = -15; i < 85; i++) {
+            const time = day.timestamp + i * 24 * 60 * 60 * 1000;
+            const strTime = timeToString(time);
+          
+            if (!items[strTime]) {
+                items[strTime] = [];
+              
+
+                const numItems = Math.floor(Math.random() + 1);
+
+                for (let j = 0; j < numItems; j++) {
+                    items[strTime].push({
+                        name:  strTime ,
+                       
+      
+                    });
+                }
+            }
+        }
+        const newItems = {};
+        Object.keys(items).forEach(key => {
+            newItems[key] = items[key];
+        });
+        setItems(newItems);
+    }, 1000);
+}
+
+
+const renderItem = (item) => {
+  return (
+     <View>
+     
+          <FlatList  data={data.filter(obj=>obj.kiedy==item.name)} renderItem={({item}) => 
+    
+           <Box style={styles.boxes}>
+            <HStack space={10}>
+              <Checkbox  accessibilityLabel="Checkbox" ></Checkbox>
+          <Text style={styles.text_box} > {item.nazwa}</Text>
+          <Text style={styles.text_box} > {item.kiedy}</Text>
+ 
+         </HStack>
+          </Box>
+       
+           }
+          keyExtractor={item => item.id} 
+          
+          />         
+      
+      </View>
+  );
+}
+
+  return(
   <NativeBaseProvider>
-    <LinearGradient
+   <LinearGradient
         colors={['#0c4a6e', '#7dd3fc']}
         style={styles.root}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
-        <FlatList></FlatList>
-    <ScrollView>
-    
-      <Box alignSelf="center" width="80" height="40" bg="primary.500" _text={{
-      fontSize: "40",
-      fontWeight: "medium",
-      color: "warmGray.50",
-      letterSpacing: "lg",
-    }}
-    rounded="xl"
-    >
-       Kolos</Box>
-       
-
-        <Text>
-        Home Screen 
-      </Text>
-      <Button
-      title="Go to Jane's profile"
-      onPress={() =>
-        navigation.navigate('Profile', { name: 'Jane' })
-      }
-      >
-         <Text>Go</Text>
-    </Button>
-        
-    </ScrollView>
-  </LinearGradient>
+       <Agenda
+               
+                items={items}
+                loadItemsForMonth={loadItems}
+                showClosingKnob={true}
+                refreshing={true}
+                renderItem={renderItem}
+            />
+      
+  
+          
+   </LinearGradient>
   </NativeBaseProvider>
-);
+)};
 
 Home.propTypes = {
   navigation: PropTypes.shape({
@@ -62,8 +161,19 @@ Home.propTypes = {
   }),
 };
 
+
+Home.propTypes = {
+  route: PropTypes.shape({
+    params: PropTypes.shape({ from: PropTypes.string }),
+  }),
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+  }),
+};
+
 Home.defaultProps = {
+  route: { params: { from: '' } },
   navigation: { navigate: () => null },
 };
 
-export default Home;
+export default Home

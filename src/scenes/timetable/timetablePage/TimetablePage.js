@@ -28,31 +28,29 @@ const styles = StyleSheet.create({
   },
 });
 
-const WalletPage = ({route,navigation}) => {
+const TimetablePage = ({route,navigation}) => {
   const from = route?.params?.from
 
- //const url = 'http://192.168.0.186/organizer/index_wallet.php';//dom
-  const url = 'http://192.168.1.209/organizer/index_wallet.php';//aka
- // const url = 'http://192.168.0.156/organizer/index_wallet.php';//dom_KOMP
+ const url = 'http://192.168.0.128/organizer/index_todo.php';//dom
+ //const url = 'http://192.168.1.209/organizer/index_todo.php';//aka
+ // const url = 'http://192.168.0.156/organizer/index_todo.php';//dom_KOMP
 
   const [showModal, setShowModal] = useState(false);
   const [data, setData] = useState([]);
   const [daneNazwa,setNazwa] = useState('');
-  const [daneNumTel,setNumTel] = useState('');
-  const [daneNumKon,setNumKon] = useState('');
+  const [daneKiedy,setKiedy] = useState('');
+
 
 
 const postData = () =>{
   
   axios.post(url,{
     nazwa:daneNazwa,
-    num_telefonu:daneNumTel,
-    num_konta:daneNumKon
-  }).then(response => console.log('dodano:',daneNazwa,daneNumTel,daneNumKon),
+    kiedy:daneKiedy
+  }).then(response => console.log('dodano:',daneNazwa,daneKiedy),
    setNazwa(''),
-   setNumTel(''),
-   setNumKon(''),
-   navigation.navigate('Portfel'),
+   setKiedy(''),
+   navigation.navigate('To do'),
   ).catch(err=>console.log(err))
 }
 
@@ -68,7 +66,7 @@ const postData = () =>{
         size:8
       }}
       onPress={() => {
-        navigation.navigate('Portfel')
+        navigation.navigate('Terminarz')
   }}></IconButton>
   <IconButton
        _icon={{
@@ -87,8 +85,8 @@ const postData = () =>{
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
-        <Avatar my= "5" size={150} background={colors.lightBlue}>
-         <Icon name="adduser" size={70}  /> 
+        <Avatar my= "5" size={150} background={colors.blue}>
+         <Icon name="plus" size={70}  /> 
          </Avatar>
         
         <Input value={daneNazwa} variant="rounded" mx="3" my= "5" placeholder="Nazwa" 
@@ -98,28 +96,21 @@ const postData = () =>{
         placeholderTextColor: "#a3e635"
         }} >
         </Input>
-        <Input value={daneNumTel} variant="rounded" mx="3" my= "5" 
-        placeholder="Numer telefonu" w="50%" backgroundColor="#0c4a6e" 
-        borderColor="#a3e635" 
-        onChangeText={text => setNumTel(text)} 
+        <Input value={daneKiedy} variant="rounded" mx="3" my= "5" placeholder="Data" 
+        w="50%" backgroundColor="#0c4a6e" borderColor="#a3e635" 
+        keyboardType = 'numeric'
+        onChangeText={text => setKiedy(text)} 
         _light={{
         placeholderTextColor: "#a3e635"
         }} >
         </Input>
-        <Input value={daneNumKon} variant="rounded" mx="3" my= "5"
-         placeholder="Numer konta" w="50%" backgroundColor="#0c4a6e"
-          borderColor="#a3e635" 
-          onChangeText={text => setNumKon(text)} 
-        _light={{
-        placeholderTextColor: "#a3e635"
-        }} >
-        </Input>
+  
     
     </LinearGradient>
     </NativeBaseProvider>
     )
 };
-WalletPage.propTypes = {
+TimetablePage.propTypes = {
   route: PropTypes.shape({
     params: PropTypes.shape({ from: PropTypes.string }),
   }),
@@ -128,9 +119,9 @@ WalletPage.propTypes = {
   }),
 };
 
-WalletPage.defaultProps = {
+TimetablePage.defaultProps = {
   route: { params: { from: '' } },
   navigation: { navigate: () => null },
 };
 
-export default WalletPage;
+export default TimetablePage;

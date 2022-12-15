@@ -150,7 +150,7 @@ const renderItem = (item) => {
             />
       
       <Fab  shadow={4} bgColor={'#002851'} 
-          onPress={() => navigation.navigate('ToDoStrona')}
+          onPress={() => navigation.navigate('TerminarzStrona')}
           icon={<Icon color="#a3e635" as={AntDesign} name="plus" size="lg" />} />
           
           

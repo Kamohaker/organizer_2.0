@@ -29,9 +29,8 @@ const styles = StyleSheet.create({
     borderColor:colors.blue ,
     backgroundColor:colors.lightBlue,
     marginTop:20,
-    width:'100%',
+    width:400,
     height:80,
-    alignItems:'center',
     
   }
 });
@@ -109,28 +108,28 @@ return (focusHandler)
         <FlatList data={data} renderItem={({item}) => 
         <Box style={styles.boxes}>
          
-            <HStack space={[2, 3]} justifyContent="space-between">
+            <HStack  >
               
             
-              <Avatar size="60px" mx="4" backgroundColor={randomColor()}>{getFirstLetterFrom(item.nazwa)}</Avatar>
+              <Avatar size="60px" mx='1' backgroundColor={randomColor()}>{getFirstLetterFrom(item.nazwa)}</Avatar>
              <Pressable onPress={() =>
           navigation.navigate('PortfelEdytuj',{nazwa:item.nazwa , num_konta:item.num_konta, num_telefonu:item.num_telefonu})
         }>
-                <Text  numberOfLines={1} ellipsizeMode='tail' color="#ea580c" bold>
+                <Text  numberOfLines={1} ellipsizeMode='tail'  bold mx='4' my='3'>
                   {item.nazwa}
                 </Text>
                 </Pressable>
-                <Divider orientation="vertical" mx="4" _light={{
+                <Divider orientation="vertical" mx="2" _light={{
           bg: "muted.800"
         }}  />
-                <Text numberOfLines={1} ellipsizeMode='tail'>
+                <Text numberOfLines={1} ellipsizeMode='tail' mx='4' my='3'>
                   {item.num_telefonu}
             
                 </Text>
-                <Divider orientation="vertical" mx="4" _light={{
+                <Divider orientation="vertical" mx="2" _light={{
           bg: "muted.800"
         }}  />
-                <Text numberOfLines={1} ellipsizeMode='tail'>
+                <Text numberOfLines={1} ellipsizeMode='tail' mx='4' my='3'>
             
                   {item.num_konta}
             

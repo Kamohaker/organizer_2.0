@@ -5,24 +5,28 @@ import { Image,NativeBaseProvider } from "native-base";
 import logo from "../../../assets/logos.png"
 import Icon from "react-native-vector-icons/AntDesign";
 import MailsSctreen from "../../scenes/mails/Mails";
+import MailsPageScreen from "../../scenes/mails/mailsPage";
+import MailsEditScreen from "../../scenes/mails/mailsEdit";
 import ToDoScreen from "../../scenes/todo/ToDo";
+import ToDoPageScreen from "../../scenes/todo/todoPage";
 import LecturersScreen from "../../scenes/lecturers";
+import LecturesPageScreen from "../../scenes/lecturers/lecturesPage";
+import LecturesEditScreen from "../../scenes/lecturers/lecturesEdit";
 import ScheduleScreen from "../../scenes/schedule";
 import TimetableScreen from "../../scenes/timetable";
+import TimetablePageScreen from "../../scenes/timetable/timetablePage";
 import LinksScreen from "../../scenes/links";
+import LinksPageScreen from "../../scenes/links/linksPage";
+import LinksEditScreen from "../../scenes/links/linksEdit";
 import WalletScreen from "../../scenes/wallet";
+import WalletEditScreen from "../../scenes/wallet/walletEdit";
+import WalletPageScreen from "../../scenes/wallet/walletPage";
 import NotebookScreen from "../../scenes/notebook";
 import NotebookPageScreen from "../../scenes/notebook/notebookPage";
 import NotebookEditScreen from "../../scenes/notebook/NotebookEdit";
-import WalletEditScreen from "../../scenes/wallet/walletEdit";
-import WalletPageScreen from "../../scenes/wallet/walletPage";
-import LinksPageScreen from "../../scenes/links/linksPage";
-import LinksEditScreen from "../../scenes/links/linksEdit";
-import MailsPageScreen from "../../scenes/mails/mailsPage";
-import MailsEditScreen from "../../scenes/mails/mailsEdit";
-import LecturesPageScreen from "../../scenes/lecturers/lecturesPage";
-import LecturesEditScreen from "../../scenes/lecturers/lecturesEdit";
-import ToDoPageScreen from "../../scenes/todo/todoPage";
+
+
+
 import {colors} from "../../theme";
 
 const Drawer = createDrawerNavigator();
@@ -50,6 +54,7 @@ export function DrawerNavigator  ()  {
          (routeName) => routeName !== 'ProwadzacyStrona',
          (routeName) => routeName !== 'ProwadzacyEdytuj',
          (routeName) => routeName !== 'ToDoStorna',
+         (routeName) => routeName !== 'TerminarzStorna',
         ),
         routes: props.state.routes.filter(
           (route) =>
@@ -63,7 +68,8 @@ export function DrawerNavigator  ()  {
             route.name !== 'MailEdytuj' &&
             route.name !== 'ProwadzacyStrona' &&
             route.name !== 'ProwadzacyEdytuj' &&
-            route.name !== 'ToDoStrona' 
+            route.name !== 'ToDoStrona' &&
+            route.name !== 'TerminarzStrona'
 
         ),
       },
@@ -219,6 +225,11 @@ export function DrawerNavigator  ()  {
       name="ToDoStrona"
       
       component={ToDoPageScreen}
+      />
+      <Drawer.Screen
+      name="TerminarzStrona"
+      
+      component={TimetablePageScreen}
       />
    
    

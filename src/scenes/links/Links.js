@@ -16,8 +16,8 @@ const styles = StyleSheet.create({
    
   },
   title: {
-    fontSize: 44,
-    marginBottom: 20,
+    fontSize: 22,
+    marginBottom: 10,
   },
 
   boxes: {
@@ -31,7 +31,8 @@ const styles = StyleSheet.create({
     marginTop:10,
     width:220,
     height:80,
-    alignItems:'center'
+    alignItems:'center',
+    padding:18
   }
 });
 
@@ -69,7 +70,19 @@ const Links = ({route,navigation}) => {
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
-    
+      <Box marginTop = '5' marginBottom = '5'>
+          <HStack>
+        <Text style={styles.title}>
+          Nazwa
+        </Text>
+        <Divider orientation="vertical" mx="20" _light={{
+          bg: "muted.800"
+        }}  />
+         <Text style={styles.title}>
+          Link
+        </Text>
+        </HStack>
+         </Box>
         <FlatList data={data} renderItem={({item}) => 
         <Pressable onPress={()=>{navigation.navigate("LinkiEdytuj",{nazwa:item.nazwa,link:item.links})}}>
           <Box style={styles.boxes}>
@@ -77,7 +90,7 @@ const Links = ({route,navigation}) => {
             <HStack space={[2, 3]} justifyContent="space-between">
              
               
-                <Text  color="#ea580c" bold fontSize="20">
+                <Text   bold fontSize="20">
                   {item.nazwa}
                 </Text>
                 <Divider orientation="vertical" mx="2" _light={{
