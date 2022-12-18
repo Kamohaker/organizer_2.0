@@ -43,8 +43,8 @@ const styles = StyleSheet.create({
 const MailsPage = ({route,navigation}) => {
   const from = route?.params?.from
  
-  //const url = 'http://192.168.0.186/organizer/index_mails.php';//dpm
-  const url = 'http://192.168.1.209/organizer/index_mails.php';//aka
+  const url = 'http://192.168.0.188/organizer/index_mails.php';//dpm
+  //const url = 'http://192.168.1.209/organizer/index_mails.php';//aka
   //const url = 'http://192.168.0.156/organizer/index_mails.php';//dom_KOMP
 
   const [showModal, setShowModal] = useState(false);
@@ -99,23 +99,32 @@ const MailsPage = ({route,navigation}) => {
         <Avatar my= "5" size={150} background={colors.lightOrange}>
          <Icons name="adduser" size={70} /> 
          </Avatar>
-        
-        <Input  value={daneNazwa} variant="rounded" mx="3" my= "5" placeholder="Nazwa" 
+        <VStack my='4'>
+        <Text fontSize={15} color={colors.limone}>
+          Nazwa
+        </Text>
+        <Input  value={daneNazwa} variant="rounded"  marginBottom={6} marginTop={2}
+        placeholder="Nazwa" 
         w="50%" backgroundColor="#0c4a6e" borderColor="#a3e635" 
         onChangeText={text => setNazwa(text)} 
         _light={{
-        placeholderTextColor: "#a3e635"
+        placeholderTextColor: "#a3e635" ,
+        color:colors.limone
         }} >
         </Input>
-        <Input value={daneMail} variant="rounded" mx="3" my= "5" 
+        <Text fontSize={15} color={colors.limone}>
+          Mail
+        </Text>
+        <Input value={daneMail} variant="rounded"  marginBottom={6} marginTop={2}
         placeholder="Mail" w="50%" backgroundColor="#0c4a6e" 
         borderColor="#a3e635" 
         onChangeText={text => setMail(text)} 
         _light={{
-        placeholderTextColor: "#a3e635"
+        placeholderTextColor: "#a3e635",
+        color:colors.limone
         }} >
         </Input>
-        
+        </VStack>
     
     </LinearGradient>
     </NativeBaseProvider>

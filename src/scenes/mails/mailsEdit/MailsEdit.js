@@ -43,8 +43,8 @@ const styles = StyleSheet.create({
 const MailsEdit = ({route,navigation}) => {
   const from = route?.params?.from
  
-  //const url = 'http://192.168.0.186/organizer/index_mails.php';//dpm
-  const url = 'http://192.168.1.209/organizer/index_mails.php';//aka
+  const url = 'http://192.168.0.188/organizer/index_mails.php';//dpm
+  //const url = 'http://192.168.1.209/organizer/index_mails.php';//aka
   //const url = 'http://192.168.0.156/organizer/index_mails.php';//dom_KOMP
   const [showModal, setShowModal] = useState(false);
   const [data, setData] = useState([]);
@@ -116,22 +116,32 @@ const MailsEdit = ({route,navigation}) => {
         <Avatar my= "5" size={150} background={colors.lightOrange}>
          <Icons name="edit" size={70} /> 
          </Avatar>
-        
-        <Input  defaultValue= {route.params.nazwa} variant="rounded" mx="3" my= "5" placeholder="Nazwa" 
+        <VStack my='4'>
+        <Text fontSize={15} color={colors.limone}>
+          Edytuj nazwę
+        </Text>
+        <Input  defaultValue= {route.params.nazwa} variant="rounded" marginTop={2} marginBottom={6}
+        placeholder="Nazwa" 
         w="50%" backgroundColor="#0c4a6e" borderColor="#a3e635" 
         onChangeText={text => setNazwa(text)} 
         _light={{
-        placeholderTextColor: "#a3e635"
+        placeholderTextColor: "#a3e635",
+        color:colors.limone
         }} >
         </Input>
-        <Input defaultValue= {route.params.mail} variant="rounded" mx="3" my= "5" 
+        <Text fontSize={15} color={colors.limone}>
+          Edytuj mail
+        </Text>
+        <Input defaultValue= {route.params.mail} variant="rounded" marginTop={2} marginBottom={6} 
         placeholder="Mail" w="50%" backgroundColor="#0c4a6e" 
         borderColor="#a3e635" 
         onChangeText={text => setMail(text)} 
         _light={{
-        placeholderTextColor: "#a3e635"
+        placeholderTextColor: "#a3e635",
+        color:colors.limone
         }} >
         </Input>
+        </VStack>
         <Fab  bgColor={'#002851'} onPress={deleteData}
      icon={<Icon color="#dc2626" as={AntDesign} name="delete" size="lg" />}
     />

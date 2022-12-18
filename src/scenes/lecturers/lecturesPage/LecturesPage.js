@@ -101,32 +101,45 @@ const LecturesPage = ({route,navigation}) => {
         <Avatar my= "5" size={150} background={colors.yellow}>
          <Icons name="adduser" size={70}  /> 
          </Avatar>
-        
-        <Input  value={daneNazwa} variant="rounded" mx="3" my= "5" placeholder="Nazwa" 
+        <VStack py='4'>
+        <Text fontSize={15} color={colors.limone}>
+          Nazwa
+        </Text>
+        <Input  value={daneNazwa} variant="rounded"marginBottom={6} marginTop={2} placeholder="Nazwa" 
         w="50%" backgroundColor="#0c4a6e" borderColor="#a3e635" 
         onChangeText={text => setNazwa(text)} 
         _light={{
-        placeholderTextColor: "#a3e635"
+        placeholderTextColor: "#a3e635",
+        color:colors.limone
         }} >
         </Input>
-        <Input value={daneStopien} variant="rounded" mx="3" my= "5" 
-        placeholder="Stopien" w="50%" backgroundColor="#0c4a6e" 
+        <Text fontSize={15} color={colors.limone}>
+          Stopień
+        </Text>
+        <Input value={daneStopien} variant="rounded" marginBottom={6} marginTop={2} 
+        placeholder="Stopień" w="50%" backgroundColor="#0c4a6e" 
         borderColor="#a3e635" 
         onChangeText={text => setStopien(text)} 
         _light={{
-        placeholderTextColor: "#a3e635"
+        placeholderTextColor: "#a3e635",
+        color:colors.limone
         }} >
         </Input>
-        <Input value={daneNumPok} variant="rounded" mx="3" my= "5" 
+        <Text fontSize={15} color={colors.limone}>
+          Numer pokoju
+        </Text>
+        <Input value={daneNumPok} variant="rounded" marginBottom={6} marginTop={2}
         placeholder="Numer pokoju" w="50%" backgroundColor="#0c4a6e" 
         borderColor="#a3e635" 
+        keyboardType='numeric'
         onChangeText={text => setNumPok(text)} 
         _light={{
-        placeholderTextColor: "#a3e635"
+        placeholderTextColor: "#a3e635",
+        color:colors.limone
         }} >
         </Input>
         
-    
+    </VStack>
     </LinearGradient>
     </NativeBaseProvider>
     )

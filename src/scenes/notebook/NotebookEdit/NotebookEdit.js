@@ -6,6 +6,7 @@ import axios from 'axios';
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useState ,useEffect} from "react";
 import { LinearGradient } from "expo-linear-gradient";
+import { colors } from "../../../theme";
 
 
 const styles = StyleSheet.create({
@@ -125,7 +126,7 @@ data:{
       >
 
     <TextArea   defaultValue= {route.params.nazwa} h={50} fontSize={20}  onChangeText={text => setNazwa(text)} isDisabled/>
-    <TextArea  defaultValue= {route.params.opis } shadow={2} h={600}  fontSize={15}  onChangeText={text => setOpis(text)} />
+    <TextArea  defaultValue= {route.params.opis } color={colors.limone} shadow={2} h={600}  fontSize={15}  onChangeText={text => setOpis(text)} />
     <Fab  shadow={4} right={50} bgColor={'#002851'} onPress={deleteData
         }
           icon={<Icon color="#dc2626" as={AntDesign} name="delete" size="lg" />} 

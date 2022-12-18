@@ -31,8 +31,8 @@ const styles = StyleSheet.create({
 const WalletPage = ({route,navigation}) => {
   const from = route?.params?.from
 
- //const url = 'http://192.168.0.186/organizer/index_wallet.php';//dom
-  const url = 'http://192.168.1.209/organizer/index_wallet.php';//aka
+ const url = 'http://192.168.0.188/organizer/index_wallet.php';//dom
+ // const url = 'http://192.168.1.209/organizer/index_wallet.php';//aka
  // const url = 'http://192.168.0.156/organizer/index_wallet.php';//dom_KOMP
 
   const [showModal, setShowModal] = useState(false);
@@ -90,31 +90,45 @@ const postData = () =>{
         <Avatar my= "5" size={150} background={colors.lightBlue}>
          <Icon name="adduser" size={70}  /> 
          </Avatar>
-        
-        <Input value={daneNazwa} variant="rounded" mx="3" my= "5" placeholder="Nazwa" 
+         <VStack py='4'>
+         <Text fontSize={15} color={colors.limone}>
+          Nazwa
+        </Text>
+        <Input value={daneNazwa} variant="rounded"marginBottom={6} marginTop={2} placeholder="Nazwa" 
         w="50%" backgroundColor="#0c4a6e" borderColor="#a3e635" 
         onChangeText={text => setNazwa(text)} 
         _light={{
-        placeholderTextColor: "#a3e635"
+        placeholderTextColor: "#a3e635",
+        color:colors.limone
         }} >
         </Input>
-        <Input value={daneNumTel} variant="rounded" mx="3" my= "5" 
+        <Text fontSize={15} color={colors.limone}>
+          Numer telefonu
+        </Text>
+        <Input value={daneNumTel} variant="rounded" marginBottom={6} marginTop={2}
         placeholder="Numer telefonu" w="50%" backgroundColor="#0c4a6e" 
         borderColor="#a3e635" 
+        keyboardType='numeric'
         onChangeText={text => setNumTel(text)} 
         _light={{
-        placeholderTextColor: "#a3e635"
+        placeholderTextColor: "#a3e635",
+        color:colors.limone
         }} >
         </Input>
-        <Input value={daneNumKon} variant="rounded" mx="3" my= "5"
+        <Text fontSize={15} color={colors.limone}>
+          Numer konta
+        </Text>
+        <Input value={daneNumKon} variant="rounded" marginBottom={6} marginTop={2}
          placeholder="Numer konta" w="50%" backgroundColor="#0c4a6e"
           borderColor="#a3e635" 
+          keyboardType='numeric'
           onChangeText={text => setNumKon(text)} 
         _light={{
-        placeholderTextColor: "#a3e635"
+        placeholderTextColor: "#a3e635",
+        color:colors.limone
         }} >
         </Input>
-    
+        </VStack>
     </LinearGradient>
     </NativeBaseProvider>
     )

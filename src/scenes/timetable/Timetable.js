@@ -110,7 +110,7 @@ const Timetable = ({ route,navigation }) => {
 
 const renderItem = (item) => {
   return (
-     <View>
+     <View style={styles.root}>
      
           <FlatList  data={data.filter(obj=>obj.kiedy==item.name)} renderItem={({item}) => 
     
@@ -141,7 +141,22 @@ const renderItem = (item) => {
         end={{ x: 1, y: 1 }}
       >
        <Agenda
-        theme={{ calendarBackground:colors.grayBlue}}
+         theme={{ 
+          calendarBackground:colors.calendar,
+          textSectionTitleColor: colors.darkGreyBlue,
+          selectedDayBackgroundColor: colors.selector,
+          selectedDayTextColor: colors.limone,
+          dayTextColor: 'white', 
+          dotColor: colors.darkGreyBlue,
+          selectedDotColor: colors.limone,
+          monthTextColor: 'white',
+
+           
+          agendaDayNumColor: colors.darkGreyBlue,
+          agendaTodayColor: colors.limone,
+        
+         
+        }}
                
                 items={items}
                 loadItemsForMonth={loadItems}

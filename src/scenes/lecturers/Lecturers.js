@@ -19,6 +19,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     marginBottom: 2,
+    fontWeight: "bold",
+    color: "white"
+
   },
   boxes:{
     borderBottomWidth:5,
@@ -37,7 +40,7 @@ const styles = StyleSheet.create({
 
 const Lectures = ({route,navigation}) => {
   const from = route?.params?.from
- const url = 'http://192.168.0.128/organizer/index_lectures.php';//dom
+ const url = 'http://192.168.0.188/organizer/index_lectures.php';//dom
  // const url = 'http://192.168.1.209/organizer/index_lectures.php';//aka
 
   const [showModal, setShowModal] = useState(false);
@@ -102,15 +105,15 @@ const Lectures = ({route,navigation}) => {
       
         <FlatList data={data}  renderItem={({item}) => 
           <Box style={styles.boxes}>
-            <HStack >
+            <HStack py={1}>
               <Avatar mx='5' backgroundColor={randomColor()} size="60px" >{getFirstLetterFrom(item.nazwa)}</Avatar> 
                 <Pressable onPress={()=>{navigation.navigate('ProwadzacyEdytuj',{nazwa:item.nazwa,stopien:item.stopien,num_pok:item.num_pokoju})}}>
                 <Text  bold my='4'>
                   {item.nazwa}
                 </Text>
                 </Pressable>
-                <Divider orientation="vertical" mx="10" my='1' _light={{
-          bg: "muted.800"
+                <Divider orientation="vertical" mx="10"  _light={{
+          background:colors.darkYellow
         }}  />
                 <Text my='4'>
              
@@ -118,8 +121,8 @@ const Lectures = ({route,navigation}) => {
                   {item.stopien}
                   
                 </Text >
-                <Divider orientation="vertical" mx="10"my='1' _light={{
-          bg: "muted.800"
+                <Divider orientation="vertical" mx="10" _light={{
+         background:colors.darkYellow
         }}  />
          <Text   bold my='4'>
                   {item.num_pokoju}

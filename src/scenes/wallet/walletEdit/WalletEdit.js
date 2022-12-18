@@ -7,6 +7,7 @@ import Fot  from "react-native-vector-icons/AntDesign";
 import { useState ,useEffect} from "react";
 import axios from "axios";
 import { LinearGradient } from "expo-linear-gradient";
+import { colors } from "../../../theme";
 
 const styles = StyleSheet.create({
   root: {
@@ -30,8 +31,8 @@ const styles = StyleSheet.create({
 const WalletEdit = ({route,navigation}) => {
   const from = route?.params?.from
 
- //const url = 'http://192.168.0.186/organizer/index_wallet.php';//dom
-  const url = 'http://192.168.1.209/organizer/index_wallet.php';//aka
+ const url = 'http://192.168.0.188/organizer/index_wallet.php';//dom
+  //const url = 'http://192.168.1.209/organizer/index_wallet.php';//aka
  // const url = 'http://192.168.0.156/organizer/index_wallet.php';//dom_KOMP
 
   const [showModal, setShowModal] = useState(false);
@@ -103,34 +104,51 @@ data:{
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
-        <Avatar my= "5" size={150} background="#002851">
-         <Fot name="edit" size={70} color="#a3e635" /> 
+        <Avatar my= "5" size={150} background={colors.lightBlue}>
+         <Fot name="edit" size={70}/> 
          </Avatar>
-        
-        <Input defaultValue= {route.params.nazwa} variant="rounded" mx="3" my= "5" placeholder="Nazwa" 
+        <VStack py='4'>
+        <Text fontSize={15} color={colors.limone}>
+         Nazwa
+        </Text>
+        <Input defaultValue= {route.params.nazwa} variant="rounded" marginBottom={6} marginTop={2} placeholder="Nazwa" 
         w="50%" backgroundColor="#0c4a6e" borderColor="#a3e635" 
         onChangeText={text => setNazwa(text)} 
         _light={{
-        placeholderTextColor: "#a3e635"
+        placeholderTextColor: "#a3e635",
+        color:colors.limone
       
         }} >
         </Input>
-        <Input defaultValue = {route.params.num_telefonu} variant="rounded" mx="3" my= "5" 
+        <Text fontSize={15} color={colors.limone}>
+          Numer telefonu
+        </Text>
+        <Input defaultValue = {route.params.num_telefonu} variant="rounded" marginBottom={6} marginTop={2} 
         placeholder="Numer telefonu" w="50%" backgroundColor="#0c4a6e" 
         borderColor="#a3e635" 
+        keyboardType='numeric'
         onChangeText={text => setNumTel(text)} 
         _light={{
-        placeholderTextColor: "#a3e635"
+        placeholderTextColor: "#a3e635",
+        color:colors.limone
         }} >
         </Input>
-        <Input defaultValue= {route.params.num_konta} variant="rounded" mx="3" my= "5"
+        <Text fontSize={15} color={colors.limone}>
+          Numer konta
+        </Text>
+        <Input defaultValue= {route.params.num_konta} variant="rounded" marginBottom={6} marginTop={2}
          placeholder="Numer konta" w="50%" backgroundColor="#0c4a6e"
           borderColor="#a3e635" 
+          keyboardType='numeric'
           onChangeText={text => setNumKon(text)} 
         _light={{
-        placeholderTextColor: "#a3e635"
+        placeholderTextColor: "#a3e635",
+        color:colors.limone
         }} >
         </Input>
+
+        </VStack>
+
     <Fab  bgColor={'#002851'} onPress={deleteData}
      icon={<Icon color="#dc2626" as={AntDesign} name="delete" size="lg" />}
     />

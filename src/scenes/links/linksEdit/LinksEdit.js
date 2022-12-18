@@ -7,6 +7,7 @@ import { useState ,useEffect} from "react";
 import axios from "axios";
 import { LinearGradient } from "expo-linear-gradient";
 import Icons  from "react-native-vector-icons/AntDesign";
+import { colors } from "../../../theme";
 
 const styles = StyleSheet.create({
   root: {
@@ -124,25 +125,35 @@ const LinksEdit = ({route,navigation}) => {
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
-        <Avatar my= "5" size={150} background="#002851">
-         <Icons name="edit" size={70} color="#a3e635" /> 
+        <Avatar my= "5" size={150} background={colors.violet}>
+         <Icons name="edit" size={70} /> 
          </Avatar>
-        
-        <Input  defaultValue= {route.params.nazwa} variant="rounded" mx="3" my= "5" placeholder="Nazwa" 
+        <VStack py='4'>
+        <Text fontSize={15} color={colors.limone}>
+         Edytuj stopień
+        </Text>
+        <Input  defaultValue= {route.params.nazwa} variant="rounded" marginBottom={6} marginTop={2} placeholder="Nazwa" 
         w="50%" backgroundColor="#0c4a6e" borderColor="#a3e635" 
         onChangeText={text => setNazwa(text)} 
         _light={{
-        placeholderTextColor: "#a3e635"
+        placeholderTextColor: "#a3e635",
+        color:colors.limone
         }} >
         </Input>
-        <Input defaultValue= {route.params.link} variant="rounded" mx="3" my= "5" 
+        <Text fontSize={15} color={colors.limone}>
+         Edytuj stopień
+        </Text>
+        <Input defaultValue= {route.params.link} variant="rounded" marginBottom={6} marginTop={2} 
         placeholder="Link" w="50%" backgroundColor="#0c4a6e" 
         borderColor="#a3e635" 
         onChangeText={text => setLink(text)} 
         _light={{
-        placeholderTextColor: "#a3e635"
+        placeholderTextColor: "#a3e635",
+        color:colors.limone
         }} >
         </Input>
+        </VStack>
+
         <Fab  bgColor={'#002851'} onPress={deleteData}
      icon={<Icon color="#dc2626" as={AntDesign} name="delete" size="lg" />}
     />

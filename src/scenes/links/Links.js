@@ -16,8 +16,10 @@ const styles = StyleSheet.create({
    
   },
   title: {
-    fontSize: 22,
+    fontSize: 20,
     marginBottom: 10,
+    fontWeight: "bold",
+    color: "white"
   },
 
   boxes: {
@@ -40,7 +42,7 @@ const styles = StyleSheet.create({
 const Links = ({route,navigation}) => {
   const from = route?.params?.from
  
-  const url = 'http://192.168.0.128/organizer/index_links.php';//dpm
+  const url = 'http://192.168.0.188/organizer/index_links.php';//dpm
  // const url = 'http://192.168.1.209/organizer/index_links.php';//aka
   //const url = 'http://192.168.0.156/organizer/index_links.php';//dom_KOMP
   const [showModal, setShowModal] = useState(false);
@@ -94,7 +96,7 @@ const Links = ({route,navigation}) => {
                   {item.nazwa}
                 </Text>
                 <Divider orientation="vertical" mx="2" _light={{
-          bg: "muted.800"
+         background:colors.darkViolet
         }}  />
                 <Text >
              <Link  isExternal _text={{

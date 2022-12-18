@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
 const Notebook = ({ route, navigation }) => {
   const from = route?.params?.from
   const [data, setData] = useState([]);
-const url = 'http://192.168.0.128/organizer/index_notebook.php';//dom
+const url = 'http://192.168.0.188/organizer/index_notebook.php';//dom
  // const url = 'http://192.168.1.209/organizer/index_notebook.php';//aka
 // const url = 'http://192.168.0.156/organizer/index_notebook.php';//dom_KOMP
 

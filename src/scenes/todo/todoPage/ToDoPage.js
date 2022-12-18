@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
 const ToDoPage = ({route,navigation}) => {
   const from = route?.params?.from
 
- const url = 'http://192.168.0.128/organizer/index_todo.php';//dom
+ const url = 'http://192.168.0.188/organizer/index_todo.php';//dom
  //const url = 'http://192.168.1.209/organizer/index_todo.php';//aka
  // const url = 'http://192.168.0.156/organizer/index_todo.php';//dom_KOMP
 
@@ -88,24 +88,33 @@ const postData = () =>{
         <Avatar my= "5" size={150} background={colors.red}>
          <Icon name="plus" size={70}  /> 
          </Avatar>
-        
-        <Input value={daneNazwa} variant="rounded" mx="3" my= "5" placeholder="Nazwa" 
+
+         <VStack py='4'>
+         <Text fontSize={15} color={colors.limone}>
+          Nazwa
+        </Text>
+        <Input value={daneNazwa} variant="rounded"  marginBottom={6} marginTop={2} placeholder="Nazwa" 
         w="50%" backgroundColor="#0c4a6e" borderColor="#a3e635" 
         onChangeText={text => setNazwa(text)} 
         _light={{
-        placeholderTextColor: "#a3e635"
+        placeholderTextColor: "#a3e635",
+        color:colors.limone
         }} >
         </Input>
-        <Input value={daneKiedy} variant="rounded" mx="3" my= "5" placeholder="Data" 
+        <Text fontSize={15} color={colors.limone}>
+          Data
+        </Text>
+        <Input value={daneKiedy} variant="rounded"  marginBottom={6} marginTop={2} placeholder="Data" 
         w="50%" backgroundColor="#0c4a6e" borderColor="#a3e635" 
         keyboardType = 'numeric'
         onChangeText={text => setKiedy(text)} 
         _light={{
-        placeholderTextColor: "#a3e635"
+        placeholderTextColor: "#a3e635",
+        color:colors.limone
         }} >
         </Input>
   
-    
+        </VStack>
     </LinearGradient>
     </NativeBaseProvider>
     )

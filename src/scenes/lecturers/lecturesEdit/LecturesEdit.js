@@ -118,30 +118,43 @@ const LecturesEdit = ({route,navigation}) => {
         <Avatar my= "5" size={150} background={colors.yellow}>
          <Icons name="edit" size={70}  /> 
          </Avatar>
-        
-        <Input  defaultValue= {route.params.nazwa} variant="rounded" mx="3" my= "5" placeholder="Nazwa" 
+        <VStack py='4'>
+        <Text fontSize={15} color={colors.limone}>
+         Edytuj nazwę
+        </Text>
+        <Input  defaultValue= {route.params.nazwa} variant="rounded" marginBottom={6} marginTop={2} placeholder="Nazwa" 
         w="50%" backgroundColor="#0c4a6e" borderColor="#a3e635" 
         onChangeText={text => setNazwa(text)} 
         _light={{
-        placeholderTextColor: "#a3e635"
+        placeholderTextColor: "#a3e635",
+        color:colors.limone
         }} >
         </Input>
-        <Input defaultValue= {route.params.stopien} variant="rounded" mx="3" my= "5" 
+        <Text fontSize={15} color={colors.limone}>
+         Edytuj stopień
+        </Text>
+        <Input defaultValue= {route.params.stopien} variant="rounded" marginBottom={6} marginTop={2} 
         placeholder="Stopień" w="50%" backgroundColor="#0c4a6e" 
         borderColor="#a3e635" 
         onChangeText={text => setStopien(text)} 
         _light={{
-        placeholderTextColor: "#a3e635"
+        placeholderTextColor: "#a3e635",
+        color:colors.limone
         }} >
         </Input>
-        <Input defaultValue= {route.params.num_pok} variant="rounded" mx="3" my= "5" 
+        <Text fontSize={15} color={colors.limone}>
+         Edytuj numer pokoju
+        </Text>
+        <Input defaultValue= {route.params.num_pok} variant="rounded" marginBottom={6} marginTop={2} 
         placeholder="Numer pokoju" w="50%" backgroundColor="#0c4a6e" 
         borderColor="#a3e635" 
         onChangeText={text => setNumPok(text)} 
         _light={{
-        placeholderTextColor: "#a3e635"
+        placeholderTextColor: "#a3e635",
+        color:colors.limone
         }} >
         </Input>
+        </VStack>
         <Fab  bgColor={'#002851'} onPress={deleteData}
      icon={<Icon color="#dc2626" as={AntDesign} name="delete" size="lg" />}
     />

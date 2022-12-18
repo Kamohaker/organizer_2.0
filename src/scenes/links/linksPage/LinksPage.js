@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
 const LinksPage = ({route,navigation}) => {
   const from = route?.params?.from
  
-  const url = 'http://192.168.0.128/organizer/index_links.php';//dpm
+  const url = 'http://192.168.0.188/organizer/index_links.php';//dpm
   //const url = 'http://192.168.1.209/organizer/index_links.php';//aka
   //const url = 'http://192.168.0.156/organizer/index_links.php';//dom_KOMP
   const [showModal, setShowModal] = useState(false);
@@ -111,23 +111,32 @@ const LinksPage = ({route,navigation}) => {
          <Icons name="plus" size={70}  /> 
          </Avatar>
         
-        <Input  value={daneNazwa} variant="rounded" mx="3" my= "5" placeholder="Nazwa" 
+        <VStack py='4'>
+        <Text fontSize={15} color={colors.limone}>
+         Nazwa
+        </Text>
+        <Input  value={daneNazwa} variant="rounded" marginBottom={6} marginTop={2} placeholder="Nazwa" 
         w="50%" backgroundColor="#0c4a6e" borderColor="#a3e635" 
         onChangeText={text => setNazwa(text)} 
         _light={{
-        placeholderTextColor: "#a3e635"
+        placeholderTextColor: "#a3e635",
+        color:colors.limone
         }} >
         </Input>
-        <Input value={daneLink} variant="rounded" mx="3" my= "5" 
+        <Text fontSize={15} color={colors.limone}>
+         Link
+        </Text>
+        <Input value={daneLink} variant="rounded" marginBottom={6} marginTop={2} 
         placeholder="Link" w="50%" backgroundColor="#0c4a6e" 
         borderColor="#a3e635" 
         onChangeText={text => setLink(text)} 
         _light={{
-        placeholderTextColor: "#a3e635"
+        placeholderTextColor: "#a3e635",
+        color:colors.limone
         }} >
         </Input>
         
-    
+        </VStack>
     </LinearGradient>
     </NativeBaseProvider>
     )

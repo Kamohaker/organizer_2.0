@@ -6,6 +6,7 @@ import axios from 'axios';
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useState ,useEffect} from "react";
 import { LinearGradient } from "expo-linear-gradient";
+import { colors } from "../../../theme";
 
 
 const styles = StyleSheet.create({
@@ -41,8 +42,8 @@ const styles = StyleSheet.create({
 
 const NotebookPage = ({route, navigation }) => {
   const from = route?.params?.from
- // const url = 'http://192.168.0.186/organizer/index_notebook.php';//dom
-  const url = 'http://192.168.1.209/organizer/index_notebook.php';//aka
+  const url = 'http://192.168.0.188/organizer/index_notebook.php';//dom
+  //const url = 'http://192.168.1.209/organizer/index_notebook.php';//aka
   //const url = 'http://192.168.0.156/organizer/index_notebook.php';//dom_KOMP
   const [data, setData] = useState([]);
   const [daneNazwa,setNazwa] = useState('');
@@ -104,8 +105,8 @@ const NotebookPage = ({route, navigation }) => {
         end={{ x: 1, y: 1 }}
       >
 
-    <TextArea value={daneNazwa} placeholder="Tytuł" h={50} fontSize={20}  onChangeText={text => setNazwa(text)} />
-    <TextArea value={daneOpis} shadow={2} h={600} placeholder="Zacznij pisać" fontSize={13}  onChangeText={text => setOpis(text)} />
+    <TextArea value={daneNazwa} placeholder="Tytuł" color={colors.limone} h={50} fontSize={20}  onChangeText={text => setNazwa(text)} />
+    <TextArea value={daneOpis} shadow={2} h={600} color={colors.limone} placeholder="Zacznij pisać" fontSize={13}  onChangeText={text => setOpis(text)} />
     </LinearGradient>
   </NativeBaseProvider>
 )};

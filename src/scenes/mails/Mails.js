@@ -1,6 +1,6 @@
 import React  from "react";
 import { PropTypes } from "prop-types";
-import { Link,FormControl,Input,Button,Pressable, Box,Flex,View,Divider, FlatList, Avatar, HStack, VStack, Fab,Text, Icon, Center, NativeBaseProvider } from "native-base";
+import { Link,Pressable, Box,Divider, FlatList, Avatar, HStack, VStack, Fab,Text, Icon, NativeBaseProvider } from "native-base";
 import {StyleSheet} from "react-native"
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useState ,useEffect} from "react";
@@ -19,6 +19,8 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     marginBottom: 2,
+    fontWeight: "bold",
+    color: "white"
   },
   boxes: {
     borderBottomWidth:5,
@@ -38,7 +40,7 @@ const styles = StyleSheet.create({
 
 const Maile = ({route,navigation}) => {
   const from = route?.params?.from
-  const url = 'http://192.168.0.128/organizer/index_mails.php';//dom
+  const url = 'http://192.168.0.188/organizer/index_mails.php';//dom
  // const url = 'http://192.168.1.209/organizer/index_mails.php';//aka
   //const url = 'http://192.168.0.156/organizer/index_mails.php';//dom_KOMP
 
@@ -104,7 +106,7 @@ const Maile = ({route,navigation}) => {
                   {item.nazwa}
                 </Text>
                 <Divider orientation="vertical" mx="8" my="1" _light={{
-          bg: "muted.800"
+          background:colors.orange
         }}  />
                 <Text my= '7' mx='4'>
              <Link href="https://mail.google.com" isExternal _text={{

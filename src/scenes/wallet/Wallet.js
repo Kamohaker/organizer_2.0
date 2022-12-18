@@ -18,7 +18,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     marginTop: 10,
-    marginBottom:10
+    marginBottom:10,
+    fontWeight: "bold",
+    color: "white"
   },
   boxes:{
     borderBottomWidth:5,
@@ -38,7 +40,7 @@ const styles = StyleSheet.create({
 const Wallet = ({route,navigation}) => {
   const from = route?.params?.from
 
- const url = 'http://192.168.0.128/organizer/index_wallet.php';//dom
+ const url = 'http://192.168.0.188/organizer/index_wallet.php';//dom
  // const url = 'http://192.168.1.209/organizer/index_wallet.php';//aka
  // const url = 'http://192.168.0.156/organizer/index_wallet.php';//dom_KOMP
 
@@ -85,32 +87,28 @@ return (focusHandler)
       >
       <HStack space={[2, 3]} justifyContent="space-between">
         <Text style= {styles.title}>
-          nazwa
+          Nazwa
         </Text>
         <Divider orientation="vertical" mx="3" _light={{
           bg: "muted.800"
         }}  />
         <Text style= {styles.title}>
-          numer telefonu
+          Numer telefonu
         </Text>
         <Divider orientation="vertical" mx="3" _light={{
           bg: "muted.800"
         }}  />
         <Text style= {styles.title}>
-          numer konta
+          Numer konta
         </Text>
        
       </HStack>
-      <Divider orientation="horizontal" my="3" _light={{
-          bg: "muted.800"
-        }}  />
      
         <FlatList data={data} renderItem={({item}) => 
         <Box style={styles.boxes}>
          
-            <HStack  >
+            <HStack py='1' >
               
-            
               <Avatar size="60px" mx='1' backgroundColor={randomColor()}>{getFirstLetterFrom(item.nazwa)}</Avatar>
              <Pressable onPress={() =>
           navigation.navigate('PortfelEdytuj',{nazwa:item.nazwa , num_konta:item.num_konta, num_telefonu:item.num_telefonu})
@@ -120,14 +118,14 @@ return (focusHandler)
                 </Text>
                 </Pressable>
                 <Divider orientation="vertical" mx="2" _light={{
-          bg: "muted.800"
+         background:colors.blue
         }}  />
                 <Text numberOfLines={1} ellipsizeMode='tail' mx='4' my='3'>
                   {item.num_telefonu}
             
                 </Text>
                 <Divider orientation="vertical" mx="2" _light={{
-          bg: "muted.800"
+         background:colors.blue
         }}  />
                 <Text numberOfLines={1} ellipsizeMode='tail' mx='4' my='3'>
             
