@@ -28,11 +28,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const TimetablePage = ({route,navigation}) => {
+const SchedulePage = ({route,navigation}) => {
   const from = route?.params?.from
 
- const url = 'http://192.168.0.188/organizer/index_timetable.php';//dom
- //const url = 'http://192.168.1.209/organizer/index_timetable.php';//aka
+ const url = 'http://192.168.0.188/organizer/index_schedule.php';//dom
+ //const url = 'http://192.168.1.209/organizer/index_schedule.php';//aka
 
 
   const [showModal, setShowModal] = useState(false);
@@ -50,7 +50,7 @@ const postData = () =>{
   }).then(response => console.log('dodano:',daneNazwa,daneKiedy),
    setNazwa(''),
    setKiedy(''),
-   navigation.navigate('Terminarz'),
+   navigation.navigate('Plan zajęć'),
   ).catch(err=>console.log(err))
 }
 
@@ -66,7 +66,7 @@ const postData = () =>{
         size:8
       }}
       onPress={() => {
-        navigation.navigate('Terminarz')
+        navigation.navigate('Plan zajęć')
   }}></IconButton>
   <IconButton
        _icon={{
@@ -85,7 +85,7 @@ const postData = () =>{
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
-        <Avatar my= "5" size={150} background={colors.blue}>
+        <Avatar my= "5" size={150} background={colors.green}>
          <Icon name="plus" size={70}  /> 
          </Avatar>
          <VStack py='4'>
@@ -103,7 +103,7 @@ const postData = () =>{
         <Text fontSize={15} color={colors.limone}>
           Data
         </Text>
-        <Input value={daneKiedy} variant="rounded"  marginBottom={6} marginTop={2} placeholder="Data" 
+        <Input value={daneKiedy} variant="rounded" marginBottom={6} marginTop={2} placeholder="Data" 
         w="50%" backgroundColor="#0c4a6e" borderColor="#a3e635" 
         keyboardType = 'numeric'
         onChangeText={text => setKiedy(text)} 
@@ -118,7 +118,7 @@ const postData = () =>{
     </NativeBaseProvider>
     )
 };
-TimetablePage.propTypes = {
+SchedulePage.propTypes = {
   route: PropTypes.shape({
     params: PropTypes.shape({ from: PropTypes.string }),
   }),
@@ -127,9 +127,9 @@ TimetablePage.propTypes = {
   }),
 };
 
-TimetablePage.defaultProps = {
+SchedulePage.defaultProps = {
   route: { params: { from: '' } },
   navigation: { navigate: () => null },
 };
 
-export default TimetablePage;
+export default SchedulePage;

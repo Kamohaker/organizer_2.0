@@ -36,6 +36,8 @@ const styles = StyleSheet.create({
     borderColor:colors.darkGreen,
     backgroundColor:colors.green,
     marginTop:20,
+    marginLeft:10 ,
+    paddingRight:10,
     width:'100%',
     height:80,
     alignItems:'center',
@@ -52,7 +54,7 @@ const timeToString = (time) => {
 
 const Shedule = ({ route,navigation }) => {
   const from = route?.params?.from
-  const url = 'http://192.168.0.128/organizer/index_schedule.php';//dom
+  const url = 'http://192.168.0.188/organizer/index_schedule.php';//dom
   //const url = 'http://192.168.1.209/organizer/index_schedule.php';//aka
 
   const [data, setData] = useState([]);
@@ -163,7 +165,7 @@ const renderItem = (item) => {
                 renderItem={renderItem}
             />
        <Fab  shadow={4} bgColor={'#002851'} 
-         
+          onPress={() => navigation.navigate('PlanStrona')}
           icon={<Icon color="#a3e635" as={AntDesign} name="plus" size="lg" />} />
           
         

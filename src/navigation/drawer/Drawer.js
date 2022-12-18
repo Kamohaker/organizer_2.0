@@ -13,6 +13,7 @@ import LecturersScreen from "../../scenes/lecturers";
 import LecturesPageScreen from "../../scenes/lecturers/lecturesPage";
 import LecturesEditScreen from "../../scenes/lecturers/lecturesEdit";
 import ScheduleScreen from "../../scenes/schedule";
+import SchedulePageScreen from "../../scenes/schedule/schedulePage";
 import TimetableScreen from "../../scenes/timetable";
 import TimetablePageScreen from "../../scenes/timetable/timetablePage";
 import LinksScreen from "../../scenes/links";
@@ -55,6 +56,7 @@ export function DrawerNavigator  ()  {
          (routeName) => routeName !== 'ProwadzacyEdytuj',
          (routeName) => routeName !== 'ToDoStorna',
          (routeName) => routeName !== 'TerminarzStorna',
+         (routeName) => routeName !== 'PlanStorna',
         ),
         routes: props.state.routes.filter(
           (route) =>
@@ -69,7 +71,9 @@ export function DrawerNavigator  ()  {
             route.name !== 'ProwadzacyStrona' &&
             route.name !== 'ProwadzacyEdytuj' &&
             route.name !== 'ToDoStrona' &&
-            route.name !== 'TerminarzStrona'
+            route.name !== 'TerminarzStrona' &&
+            route.name !== 'PlanStrona'
+
 
         ),
       },
@@ -230,6 +234,11 @@ export function DrawerNavigator  ()  {
       name="TerminarzStrona"
       
       component={TimetablePageScreen}
+      />
+      <Drawer.Screen
+      name="PlanStrona"
+      
+      component={SchedulePageScreen}
       />
    
    
