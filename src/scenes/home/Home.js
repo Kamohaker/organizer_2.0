@@ -1,14 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StyleSheet, View, StatusBar } from "react-native";
+import { StyleSheet, View  } from "react-native";
 import { NativeBaseProvider,Pressable,Checkbox, Icon, Box,VStack, Button, Image, Text,ScrollView, FlatList, HStack, Fab } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 import { Calendar,Agenda } from "react-native-calendars";
 import { useState ,useEffect} from "react";
 import axios from "axios";
-import AntDesign from "react-native-vector-icons/AntDesign";
 import { colors } from "../../theme";
-import { color } from "react-native-reanimated";
+
 
 const styles = StyleSheet.create({
   root: {
@@ -35,7 +34,7 @@ const styles = StyleSheet.create({
     borderLeftWidth:5,
     borderRightWidth:5,
     borderRadius:20,
-    borderColor:colors.darkGreyBlue,
+    borderColor:colors.limone,
     backgroundColor:colors.blue,
     marginTop:20,
     marginLeft:22,
@@ -60,10 +59,8 @@ const Home = ({ route,navigation }) => {
   //const url = 'http://192.168.1.209/organizer/index_home.php';//aka
 
   const [data, setData] = useState([]);
-  const [daneNazwa,setNazwa] = useState('');
-  const [daneDaty,setDaty] = useState('');
   const [items, setItems] = useState({});
-  const [filter, setFilter] = useState('');
+  
  
   useEffect(()=>{
     const focusHandler = navigation.addListener('focus', () => {
@@ -115,11 +112,11 @@ const renderItem = (item) => {
   return (
      <NativeBaseProvider>
      <View style={styles.root}>
-          <FlatList  data={data.filter(obj=>obj.kiedy==item.name)} renderItem={({item}) => 
+          <FlatList   data={data.filter(obj=>obj.kiedy==item.name)} renderItem={({item}) => 
     
            <Box style={styles.boxes}>
             <HStack space={10}>
-              <Checkbox  accessibilityLabel="Checkbox" ></Checkbox>
+            
           <Text style={styles.text_box} > {item.nazwa}</Text>
           <Text style={styles.text_box} > {item.kiedy}</Text>
  
@@ -127,7 +124,7 @@ const renderItem = (item) => {
           </Box>
        
            }
-          keyExtractor={item => item.id} 
+          keyExtractor={item => item.index} 
           
           />         
       </View>
@@ -154,7 +151,6 @@ const renderItem = (item) => {
                 selectedDotColor: colors.limone,
                 monthTextColor: 'white',
 
-                 
                 agendaDayNumColor: colors.darkGreyBlue,
                 agendaTodayColor: colors.limone,
               
