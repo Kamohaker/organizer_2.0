@@ -1,25 +1,28 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StyleSheet, View, StatusBar } from "react-native";
-import { NativeBaseProvider,Pressable,Fab,Icon,Modal, VStack,TextArea, Button, Image, Text,Avatar, Box, HStack, FlatList } from "native-base";
+import { StyleSheet} from "react-native";
+import { NativeBaseProvider,Pressable,Fab,Icon,Input,VStack, Text, Box, HStack, FlatList } from "native-base";
 import axios from 'axios';
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useState ,useEffect} from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { colors } from "../../theme";
+
 const styles = StyleSheet.create({
   root: {
     flex: 1,
     flexDirection: "column",
     alignItems: "center",
-    backgroundColor: "#0c4a6e"
+    backgroundColor: colors.grayBlue
    
   },
+
   title: {
     marginTop:10,
     fontSize: 20,
     marginBottom: 20,
   },
+
   boxes: {
     borderBottomWidth:5,
     borderTopWidth:5,
@@ -28,20 +31,22 @@ const styles = StyleSheet.create({
     borderRadius:30,
     borderColor:colors.darkLimone ,
     backgroundColor:colors.limone,
-    marginTop:10,
+    marginTop:'10%',
     width:220,
     height:120,
     alignItems:'center',
-    paddingTop:12
+    paddingTop:'5%'
   }
 });
 
 const Notebook = ({ route, navigation }) => {
   const from = route?.params?.from
   const [data, setData] = useState([]);
+  const [filter, setFilter] = useState('');
+
 const url = 'http://192.168.0.188/organizer/index_notebook.php';//dom
  // const url = 'http://192.168.1.209/organizer/index_notebook.php';//aka
-// const url = 'http://192.168.0.156/organizer/index_notebook.php';//dom_KOMP
+
 
   
   useEffect(()=>{
@@ -59,9 +64,22 @@ const url = 'http://192.168.0.188/organizer/index_notebook.php';//dom
 
  const onSubmit=()=>
   {
-
     navigation.navigate('NotatnikStrona')
   }
+
+  
+const clearString = (value) => {
+  return value.replace(/\s/g, '').toLowerCase();
+}
+
+const checkTitles = (value) => {
+  return clearString(value.nazwa).indexOf(clearString(filter)) >= 0
+}
+
+const filterList = (value) => {
+  setFilter(value);
+}
+
   return(
   <NativeBaseProvider>
     <LinearGradient
@@ -70,32 +88,37 @@ const url = 'http://192.168.0.188/organizer/index_notebook.php';//dom
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
-      
-      <FlatList
-      data={data}
-      renderItem={({ item })=>(
+       <Input variant="rounded" mx='10' my='5' marginTop={8} 
+        onChangeText={filterList} 
+        InputRightElement={
+          <Icon as={
+            <AntDesign name="search1" />} 
+          size={5} mr="3" color="muted.400" />}
+        placeholder="Wyszukaj" 
+        backgroundColor={colors.grayBlue} borderColor={colors.limone} 
+        _light={{
+          placeholderTextColor: colors.limone,
+          color:colors.limone
+          }} 
+        />
+      <FlatList data={data.filter(checkTitles)} renderItem={({ item })=>(
         <Pressable onPress={() =>
           navigation.navigate('NotatnikEdytuj',{nazwa:item.nazwa , opis:item.opis})
         }>
-      <Box style={styles.boxes}>
-          <Text style={styles.title}numberOfLines={1} ellipsizeMode='tail' >
+          <Box style={styles.boxes}>
+           <Text style={styles.title}numberOfLines={1} ellipsizeMode='tail' >
               {item.nazwa}
-          </Text>
-          <Text color='#002851' numberOfLines={1} ellipsizeMode='tail'>{item.opis}</Text>
-      </Box>
-      </Pressable>
+            </Text>
+            <Text color={colors.darkGreyBlue} numberOfLines={1} ellipsizeMode='tail'>{item.opis}</Text>
+          </Box>
+        </Pressable>
     )}
+        keyExtractor={(item)=>item.id.toString()}>
 
-    keyExtractor={(item)=>item.id.toString()}
-    
-    >
-
-    </FlatList>
-   
-    <Fab  shadow={4} right={50} bgColor={'#002851'} onPress={onSubmit
+      </FlatList>
+      <Fab  shadow={4} right={50} bgColor={'#002851'} onPress={onSubmit
         }
-          icon={<Icon color="#a3e635" as={AntDesign} name="plus" size="lg" />} 
-    />
+          icon={<Icon color="#a3e635" as={AntDesign} name="plus" size="lg" />}/>
   
     </LinearGradient>
   </NativeBaseProvider>

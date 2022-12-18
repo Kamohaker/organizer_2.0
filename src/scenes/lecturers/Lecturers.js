@@ -48,7 +48,7 @@ const Lectures = ({route,navigation}) => {
   const [daneNazwa,setNazwa] = useState('');
   const [daneStopien,setStopien] = useState('');
   const [danePokuj,setPokuj] = useState('');
- 
+  const [filter, setFilter] = useState('');
   function getFirstLetterFrom(value) {
     return value.slice(0, 1).toUpperCase();
   }
@@ -74,7 +74,18 @@ const Lectures = ({route,navigation}) => {
   return (focusHandler)
   },[])
   
-  
+  const clearString = (value) => {
+    return value.replace(/\s/g, '').toLowerCase();
+}
+
+const checkTitles = (value) => {
+    return clearString(value.nazwa).indexOf(clearString(filter)) >= 0
+}
+
+const filterList = (value) => {
+    setFilter(value);
+}
+
   return (
   <NativeBaseProvider>
    <LinearGradient
@@ -83,6 +94,16 @@ const Lectures = ({route,navigation}) => {
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
+          <Input  onChangeText={filterList} 
+        variant="rounded" mx='10' my='5' marginTop={8} InputRightElement={
+        <Icon as={<AntDesign name="search1" />} size={5} mr="3" color="muted.400" />}
+        placeholder="Wyszukaj" 
+        backgroundColor="#0c4a6e" borderColor="#a3e635" 
+        _light={{
+          placeholderTextColor: "#a3e635",
+          color:colors.limone
+          }} 
+        />
          <Box my='2'>
           <HStack>
         <Text style={styles.title}>
@@ -103,7 +124,7 @@ const Lectures = ({route,navigation}) => {
         </HStack>
          </Box>
       
-        <FlatList data={data}  renderItem={({item}) => 
+        <FlatList data={data.filter(checkTitles)}  renderItem={({item}) => 
         <Pressable onPress={()=>{navigation.navigate('ProwadzacyEdytuj',{nazwa:item.nazwa,stopien:item.stopien,num_pok:item.num_pokoju})}}>
                
           <Box style={styles.boxes}>

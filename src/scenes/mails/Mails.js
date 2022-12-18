@@ -1,6 +1,6 @@
 import React  from "react";
 import { PropTypes } from "prop-types";
-import { Link,Pressable, Box,Divider, FlatList, Avatar, HStack, VStack, Fab,Text, Icon, NativeBaseProvider } from "native-base";
+import { Link,Pressable, Box,Divider, FlatList,Input, Avatar, HStack, VStack, Fab,Text, Icon, NativeBaseProvider } from "native-base";
 import {StyleSheet} from "react-native"
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { useState ,useEffect} from "react";
@@ -48,6 +48,8 @@ const Maile = ({route,navigation}) => {
   const [data, setData] = useState([]);
   const [daneNazwa,setNazwa] = useState('');
   const [daneMail,setMail] = useState('');
+  const [list, setList] = useState([]);
+    const [filter, setFilter] = useState('');
  
   function getFirstLetterFrom(value) {
     return value.slice(0, 1).toUpperCase();
@@ -74,6 +76,19 @@ const Maile = ({route,navigation}) => {
   return (focusHandler)
   },[])
   
+  const clearString = (value) => {
+    return value.replace(/\s/g, '').toLowerCase();
+}
+
+const checkTitles = (value) => {
+    return clearString(value.nazwa).indexOf(clearString(filter)) >= 0
+}
+
+const filterList = (value) => {
+    setFilter(value);
+}
+
+
   return (
   <NativeBaseProvider>
    <LinearGradient
@@ -82,6 +97,16 @@ const Maile = ({route,navigation}) => {
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
+        <Input  onChangeText={filterList} 
+        variant="rounded" mx='10' my='5' marginTop={8} InputRightElement={
+        <Icon as={<AntDesign name="search1" />} size={5} mr="3" color="muted.400" />}
+        placeholder="Wyszukaj" 
+        backgroundColor="#0c4a6e" borderColor="#a3e635" 
+        _light={{
+          placeholderTextColor: "#a3e635",
+          color:colors.limone
+          }} 
+        />
          <Box marginTop = '5' marginBottom = '5'>
           <HStack>
         <Text style={styles.title}>
@@ -96,7 +121,7 @@ const Maile = ({route,navigation}) => {
         </HStack>
          </Box>
       <Box>
-        <FlatList data={data}  renderItem={({item}) => 
+        <FlatList data={data.filter(checkTitles)}  renderItem={({item}) => 
         <Pressable onPress={()=>{navigation.navigate('MailEdytuj',{nazwa:item.nazwa,mail:item.email})}}>
           <Box style={styles.boxes}>
             <HStack>

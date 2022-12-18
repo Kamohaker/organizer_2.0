@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StyleSheet, View  } from "react-native";
-import { NativeBaseProvider,Pressable,Checkbox, Icon, Box,VStack, Button, Image, Text,ScrollView, FlatList, HStack, Fab } from "native-base";
+import { StyleSheet } from "react-native";
+import { NativeBaseProvider,Pressable,Checkbox, View, Box,VStack,  Text, FlatList, HStack } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 import { Calendar,Agenda } from "react-native-calendars";
 import { useState ,useEffect} from "react";
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#0c4a6e"
+    backgroundColor: colors.grayBlue
    
   },
   title: {
@@ -134,14 +134,10 @@ const renderItem = (item) => {
 
   return(
   <NativeBaseProvider>
-   <LinearGradient
-        colors={['#0c4a6e', '#7dd3fc']}
-        style={styles.root}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-      >
+   <View style={styles.root}>
        <Agenda
                theme={{ 
+            
                 calendarBackground:colors.calendar,
                 textSectionTitleColor: colors.darkGreyBlue,
                 selectedDayBackgroundColor: colors.selector,
@@ -150,11 +146,10 @@ const renderItem = (item) => {
                 dotColor: colors.darkGreyBlue,
                 selectedDotColor: colors.limone,
                 monthTextColor: 'white',
-
+              
                 agendaDayNumColor: colors.darkGreyBlue,
                 agendaTodayColor: colors.limone,
-              
-               
+
               }}
                 items={items}
                 loadItemsForMonth={loadItems }
@@ -165,7 +160,7 @@ const renderItem = (item) => {
       
   
           
-   </LinearGradient>
+   </View>
   </NativeBaseProvider>
 )};
 

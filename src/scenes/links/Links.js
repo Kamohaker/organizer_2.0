@@ -49,7 +49,8 @@ const Links = ({route,navigation}) => {
   const [data, setData] = useState([]);
   const [daneNazwa,setNazwa] = useState('');
   const [daneLink,setLink] = useState('');
- 
+  const [filter, setFilter] = useState('');
+
   useEffect(()=>{
     const focusHandler = navigation.addListener('focus', () => {
       axios.get(url).then(response =>{
@@ -63,7 +64,17 @@ const Links = ({route,navigation}) => {
   return (focusHandler)
   },[])
 
+  const clearString = (value) => {
+    return value.replace(/\s/g, '').toLowerCase();
+}
 
+const checkTitles = (value) => {
+    return clearString(value.nazwa).indexOf(clearString(filter)) >= 0
+}
+
+const filterList = (value) => {
+    setFilter(value);
+}
   return (
   <NativeBaseProvider>
     <LinearGradient
@@ -72,6 +83,16 @@ const Links = ({route,navigation}) => {
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
+        <Input  onChangeText={filterList} 
+        variant="rounded" mx='10' my='5' marginTop={8} InputRightElement={
+        <Icon as={<AntDesign name="search1" />} size={5} mr="3" color="muted.400" />}
+        placeholder="Wyszukaj" 
+        backgroundColor="#0c4a6e" borderColor="#a3e635" 
+        _light={{
+          placeholderTextColor: "#a3e635",
+          color:colors.limone
+          }} 
+        />
       <Box marginTop = '5' marginBottom = '5'>
           <HStack>
         <Text style={styles.title}>
@@ -85,7 +106,7 @@ const Links = ({route,navigation}) => {
         </Text>
         </HStack>
          </Box>
-        <FlatList data={data} renderItem={({item}) => 
+        <FlatList data={data.filter(checkTitles)} renderItem={({item}) => 
         <Pressable onPress={()=>{navigation.navigate("LinkiEdytuj",{nazwa:item.nazwa,link:item.links})}}>
           <Box style={styles.boxes}>
 
