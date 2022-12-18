@@ -104,15 +104,18 @@ const Lectures = ({route,navigation}) => {
          </Box>
       
         <FlatList data={data}  renderItem={({item}) => 
+        <Pressable onPress={()=>{navigation.navigate('ProwadzacyEdytuj',{nazwa:item.nazwa,stopien:item.stopien,num_pok:item.num_pokoju})}}>
+               
           <Box style={styles.boxes}>
             <HStack py={1}>
-              <Avatar mx='5' backgroundColor={randomColor()} size="60px" >{getFirstLetterFrom(item.nazwa)}</Avatar> 
-                <Pressable onPress={()=>{navigation.navigate('ProwadzacyEdytuj',{nazwa:item.nazwa,stopien:item.stopien,num_pok:item.num_pokoju})}}>
-                <Text  bold my='4'>
-                  {item.nazwa}
+              <Avatar mx='4' backgroundColor={randomColor()} size="60px" >{getFirstLetterFrom(item.nazwa)}</Avatar> 
+                 <Text  bold my='4'>
+                { ((item.nazwa).length > 10) ? 
+                 (((item.nazwa).substring(0,7)) + '...') : 
+                 item.nazwa }
                 </Text>
-                </Pressable>
-                <Divider orientation="vertical" mx="10"  _light={{
+              
+                <Divider orientation="vertical" mx="8"  _light={{
           background:colors.darkYellow
         }}  />
                 <Text my='4'>
@@ -129,7 +132,9 @@ const Lectures = ({route,navigation}) => {
                 </Text>
 
             </HStack>
-          </Box>} keyExtractor={item => item.id} />
+          </Box>
+          </Pressable>
+          } keyExtractor={item => item.id} />
           <Fab  shadow={4} bgColor={'#002851'} 
           onPress={() => navigation.navigate('ProwadzacyStrona')}
           icon={<Icon color="#a3e635" as={AntDesign} name="plus" size="lg" />} />

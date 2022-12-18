@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     borderColor:colors.darkViolet,
     backgroundColor:colors.violet,
     marginTop:10,
-    width:220,
+    width:400,
     height:80,
     alignItems:'center',
     padding:18
@@ -93,17 +93,21 @@ const Links = ({route,navigation}) => {
              
               
                 <Text   bold fontSize="20">
-                  {item.nazwa}
+                { ((item.nazwa).length > 10) ? 
+                 (((item.nazwa).substring(0,7)) + '...') : 
+                 item.nazwa }
                 </Text>
                 <Divider orientation="vertical" mx="2" _light={{
          background:colors.darkViolet
         }}  />
                 <Text >
-             <Link  isExternal _text={{
-        color: "blue.400"
+             <Link  href={item.links} isExternal _text={{
+        color: colors.darkGreyBlue
       }}>
      
-                  {item.links}
+                  { ((item.links).length > 20) ? 
+                 (((item.links).substring(0,15)) + '...') : 
+                 item.links }
                   </Link>
                 </Text>
           

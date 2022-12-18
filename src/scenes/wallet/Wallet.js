@@ -89,13 +89,13 @@ return (focusHandler)
         <Text style= {styles.title}>
           Nazwa
         </Text>
-        <Divider orientation="vertical" mx="3" _light={{
+        <Divider orientation="vertical" mx="2" _light={{
           bg: "muted.800"
         }}  />
         <Text style= {styles.title}>
           Numer telefonu
         </Text>
-        <Divider orientation="vertical" mx="3" _light={{
+        <Divider orientation="vertical" mx="2" _light={{
           bg: "muted.800"
         }}  />
         <Text style= {styles.title}>
@@ -105,31 +105,36 @@ return (focusHandler)
       </HStack>
      
         <FlatList data={data} renderItem={({item}) => 
+        <Pressable onPress={() =>
+          navigation.navigate('PortfelEdytuj',{nazwa:item.nazwa , num_konta:item.num_konta, num_telefonu:item.num_telefonu})
+        }>
         <Box style={styles.boxes}>
          
             <HStack py='1' >
               
               <Avatar size="60px" mx='1' backgroundColor={randomColor()}>{getFirstLetterFrom(item.nazwa)}</Avatar>
-             <Pressable onPress={() =>
-          navigation.navigate('PortfelEdytuj',{nazwa:item.nazwa , num_konta:item.num_konta, num_telefonu:item.num_telefonu})
-        }>
-                <Text  numberOfLines={1} ellipsizeMode='tail'  bold mx='4' my='3'>
-                  {item.nazwa}
+             
+                <Text  numberOfLines={1} ellipsizeMode='tail'  bold mx='4' my='4'>
+                { ((item.nazwa).length > 7) ? 
+                 (((item.nazwa).substring(0,7)) + '...') : 
+                 item.nazwa }
                 </Text>
-                </Pressable>
+               
                 <Divider orientation="vertical" mx="2" _light={{
          background:colors.blue
         }}  />
-                <Text numberOfLines={1} ellipsizeMode='tail' mx='4' my='3'>
+                <Text  mx='4' my='4'>
                   {item.num_telefonu}
             
                 </Text>
                 <Divider orientation="vertical" mx="2" _light={{
          background:colors.blue
         }}  />
-                <Text numberOfLines={1} ellipsizeMode='tail' mx='4' my='3'>
+                <Text  mx='4' my='4'>
             
-                  {item.num_konta}
+                { ((item.num_konta).length > 10) ? 
+                 (((item.num_konta).substring(0,7)) + '...') : 
+                 item.num_konta }
             
                 </Text>
 
@@ -138,6 +143,7 @@ return (focusHandler)
            
          
             </Box>
+            </Pressable>
           } keyExtractor={item => item.id} />
 
           <Fab  shadow={4} bgColor={'#002851'} 

@@ -130,9 +130,9 @@ const LinksEdit = ({route,navigation}) => {
          </Avatar>
         <VStack py='4'>
         <Text fontSize={15} color={colors.limone}>
-         Edytuj stopień
+         Nazwa
         </Text>
-        <Input  defaultValue= {route.params.nazwa} variant="rounded" marginBottom={6} marginTop={2} placeholder="Nazwa" 
+        <Input  isDisabled defaultValue= {route.params.nazwa} variant="rounded" marginBottom={6} marginTop={2} placeholder="Nazwa" 
         w="50%" backgroundColor="#0c4a6e" borderColor="#a3e635" 
         onChangeText={text => setNazwa(text)} 
         _light={{
@@ -141,7 +141,7 @@ const LinksEdit = ({route,navigation}) => {
         }} >
         </Input>
         <Text fontSize={15} color={colors.limone}>
-         Edytuj stopień
+         Edytuj link
         </Text>
         <Input defaultValue= {route.params.link} variant="rounded" marginBottom={6} marginTop={2} 
         placeholder="Link" w="50%" backgroundColor="#0c4a6e" 

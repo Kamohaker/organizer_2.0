@@ -118,9 +118,9 @@ const MailsEdit = ({route,navigation}) => {
          </Avatar>
         <VStack my='4'>
         <Text fontSize={15} color={colors.limone}>
-          Edytuj nazwę
+         Nazwa
         </Text>
-        <Input  defaultValue= {route.params.nazwa} variant="rounded" marginTop={2} marginBottom={6}
+        <Input  isDisabled defaultValue= {route.params.nazwa} variant="rounded" marginTop={2} marginBottom={6}
         placeholder="Nazwa" 
         w="50%" backgroundColor="#0c4a6e" borderColor="#a3e635" 
         onChangeText={text => setNazwa(text)} 

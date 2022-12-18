@@ -103,7 +103,9 @@ const Maile = ({route,navigation}) => {
               <Avatar my= '3' mx='4' backgroundColor={randomColor()} size="60px" >{getFirstLetterFrom(item.nazwa)}</Avatar> 
               
                <Text my= '7' mx='4'  bold>
-                  {item.nazwa}
+               { ((item.nazwa).length > 10) ? 
+                 (((item.nazwa).substring(0,7)) + '...') : 
+                 item.nazwa }
                 </Text>
                 <Divider orientation="vertical" mx="8" my="1" _light={{
           background:colors.orange
@@ -113,7 +115,9 @@ const Maile = ({route,navigation}) => {
         color: "#002851"
       }}>
      
-                  {item.email}
+     { ((item.email).length > 20) ? 
+                 (((item.email).substring(0,15)) + '...') : 
+                 item.email }
                   </Link>
                 </Text>
                

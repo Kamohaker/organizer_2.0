@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
 const LecturesEdit = ({route,navigation}) => {
   const from = route?.params?.from
  
-  const url = 'http://192.168.0.128/organizer/index_lectures.php';//dpm
+  const url = 'http://192.168.0.188/organizer/index_lectures.php';//dpm
   //const url = 'http://192.168.1.209/organizer/index_lectures.php';//aka
   //const url = 'http://192.168.0.156/organizer/index_lectures.php';//dom_KOMP
   const [showModal, setShowModal] = useState(false);
@@ -120,9 +120,9 @@ const LecturesEdit = ({route,navigation}) => {
          </Avatar>
         <VStack py='4'>
         <Text fontSize={15} color={colors.limone}>
-         Edytuj nazwę
+         Nazwa
         </Text>
-        <Input  defaultValue= {route.params.nazwa} variant="rounded" marginBottom={6} marginTop={2} placeholder="Nazwa" 
+        <Input isDisabled defaultValue= {route.params.nazwa} variant="rounded" marginBottom={6} marginTop={2} placeholder="Nazwa" 
         w="50%" backgroundColor="#0c4a6e" borderColor="#a3e635" 
         onChangeText={text => setNazwa(text)} 
         _light={{
