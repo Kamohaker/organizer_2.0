@@ -24,24 +24,22 @@ const styles = StyleSheet.create({
   text_box: {
     fontSize: 18,
     marginBottom: 16,
-   
+    color:'white',
     marginLeft:10
   },
   
   boxes:{
-    borderBottomWidth:5,
-    borderTopWidth:5,
-    borderLeftWidth:5,
-    borderRightWidth:5,
+   
     borderRadius:20,
-    borderColor:colors.limone,
+    borderColor:colors.blue,
     backgroundColor:colors.blue,
     marginTop:20,
     marginLeft:22,
     width:'100%',
     height:80,
     alignItems:'center',
-    paddingTop:18
+    paddingTop:18,
+    
 
   }
 });
@@ -55,8 +53,8 @@ const timeToString = (time) => {
 
 const Home = ({ route,navigation }) => {
   const from = route?.params?.from
-  const url = 'http://192.168.0.188/organizer/index_home.php';//dom
-  //const url = 'http://192.168.1.209/organizer/index_home.php';//aka
+  //const url = 'http://192.168.0.188/organizer/index_home.php';//dom
+  const url = 'http://192.168.1.209/organizer/index_home.php';//aka
 
   const [data, setData] = useState([]);
   const [items, setItems] = useState({});
@@ -110,25 +108,25 @@ const Home = ({ route,navigation }) => {
 
 const renderItem = (item) => {
   return (
-     <NativeBaseProvider>
+    <NativeBaseProvider>
      <View style={styles.root}>
-          <FlatList   data={data.filter(obj=>obj.kiedy==item.name)} renderItem={({item}) => 
+        <FlatList   data={data.filter(obj=>obj.kiedy==item.name)} renderItem={({item}) => 
     
-           <Box style={styles.boxes}>
+          <Box style={styles.boxes} >
             <HStack space={10}>
             
-          <Text style={styles.text_box} > {item.nazwa}</Text>
-          <Text style={styles.text_box} > {item.kiedy}</Text>
+              <Text style={styles.text_box} > {item.nazwa}</Text>
+              <Text  mt='6' color={"white"}> {item.kiedy}</Text>
  
-         </HStack>
+            </HStack>
           </Box>
        
            }
           keyExtractor={item => item.index} 
           
-          />         
+        />         
       </View>
-      </NativeBaseProvider>
+    </NativeBaseProvider>
   );
 }
 

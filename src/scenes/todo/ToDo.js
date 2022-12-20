@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { StyleSheet, View, StatusBar } from "react-native";
-import { NativeBaseProvider,Pressable,Checkbox, Icon, Box,VStack, Button, Image, Text,ScrollView, FlatList, HStack, Fab } from "native-base";
+import { NativeBaseProvider,Pressable,Checkbox, Icon, Box,VStack,IconButton, Button, Image, Text,ScrollView, FlatList, HStack, Fab } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 import { Calendar,Agenda } from "react-native-calendars";
 import { useState ,useEffect} from "react";
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     backgroundColor:colors.red,
     marginTop:20,
     marginLeft:8,
-    paddingTop:18,
+    paddingTop:20,
     width:'100%',
     height:80,
     alignItems:'center'
@@ -54,14 +54,18 @@ const timeToString = (time) => {
 
 const ToDo = ({ route,navigation }) => {
   const from = route?.params?.from
-  const url = 'http://192.168.0.188/organizer/index_todo.php';//dom
-  //const url = 'http://192.168.1.209/organizer/index_todo.php';//aka
+  //const url = 'http://192.168.0.188/organizer/index_todo.php';//dom
+  const url = 'http://192.168.1.209/organizer/index_todo.php';//aka
 
   const [data, setData] = useState([]);
   const [daneNazwa,setNazwa] = useState('');
   const [daneDaty,setDaty] = useState('');
   const [items, setItems] = useState({});
   const [filter, setFilter] = useState('');
+
+  
+  const [shows, setShows] = useState(false)
+  const handleClick = () => setShows(!shows)
  
   useEffect(()=>{
     const focusHandler = navigation.addListener('focus', () => {
@@ -118,7 +122,14 @@ const renderItem = (item) => {
     
            <Box style={styles.boxes}>
             <HStack space={10} >
-            <Checkbox value="test" accessibilityLabel="This is a dummy checkbox" />
+            <Box alignItems="center"><IconButton icon={<Icon as={AntDesign} name={shows?"smile-circle":"frown"} />} borderRadius="full" _icon={{
+      color: "orange.500",
+      size: "xl"
+    }} _pressed={{handleClick,
+      bg: "orange.600:alpha.20",
+     
+      
+    }}  /></Box>
 
           <Text style={styles.text_box} > {item.nazwa}</Text>
           <Text style={styles.text_box} > {item.kiedy}</Text>
