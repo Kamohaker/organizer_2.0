@@ -40,9 +40,9 @@ const styles = StyleSheet.create({
 
 const Maile = ({route,navigation}) => {
   const from = route?.params?.from
-  const url = 'http://192.168.0.188/organizer/index_mails.php';//dom
+  const url = 'http://192.168.0.186/organizer/index_mails.php';//dom
  // const url = 'http://192.168.1.209/organizer/index_mails.php';//aka
-  //const url = 'http://192.168.0.156/organizer/index_mails.php';//dom_KOMP
+ 
 
   const [showModal, setShowModal] = useState(false);
   const [data, setData] = useState([]);
@@ -127,7 +127,7 @@ const filterList = (value) => {
             <HStack>
               <Avatar my= '3' mx='4' backgroundColor={randomColor()} size="60px" >{getFirstLetterFrom(item.nazwa)}</Avatar> 
               
-               <Text my= '7' mx='4'  bold>
+               <Text my= '7' mx='4' fontSize='xl' bold>
                { ((item.nazwa).length > 10) ? 
                  (((item.nazwa).substring(0,7)) + '...') : 
                  item.nazwa }
@@ -135,7 +135,7 @@ const filterList = (value) => {
                 <Divider orientation="vertical" mx="8" my="1" _light={{
           background:colors.orange
         }}  />
-                <Text my= '7' mx='4'>
+                <Text my= '7' mx='4' >
              <Link href="https://mail.google.com" isExternal _text={{
         color: "#002851"
       }}>

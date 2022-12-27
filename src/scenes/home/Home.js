@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 16,
     color:'white',
-    marginLeft:10
+    marginLeft:10,
   },
   
   boxes:{
@@ -53,8 +53,8 @@ const timeToString = (time) => {
 
 const Home = ({ route,navigation }) => {
   const from = route?.params?.from
-  //const url = 'http://192.168.0.188/organizer/index_home.php';//dom
-  const url = 'http://192.168.1.209/organizer/index_home.php';//aka
+  const url = 'http://192.168.0.186/organizer/index_home.php';//dom
+  //const url = 'http://192.168.1.209/organizer/index_home.php';//aka
 
   const [data, setData] = useState([]);
   const [items, setItems] = useState({});
@@ -115,7 +115,7 @@ const renderItem = (item) => {
           <Box style={styles.boxes} >
             <HStack space={10}>
             
-              <Text style={styles.text_box} > {item.nazwa}</Text>
+              <Text style={styles.text_box} bold> {item.nazwa}</Text>
               <Text  mt='6' color={"white"}> {item.kiedy}</Text>
  
             </HStack>

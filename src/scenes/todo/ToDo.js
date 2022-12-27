@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StyleSheet, View, StatusBar } from "react-native";
-import { NativeBaseProvider,Pressable,Checkbox, Icon, Box,VStack,IconButton, Button, Image, Text,ScrollView, FlatList, HStack, Fab } from "native-base";
+import { StyleSheet, View, StatusBar ,TouchableOpacity} from "react-native";
+import { NativeBaseProvider,Pressable, Checkbox, Icon, Box,VStack,IconButton, Button, Image, Text,ScrollView, FlatList, HStack, Fab } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 import { Calendar,Agenda } from "react-native-calendars";
 import { useState ,useEffect} from "react";
@@ -22,9 +22,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   text_box: {
-    fontSize: 18,
+    fontSize: 16,
     marginBottom: 16,
-    
+    marginTop:18,
     marginLeft:10
   },
   
@@ -54,8 +54,8 @@ const timeToString = (time) => {
 
 const ToDo = ({ route,navigation }) => {
   const from = route?.params?.from
-  //const url = 'http://192.168.0.188/organizer/index_todo.php';//dom
-  const url = 'http://192.168.1.209/organizer/index_todo.php';//aka
+  const url = 'http://192.168.0.186/organizer/index_todo.php';//dom
+  //const url = 'http://192.168.1.209/organizer/index_todo.php';//aka
 
   const [data, setData] = useState([]);
   const [daneNazwa,setNazwa] = useState('');
@@ -112,7 +112,11 @@ const ToDo = ({ route,navigation }) => {
     }, 1000);
 }
 
+const [like, setLike] = useState([]);
+const [color, setColor] = useState("white");
 
+
+ 
 const renderItem = (item) => {
   return (
     <NativeBaseProvider>
@@ -120,28 +124,34 @@ const renderItem = (item) => {
      
           <FlatList  data={data.filter(obj=>obj.kiedy==item.name)} renderItem={({item}) => 
     
-           <Box style={styles.boxes}>
-            <HStack space={10} >
-            <Box alignItems="center"><IconButton icon={<Icon as={AntDesign} name={shows?"smile-circle":"frown"} />} borderRadius="full" _icon={{
-      color: "orange.500",
-      size: "xl"
-    }} _pressed={{handleClick,
-      bg: "orange.600:alpha.20",
-     
-      
-    }}  /></Box>
-
-          <Text style={styles.text_box} > {item.nazwa}</Text>
-          <Text style={styles.text_box} > {item.kiedy}</Text>
- 
-         </HStack>
-          </Box>
+            <Box style={styles.boxes} >
+              <HStack space={10} >
+               
+                  <TouchableOpacity 
+                 
+                    onPress={() => {
+                      setLike(item.nazwa);
+                      console.log(like);
+                   }}>
+                    <Icon
+                      as={<AntDesign name={item.nazwa===like?"smile-circle":"frown"} />}
+                      size={8}
+                      ml="2"
+                      color={item.nazwa===like? colors.green:colors.yellow}/>
+                  </TouchableOpacity>
+              
+                <Text strikeThrough={item.nazwa===like?true:false} fontSize='xl' color={"white"}> 
+                  { ((item.nazwa).length > 14) ? 
+                  (((item.nazwa).substring(0,7)) + '...') : 
+                  item.nazwa }
+                </Text>
+                <Text style={styles.text_box} color={"white"} > {item.kiedy}</Text>
+              </HStack>
+            </Box>
        
            }
-          keyExtractor={item => item.id} 
-          
+          keyExtractor={item => item.id}  
           />         
-      
       </View>
       </NativeBaseProvider>
   );
@@ -166,8 +176,7 @@ const renderItem = (item) => {
                 dotColor: colors.darkGreyBlue,
                 selectedDotColor: colors.limone,
                 monthTextColor: 'white',
-
-                 
+  
                 agendaDayNumColor: colors.darkGreyBlue,
                 agendaTodayColor: colors.limone,
               
