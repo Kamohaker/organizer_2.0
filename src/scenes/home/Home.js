@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { StyleSheet } from "react-native";
-import { NativeBaseProvider,Pressable,Checkbox, View, Box,VStack,  Text, FlatList, HStack } from "native-base";
+import { NativeBaseProvider,Pressable, View,Icon, Box,VStack, Text, FlatList, HStack } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 import { Calendar,Agenda } from "react-native-calendars";
 import { useState ,useEffect} from "react";
 import axios from "axios";
 import { colors } from "../../theme";
-
+import AntDesign from "react-native-vector-icons/AntDesign";
 
 const styles = StyleSheet.create({
   root: {
@@ -31,16 +31,14 @@ const styles = StyleSheet.create({
   boxes:{
    
     borderRadius:20,
-    borderColor:colors.blue,
-    backgroundColor:colors.blue,
+   
     marginTop:20,
-    marginLeft:22,
+    marginLeft:8,
     width:'100%',
     height:80,
     alignItems:'center',
     paddingTop:18,
-    
-
+ 
   }
 });
 
@@ -53,7 +51,7 @@ const timeToString = (time) => {
 
 const Home = ({ route,navigation }) => {
   const from = route?.params?.from
-  const url = 'http://192.168.0.186/organizer/index_home.php';//dom
+  const url = 'http://192.168.0.186/organizer/index_test_unia.php';//dom
   //const url = 'http://192.168.1.209/organizer/index_home.php';//aka
 
   const [data, setData] = useState([]);
@@ -73,7 +71,6 @@ const Home = ({ route,navigation }) => {
   return (focusHandler)
   },[])
 
- 
 
   const loadItems = (day) => {
 
@@ -105,16 +102,45 @@ const Home = ({ route,navigation }) => {
     }, 1000);
 }
 
+const Color=(item)=>{
+  if(item.plan==='plan')
+  {
+   return colors.green
+  }else if(item.plan==='todo'){
+    return colors.red
+  }else{
+    return colors.blue
+  }
+}
+
+const Icons=(item)=>{
+
+  if(item.plan==='plan')
+  {
+   return "calendar"
+  }else if(item.plan==='todo'){
+    return "carryout"
+  }else{
+    return "form"
+  }
+
+}
 
 const renderItem = (item) => {
   return (
     <NativeBaseProvider>
      <View style={styles.root}>
-        <FlatList   data={data.filter(obj=>obj.kiedy==item.name)} renderItem={({item}) => 
+        <FlatList  data={data.filter(obj=>obj.kiedy==item.name)} renderItem={({item}) => 
     
-          <Box style={styles.boxes} >
-            <HStack space={10}>
-            
+          <Box  style={styles.boxes} backgroundColor={Color(item)} shadow={9} >
+            <HStack space={8}>
+           
+            <Icon
+                      as={<AntDesign name={Icons(item)} />}
+                      size={8}
+                     
+                      color={"white"}/>
+
               <Text style={styles.text_box} bold> {item.nazwa}</Text>
               <Text  mt='6' color={"white"}> {item.kiedy}</Text>
  
@@ -122,7 +148,7 @@ const renderItem = (item) => {
           </Box>
        
            }
-          keyExtractor={item => item.index} 
+          keyExtractor={item => item.nazwa} 
           
         />         
       </View>
