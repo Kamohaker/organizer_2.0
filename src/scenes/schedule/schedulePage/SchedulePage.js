@@ -40,8 +40,6 @@ const SchedulePage = ({route,navigation}) => {
   const [daneNazwa,setNazwa] = useState('');
   const [daneKiedy,setKiedy] = useState('');
 
-
-
 const postData = () =>{
   
   axios.post(url,{
@@ -58,26 +56,26 @@ const postData = () =>{
   <NativeBaseProvider>
     <View style={styles.ico}>
       <HStack space={300}>
-    <IconButton
-       _icon={{
-        color: '#dc2626',
-        as: AntDesign,
-        name: "back",
-        size:8
-      }}
-      onPress={() => {
-        navigation.navigate('Plan zajęć')
-  }}></IconButton>
-  <IconButton
-       _icon={{
-        color: '#16a34a',
-        as: AntDesign,
-        name: "check",
-        size:8
-      }}
-      onPress={postData}
-      ></IconButton>
-  </HStack>
+        <IconButton
+          _icon={{
+            color: '#dc2626',
+            as: AntDesign,
+            name: "back",
+            size:8
+        }}
+          onPress={() => {navigation.navigate('Plan zajęć')
+        }}>
+        </IconButton>
+        <IconButton
+          _icon={{
+            color: '#16a34a',
+            as: AntDesign,
+            name: "check",
+            size:8
+          }}
+          onPress={postData}>
+        </IconButton>
+      </HStack>
     </View>
     <LinearGradient
         colors={['#0c4a6e', '#7dd3fc']}
@@ -86,37 +84,41 @@ const postData = () =>{
         end={{ x: 1, y: 1 }}
       >
         <Avatar my= "5" size={150} background={colors.green}>
-         <Icon name="plus" size={70}  /> 
-         </Avatar>
-         <VStack py='4'>
-         <Text fontSize={15} color={colors.limone}>
-          Nazwa
-        </Text>
-        <Input value={daneNazwa} variant="rounded"  marginBottom={6} marginTop={2} placeholder="Nazwa" 
-        w="50%" backgroundColor="#0c4a6e" borderColor="#a3e635" 
-        onChangeText={text => setNazwa(text)} 
-        _light={{
-        placeholderTextColor: "#a3e635",
-        color:colors.limone
-        }} >
-        </Input>
-        <Text fontSize={15} color={colors.limone}>
-          Data
-        </Text>
-        <Input value={daneKiedy} variant="rounded" marginBottom={6} marginTop={2} placeholder="Data" 
-        w="50%" backgroundColor="#0c4a6e" borderColor="#a3e635" 
-        keyboardType = 'numeric'
-        onChangeText={text => setKiedy(text)} 
-        _light={{
-        placeholderTextColor: "#a3e635",
-        color:colors.limone
-        }} >
-        </Input>
-  
-    </VStack>
+          <Icon name="plus" size={70}  /> 
+        </Avatar>
+        <VStack py='4'>
+          <Text fontSize={15} color={colors.limone}>
+            Nazwa
+          </Text>
+          <Input value={daneNazwa} variant="rounded"  marginBottom={6} marginTop={2} placeholder="Nazwa" 
+            w="50%" backgroundColor="#0c4a6e" borderColor="#a3e635" 
+            onChangeText={text => setNazwa(text)} 
+            _light={{
+            placeholderTextColor: "#a3e635",
+            color:colors.limone
+            }} >
+          </Input>
+          <Text fontSize={15} color={colors.limone}>
+            Data
+          </Text>
+          <FormControl mb="5">
+            <Input value={daneKiedy} variant="rounded" marginTop={2} placeholder="Data" 
+              w="50%" backgroundColor="#0c4a6e" borderColor="#a3e635" 
+              keyboardType = 'numeric'
+              onChangeText={text => setKiedy(text)} 
+              _light={{
+              placeholderTextColor: "#a3e635",
+              color:colors.limone
+              }} >
+          </Input>
+          <FormControl.HelperText>
+              Data powinna mieć format: 'yyyy-mm-dd'
+          </FormControl.HelperText>
+          </FormControl>
+        </VStack>
     </LinearGradient>
-    </NativeBaseProvider>
-    )
+  </NativeBaseProvider>
+  )
 };
 SchedulePage.propTypes = {
   route: PropTypes.shape({

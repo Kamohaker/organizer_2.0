@@ -7,6 +7,7 @@ import { useState ,useEffect} from "react";
 import axios from "axios";
 import { LinearGradient } from "expo-linear-gradient";
 import { colors } from "../../theme";
+
 const styles = StyleSheet.create({
   root: {
     flex: 1,
@@ -83,7 +84,7 @@ const filterList = (value) => {
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
-        <Input  onChangeText={filterList} 
+      <Input  onChangeText={filterList} 
         variant="rounded" mx='10' my='5' marginTop={8} InputRightElement={
         <Icon as={<AntDesign name="search1" />} size={5} mr="3" color="muted.400" />}
         placeholder="Wyszukaj" 
@@ -92,60 +93,51 @@ const filterList = (value) => {
           placeholderTextColor: "#a3e635",
           color:colors.limone
           }} 
-        />
+      />
       <Box marginTop = '5' marginBottom = '5'>
-          <HStack>
-        <Text style={styles.title}>
-          Nazwa
-        </Text>
-        <Divider orientation="vertical" mx="20" _light={{
-          bg: "muted.800"
-        }}  />
-         <Text style={styles.title}>
-          Link
-        </Text>
+        <HStack>
+          <Text style={styles.title}>
+            Nazwa
+          </Text>
+          <Divider orientation="vertical" mx="20" _light={{
+            bg: "muted.800"
+          }}  />
+          <Text style={styles.title}>
+            Link
+          </Text>
         </HStack>
-         </Box>
-        <FlatList data={data.filter(checkTitles)} renderItem={({item}) => 
+      </Box>
+      <FlatList data={data.filter(checkTitles)} renderItem={({item}) => 
         <Pressable onPress={()=>{navigation.navigate("LinkiEdytuj",{nazwa:item.nazwa,link:item.links})}}>
           <Box style={styles.boxes}>
-
             <HStack space={[2, 3]} justifyContent="space-between">
-             
-              
-                <Text   bold fontSize="20">
+              <Text   bold fontSize="20">
                 { ((item.nazwa).length > 10) ? 
                  (((item.nazwa).substring(0,7)) + '...') : 
                  item.nazwa }
-                </Text>
-                <Divider orientation="vertical" mx="2" _light={{
-         background:colors.darkViolet
-        }}  />
-                <Text >
-             <Link  href={item.links} isExternal _text={{
-        color: colors.darkGreyBlue
-      }}>
-     
+              </Text>
+              <Divider orientation="vertical" mx="2" _light={{
+                background:colors.darkViolet
+              }}/>
+              <Text>
+                <Link  href={item.links} isExternal _text={{
+                  color: colors.darkGreyBlue
+                  }}>
                   { ((item.links).length > 20) ? 
-                 (((item.links).substring(0,15)) + '...') : 
-                 item.links }
-                  </Link>
-                </Text>
-          
-              
-              
+                  (((item.links).substring(0,15)) + '...') : 
+                  item.links }
+                </Link>
+              </Text>
             </HStack>
           </Box>
-          </Pressable>
-          } keyExtractor={item => item.id} />
-          <Fab   right={50} bgColor={'#002851'} 
-          onPress={() => navigation.navigate('LinkiStrona')}
-          icon={<Icon color="#a3e635" as={AntDesign} name="plus" size="lg" />} /> 
-          
-   
+        </Pressable>
+      } keyExtractor={item => item.id} />
+      <Fab right={50} bgColor={'#002851'} 
+        onPress={() => navigation.navigate('LinkiStrona')}
+        icon={<Icon color="#a3e635" as={AntDesign} name="plus" size="lg" />} /> 
     </LinearGradient>
-    </NativeBaseProvider>
-    )
+  </NativeBaseProvider>
+  )
 };
 Links.propTypes = {
   route: PropTypes.shape({

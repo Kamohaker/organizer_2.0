@@ -29,12 +29,8 @@ const styles = StyleSheet.create({
   },
   
   boxes:{
-    borderBottomWidth:5,
-    borderTopWidth:5,
-    borderLeftWidth:5,
-    borderRightWidth:5,
+   
     borderRadius:20,
-    borderColor:colors.darkGreyBlue,
     backgroundColor:colors.blue,
     marginTop:20,
     width:'100%',
