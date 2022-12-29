@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
 const WalletEdit = ({route,navigation}) => {
   const from = route?.params?.from
 
- const url = 'http://192.168.0.188/organizer/index_wallet.php';//dom
+ const url = 'http://192.168.0.186/organizer/index_wallet.php';//dom
   //const url = 'http://192.168.1.209/organizer/index_wallet.php';//aka
  // const url = 'http://192.168.0.156/organizer/index_wallet.php';//dom_KOMP
 

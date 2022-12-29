@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { StyleSheet, View, StatusBar ,TouchableOpacity} from "react-native";
-import { NativeBaseProvider,Pressable, Checkbox, Icon, Box,VStack,IconButton, Button, Image, Text,ScrollView, FlatList, HStack, Fab } from "native-base";
+import { NativeBaseProvider,Pressable,Switch, Checkbox, Icon, Box,VStack,IconButton, Button, Image, Text,ScrollView, FlatList, HStack, Fab } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 import { Calendar,Agenda } from "react-native-calendars";
 import { useState ,useEffect} from "react";
@@ -42,7 +42,24 @@ const styles = StyleSheet.create({
     width:'100%',
     height:80,
     alignItems:'center'
-  }
+  },
+  listItem: {
+    backgroundColor: colors.darkRed,
+    marginBottom: 10,
+    borderRadius: 20,
+    overflow: 'hidden',
+  },
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    paddingLeft:10,
+    paddingTop:10,
+  
+    width: '100%',
+    height: '100%',
+    backgroundColor: colors.green,
+  },
 });
 
 
@@ -111,47 +128,83 @@ const ToDo = ({ route,navigation }) => {
         setItems(newItems);
     }, 1000);
 }
+/////////////////////////////////////////////////////////
 
 const [like, setLike] = useState([]);
-const [color, setColor] = useState("white");
+const [color, setColor] = useState(false);
 
+const ListItem = ({item, selected, onPress, onLongPress}) => (
+  <>
+    <TouchableOpacity
+      onPress={onPress}
+      onLongPress={onLongPress}
+      style={styles.listItem}>
+      <View style={{padding: 14}}>
+        <Text style={{fontSize: 22, color: '#fff'}}>{item.nazwa}</Text>
+        <Text >{item.kiedy}</Text>
+      </View>
+      {selected && <View style={styles.overlay} >
+        <HStack space={8} >
+      <Text fontSize= '22' color= {colors.red} strikeThrough>{item.nazwa}</Text>
+        <Text >{item.kiedy}</Text>
+        <Icon
+                      as={<AntDesign name={"check"} />}
+                      size={8}
+                      ml="2"
+                      color={colors.yellow}/>
+                      </HStack>
+        </View>}
+    </TouchableOpacity>
+  </>
+);
 
- 
+const [selectedItems, setSelectedItems] = useState([]);
+
+const handleLongPress = contact => {
+  selectItems(contact)
+};
+
+const handleOnPress = contact => {
+  if (selectedItems.length) {
+    return selectItems(contact);
+  }
+  // here you can add you code what do you want if user just do single tap
+  console.log('pressed');
+};
+
+const getSelected = contact => selectedItems.includes(contact.id);
+
+const deSelectItems = () => setSelectedItems([]);
+
+const selectItems = item => {
+  if (selectedItems.includes(item.id)) {
+    const newListItems = selectedItems.filter(
+      listItem => listItem !== item.id,
+    );
+    return setSelectedItems([...newListItems]);
+  }
+  setSelectedItems([...selectedItems, item.id]);
+};
+
 const renderItem = (item) => {
   return (
     <NativeBaseProvider>
      <View style={styles.root}>
      
-          <FlatList  data={data.filter(obj=>obj.kiedy==item.name)} renderItem={({item}) => 
-    
-            <Box style={styles.boxes} >
-              <HStack space={10} >
-               
-                  <TouchableOpacity 
-                 
-                    onPress={() => {
-                      setLike(item.nazwa);
-                      console.log(like);
-                   }}>
-                    <Icon
-                      as={<AntDesign name={item.nazwa===like?"smile-circle":"frown"} />}
-                      size={8}
-                      ml="2"
-                      color={item.nazwa===like? colors.green:colors.yellow}/>
-                  </TouchableOpacity>
-              
-                <Text strikeThrough={item.nazwa===like?true:false} fontSize='xl' color={"white"}> 
-                  { ((item.nazwa).length > 14) ? 
-                  (((item.nazwa).substring(0,7)) + '...') : 
-                  item.nazwa }
-                </Text>
-                <Text style={styles.text_box} color={"white"} > {item.kiedy}</Text>
-              </HStack>
-            </Box>
-       
-           }
-          keyExtractor={item => item.id}  
-          />         
+     <Pressable onPress={deSelectItems} style={{flex: 1, padding: 15}}>
+      <FlatList
+        data={data.filter(obj=>obj.kiedy==item.name)}
+        renderItem={({item}) => (
+          <ListItem
+            onPress={() => handleOnPress(item)}
+            onLongPress={handleLongPress}
+            selected={getSelected(item)}
+            item={item}
+          />
+        )}
+        keyExtractor={item => item.id}
+      />
+    </Pressable>
       </View>
       </NativeBaseProvider>
   );

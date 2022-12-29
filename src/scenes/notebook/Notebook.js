@@ -44,7 +44,7 @@ const Notebook = ({ route, navigation }) => {
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState('');
 
-const url = 'http://192.168.0.188/organizer/index_notebook.php';//dom
+const url = 'http://192.168.0.186/organizer/index_notebook.php';//dom
  // const url = 'http://192.168.1.209/organizer/index_notebook.php';//aka
 
 
