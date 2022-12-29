@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
 const MailsPage = ({route,navigation}) => {
   const from = route?.params?.from
  
-  const url = 'http://192.168.0.188/organizer/index_mails.php';//dpm
+  const url = 'http://192.168.0.186/organizer/index_mails.php';//dpm
   //const url = 'http://192.168.1.209/organizer/index_mails.php';//aka
   //const url = 'http://192.168.0.156/organizer/index_mails.php';//dom_KOMP
 

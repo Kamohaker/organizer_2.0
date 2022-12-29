@@ -116,7 +116,7 @@ const renderItem = (item) => {
      
           <FlatList  data={data.filter(obj=>obj.kiedy==item.name)} renderItem={({item}) => 
     
-           <Box style={styles.boxes}>
+           <Box style={styles.boxes} shadow={9} marginLeft={5}>
             <HStack space={10}>
           <Text style={styles.text_box} > {item.nazwa}</Text>
           <Text style={styles.text_box} > {item.kiedy}</Text>

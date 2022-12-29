@@ -78,7 +78,7 @@ const ToDo = ({ route,navigation }) => {
   const [daneNazwa,setNazwa] = useState('');
   const [daneDaty,setDaty] = useState('');
   const [items, setItems] = useState({});
-  const [filter, setFilter] = useState('');
+
 
   
   const [shows, setShows] = useState(false)
@@ -128,10 +128,7 @@ const ToDo = ({ route,navigation }) => {
         setItems(newItems);
     }, 1000);
 }
-/////////////////////////////////////////////////////////
 
-const [like, setLike] = useState([]);
-const [color, setColor] = useState(false);
 
 const ListItem = ({item, selected, onPress, onLongPress}) => (
   <>
@@ -140,19 +137,28 @@ const ListItem = ({item, selected, onPress, onLongPress}) => (
       onLongPress={onLongPress}
       style={styles.listItem}>
       <View style={{padding: 14}}>
+      <HStack space={4} >
+      <Icon
+                      as={<AntDesign name={"close"} />}
+                      size={8}
+                     
+                      color={colors.yellow}/>
         <Text style={{fontSize: 22, color: '#fff'}}>{item.nazwa}</Text>
-        <Text >{item.kiedy}</Text>
+        <Text marginTop={10}>{item.kiedy}</Text>
+       
+        </HStack>
       </View>
       {selected && <View style={styles.overlay} >
-        <HStack space={8} >
-      <Text fontSize= '22' color= {colors.red} strikeThrough>{item.nazwa}</Text>
-        <Text >{item.kiedy}</Text>
+        <HStack space={4} >
         <Icon
                       as={<AntDesign name={"check"} />}
                       size={8}
-                      ml="2"
+                     
                       color={colors.yellow}/>
-                      </HStack>
+      <Text fontSize= '22' color= {colors.red} strikeThrough>{item.nazwa}</Text>
+        <Text marginTop={10}>{item.kiedy}</Text>
+      
+          </HStack>
         </View>}
     </TouchableOpacity>
   </>

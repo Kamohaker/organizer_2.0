@@ -101,11 +101,12 @@ const filterList = (value) => {
           color:colors.limone
           }} 
         />
-      <FlatList data={data.filter(checkTitles)} renderItem={({ item })=>(
+      <FlatList data={data.filter(checkTitles)} 
+      renderItem={({ item })=>(
         <Pressable onPress={() =>
           navigation.navigate('NotatnikEdytuj',{nazwa:item.nazwa , opis:item.opis})
         }>
-          <Box style={styles.boxes}>
+          <Box style={styles.boxes} shadow={9}>
            <Text style={styles.title}numberOfLines={1} ellipsizeMode='tail' >
               {item.nazwa}
             </Text>
@@ -114,7 +115,7 @@ const filterList = (value) => {
         </Pressable>
     )}
         keyExtractor={(item)=>item.id.toString()}>
-
+        
       </FlatList>
       <Fab  shadow={4} right={50} bgColor={'#002851'} onPress={onSubmit
         }

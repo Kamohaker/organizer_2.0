@@ -124,7 +124,7 @@ const Wallet = ({route,navigation}) => {
           <Pressable onPress={() =>
             navigation.navigate('PortfelEdytuj',{nazwa:item.nazwa , num_konta:item.num_konta, num_telefonu:item.num_telefonu})
             }>
-            <Box style={styles.boxes}>
+            <Box style={styles.boxes} shadow={9}>
               <HStack py='1' >
                 <Avatar size="60px" mx='1' backgroundColor={randomColor()}>{getFirstLetterFrom(item.nazwa)}</Avatar>
                 <Text  numberOfLines={1} ellipsizeMode='tail'  bold mx='4' my='4'>

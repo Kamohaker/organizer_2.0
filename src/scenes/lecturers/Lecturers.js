@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
 
 const Lectures = ({route,navigation}) => {
   const from = route?.params?.from
- const url = 'http://192.168.0.188/organizer/index_lectures.php';//dom
+ const url = 'http://192.168.0.186/organizer/index_lectures.php';//dom
  // const url = 'http://192.168.1.209/organizer/index_lectures.php';//aka
 
   const [showModal, setShowModal] = useState(false);
@@ -127,7 +127,7 @@ const filterList = (value) => {
         <FlatList data={data.filter(checkTitles)}  renderItem={({item}) => 
         <Pressable onPress={()=>{navigation.navigate('ProwadzacyEdytuj',{nazwa:item.nazwa,stopien:item.stopien,num_pok:item.num_pokoju})}}>
                
-          <Box style={styles.boxes}>
+          <Box style={styles.boxes}shadow={9}>
             <HStack py={1}>
               <Avatar mx='4' backgroundColor={randomColor()} size="60px" >{getFirstLetterFrom(item.nazwa)}</Avatar> 
                  <Text  bold my='4'>

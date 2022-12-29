@@ -54,7 +54,7 @@ const timeToString = (time) => {
 
 const Shedule = ({ route,navigation }) => {
   const from = route?.params?.from
-  const url = 'http://192.168.0.188/organizer/index_schedule.php';//dom
+  const url = 'http://192.168.0.186/organizer/index_schedule.php';//dom
   //const url = 'http://192.168.1.209/organizer/index_schedule.php';//aka
 
   const [data, setData] = useState([]);
@@ -74,16 +74,7 @@ const Shedule = ({ route,navigation }) => {
   return (focusHandler)
   },[])
 
-    const postData = () =>{
-    
-      axios.post(url,{
-        nazwa:daneNazwa,
-        kiedy:daneDaty
-      }).then(response => console.log('dodano:',daneNazwa,daneDaty),
-       setShowModal(false)
-      
-      ).catch(err=>console.log(err))
-    }
+  
 
   const loadItems = (day) => {
 
@@ -118,7 +109,7 @@ const renderItem = (item) => {
      <View style={styles.root}>
       
           <FlatList data={data.filter(obj=>obj.kiedy==item.name)}  renderItem={({item}) => 
-           <Box style={styles.boxes}>
+           <Box style={styles.boxes} shadow={9}>
             <HStack space={10}>
           <Text style={styles.text_box} > {item.nazwa}</Text>
           <Text style={styles.text_box} > {item.kiedy}</Text>

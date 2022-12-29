@@ -31,7 +31,8 @@ const styles = StyleSheet.create({
     borderColor:colors.orange,
     backgroundColor:colors.lightOrange,
     marginTop:12,
-    width:'100%',
+    marginLeft:18,
+    width:'90%',
     height:100,
     alignItems:'center',
     
@@ -123,24 +124,24 @@ const filterList = (value) => {
       <Box>
         <FlatList data={data.filter(checkTitles)}  renderItem={({item}) => 
         <Pressable onPress={()=>{navigation.navigate('MailEdytuj',{nazwa:item.nazwa,mail:item.email})}}>
-          <Box style={styles.boxes}>
+          <Box style={styles.boxes} shadow={9}>
             <HStack>
-              <Avatar my= '3' mx='4' backgroundColor={randomColor()} size="60px" >{getFirstLetterFrom(item.nazwa)}</Avatar> 
+              <Avatar my= '3' mx='3' backgroundColor={randomColor()} size="60px" >{getFirstLetterFrom(item.nazwa)}</Avatar> 
               
                <Text my= '7' mx='4' fontSize='xl' bold>
                { ((item.nazwa).length > 10) ? 
                  (((item.nazwa).substring(0,7)) + '...') : 
                  item.nazwa }
                 </Text>
-                <Divider orientation="vertical" mx="8" my="1" _light={{
+                <Divider orientation="vertical" mx="6" my="1" _light={{
           background:colors.orange
         }}  />
-                <Text my= '7' mx='4' >
+                <Text my= '7' mx='3' >
              <Link href="https://mail.google.com" isExternal _text={{
         color: "#002851"
       }}>
      
-     { ((item.email).length > 20) ? 
+     { ((item.email).length > 18) ? 
                  (((item.email).substring(0,15)) + '...') : 
                  item.email }
                   </Link>
