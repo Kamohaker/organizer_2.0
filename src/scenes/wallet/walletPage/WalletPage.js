@@ -1,6 +1,6 @@
 import React  from "react";
 import { PropTypes } from "prop-types";
-import {Input,IconButton,View,Avatar,FormControl, HStack, VStack, Text, NativeBaseProvider } from "native-base";
+import {Input,IconButton,View,Avatar,FormControl, HStack, VStack, Text, NativeBaseProvider, ScrollView } from "native-base";
 import {StyleSheet} from "react-native"
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Icon  from "react-native-vector-icons/AntDesign";
@@ -34,38 +34,39 @@ const WalletPage = ({route,navigation}) => {
   const [daneNumTel,setNumTel] = useState('');
   const [daneNumKon,setNumKon] = useState('');
 
-
-  const postData = () =>{
-  
-  axios.post(url,{
-    nazwa:daneNazwa,
-    num_telefonu:daneNumTel,
-    num_konta:daneNumKon
-  }).then(response => console.log('dodano:',daneNazwa,daneNumTel,daneNumKon),
-   onSubmit(),
-   setNazwa(''),
-   setNumTel(''),
-   setNumKon(''),
-   navigation.navigate('Portfel'),
-  ).catch(err=>console.log(err))
-  }
   const [errors, setErrors] = useState({});
 
-  const onSubmit = () =>{
-    if(daneNumTel!=9){
+
+
+  const postData = () =>{
+    if (daneNazwa === '' || daneNumKon==='' || daneNumTel==='') {
+     console.log('Pola'),
       setErrors({
         ...errors,
-        name: 'Numer telefonu jest niepoprawny',
+        name: 'Wszystkie pola są wymagane',
       });
       return false;
-    }else if (daneNumKon!=26){
+    } else if (daneNumTel.length !=9 || daneNumKon.length !=26) {
+      console.log(daneNumKon),
       setErrors({
         ...errors,
-        name: 'Numer konta jest niepoprawny',
+        name: 'Dane są złej długości',
       });
       return false;
     }
-    return true;
+    return(
+      axios.post(url,{
+        nazwa:daneNazwa,
+        num_telefonu:daneNumTel,
+        num_konta:daneNumKon
+      }).then(response => console.log('dodano:',daneNazwa,daneNumTel,daneNumKon),
+       
+       setNazwa(''),
+       setNumTel(''),
+       setNumKon(''),
+       navigation.navigate('Portfel')
+      ).catch(err=>console.log(err)))
+    
   }
   return (
   <NativeBaseProvider>
@@ -97,27 +98,35 @@ const WalletPage = ({route,navigation}) => {
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
-      <Avatar my= "5" size={150} background={colors.lightBlue}>
+        <ScrollView>
+      <Avatar my= "5" marginLeft={20} size={150} background={colors.lightBlue}>
         <Icon name="adduser" size={70}  /> 
       </Avatar>
       <VStack py='4'>
-        <Text fontSize={15} color={colors.limone}>
+       
+        <FormControl isInvalid>
+           
+            <Text fontSize={20} color={colors.limone}>
           Nazwa
         </Text>
-        <Input value={daneNazwa} variant="rounded"marginBottom={6} marginTop={2} placeholder="Nazwa" 
-          w="50%" backgroundColor={colors.grayBlue} borderColor={colors.limone}
+        <Input value={daneNazwa} variant="rounded" marginTop={2} placeholder="Nazwa" 
+          w={300} backgroundColor={colors.grayBlue} borderColor={colors.limone}
           onChangeText={text => setNazwa(text)} 
           _light={{
           placeholderTextColor: colors.limone,
           color:colors.limone
           }} >
         </Input>
-        <Text fontSize={15} color={colors.limone}>
+            <FormControl.ErrorMessage >
+            {errors.name}
+            </FormControl.ErrorMessage>
+          </FormControl>
+        <FormControl isInvalid>
+        <Text fontSize={20} color={colors.limone}>
           Numer telefonu
         </Text>
-        <FormControl mb="5">
-        <Input value={daneNumTel} variant="rounded"  marginTop={2}
-          placeholder="Numer telefonu" w="50%" backgroundColor={colors.grayBlue}
+            <Input value={daneNumTel} variant="rounded"  marginTop={2}
+          placeholder="Numer telefonu" w="100%" backgroundColor={colors.grayBlue}
           borderColor={colors.limone}
           keyboardType='numeric'
           onChangeText={text => setNumTel(text)} 
@@ -126,14 +135,17 @@ const WalletPage = ({route,navigation}) => {
           color:colors.limone
           }} >
         </Input>
-        <FormControl.HelperText>
-              Numer telefonu powinien zawierać 9 cyfr.
-            </FormControl.HelperText>
-        <Text fontSize={15} color={colors.limone}>
+           
+            <FormControl.ErrorMessage >
+            {errors.name}
+            </FormControl.ErrorMessage>
+          </FormControl>
+        <FormControl isInvalid>
+        <Text fontSize={20} color={colors.limone}>
           Numer konta
-        </Text>
-        <Input value={daneNumKon} variant="rounded"  marginTop={2}
-          placeholder="Numer konta" w="50%" backgroundColor={colors.grayBlue}
+        </Text>  
+            <Input value={daneNumKon} variant="rounded"  marginTop={2}
+          placeholder="Numer konta" w="100%" backgroundColor={colors.grayBlue}
           borderColor={colors.limone}
           keyboardType='numeric'
           onChangeText={text => setNumKon(text)} 
@@ -142,12 +154,13 @@ const WalletPage = ({route,navigation}) => {
           color:colors.limone
           }} >
         </Input>
-        <FormControl.HelperText>
-              Numer konta powinien składać się z 26 cyfr.
-            </FormControl.HelperText>
-            <FormControl.ErrorMessage >{errors.name}</FormControl.ErrorMessage>
-        </FormControl>
+      
+            <FormControl.ErrorMessage >
+             {errors.name}
+            </FormControl.ErrorMessage>
+          </FormControl>
       </VStack>
+      </ScrollView>
     </LinearGradient>
   </NativeBaseProvider>
   )

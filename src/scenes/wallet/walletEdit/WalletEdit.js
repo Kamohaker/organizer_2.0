@@ -1,6 +1,6 @@
 import React  from "react";
 import { PropTypes } from "prop-types";
-import { Modal,FormControl,Input,Button,IconButton,Icon, Box,Flex,View,Divider, FlatList,Avatar, HStack, VStack, Fab,Text, NativeBaseProvider } from "native-base";
+import { Modal,FormControl,Input,Button,IconButton,Icon, Box,Flex,View,Divider,ScrollView, Avatar, HStack, VStack, Fab,Text, NativeBaseProvider } from "native-base";
 import {StyleSheet} from "react-native"
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Fot  from "react-native-vector-icons/AntDesign";
@@ -40,21 +40,37 @@ const WalletEdit = ({route,navigation}) => {
   const [daneNazwa,setNazwa] = useState('');
   const [daneNumTel,setNumTel] = useState('');
   const [daneNumKon,setNumKon] = useState('');
-
+  const [errors, setErrors] = useState({});
 
 const putData = () =>{
-    
-  axios.put(url,{
+ 
+    axios.put(url,{
 
-    nazwa: route.params.nazwa,
-    num_telefonu:daneNumTel,
-    num_konta:daneNumKon
-    }).then(response => console.log('zmieniono:','nazwa:',route.params.nazwa,'numer_tel:',daneNumTel,'num_kon:',daneNumKon),
-    navigation.navigate('Portfel'),
+      nazwa: route.params.nazwa,
+      num_telefonu:daneNumTel,
+      num_konta:daneNumKon,
    
-   ).catch(err=>console.log(err))
-   
+      }).then(response => console.log('zmieniono:','nazwa:',route.params.nazwa,'numer_tel:',daneNumTel,'num_kon:',daneNumKon),
+     
+      navigation.navigate('Portfel'),
+      setNumKon(daneNumKon),
+      setNumTel(daneNumTel)
+      
+     ).catch(err=>console.log(err))
+     
     
+}
+
+
+const onSubmit=()=>{
+  if (daneNumTel.length !=9 || daneNumKon.length !=26) {
+    console.log(daneNumKon,'+',daneNumTel),
+    setErrors({
+      ...errors,
+      name: 'Dane są złej długości',
+    });
+    return false;
+  }return true;
 }
 
 const deleteData = () =>{
@@ -104,15 +120,17 @@ data:{
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
-        <Avatar my= "5" size={150} background={colors.lightBlue}>
+        <ScrollView>
+        <Avatar my= "5"  marginLeft={20}  size={150} background={colors.lightBlue}>
          <Fot name="edit" size={70}/> 
          </Avatar>
         <VStack py='4'>
+          
         <Text fontSize={15} color={colors.limone}>
          Nazwa
         </Text>
         <Input isDisabled defaultValue= {route.params.nazwa} variant="rounded" marginBottom={6} marginTop={2} placeholder="Nazwa" 
-        w="50%" backgroundColor="#0c4a6e" borderColor="#a3e635" 
+        w={300}backgroundColor="#0c4a6e" borderColor="#a3e635" 
         onChangeText={text => setNazwa(text)} 
         _light={{
         placeholderTextColor: "#a3e635",
@@ -120,11 +138,13 @@ data:{
       
         }} >
         </Input>
+
+        <FormControl isInvalid>
         <Text fontSize={15} color={colors.limone}>
          Edytuj numer telefonu
         </Text>
-        <Input defaultValue = {route.params.num_telefonu} variant="rounded" marginBottom={6} marginTop={2} 
-        placeholder="Numer telefonu" w="50%" backgroundColor="#0c4a6e" 
+        <Input defaultValue = {route.params.num_telefonu} variant="rounded"  marginTop={2} 
+        placeholder="Numer telefonu" w="100%" backgroundColor="#0c4a6e" 
         borderColor="#a3e635" 
         keyboardType='numeric'
         onChangeText={text => setNumTel(text)} 
@@ -133,11 +153,17 @@ data:{
         color:colors.limone
         }} >
         </Input>
-        <Text fontSize={15} color={colors.limone}>
+           <FormControl.ErrorMessage >
+           {errors.name}
+           </FormControl.ErrorMessage>
+         </FormControl>
+         <FormControl isInvalid>
+           
+         <Text fontSize={15} color={colors.limone}>
          Edytuj numer konta
         </Text>
-        <Input defaultValue= {route.params.num_konta} variant="rounded" marginBottom={6} marginTop={2}
-         placeholder="Numer konta" w="50%" backgroundColor="#0c4a6e"
+        <Input defaultValue= {route.params.num_konta} variant="rounded"  marginTop={2}
+         placeholder="Numer konta" w="100%" backgroundColor="#0c4a6e"
           borderColor="#a3e635" 
           keyboardType='numeric'
           onChangeText={text => setNumKon(text)} 
@@ -146,12 +172,17 @@ data:{
         color:colors.limone
         }} >
         </Input>
+           <FormControl.ErrorMessage >
+           {errors.name}
+           </FormControl.ErrorMessage>
+         </FormControl>
 
         </VStack>
 
     <Fab  bgColor={'#002851'} onPress={deleteData}
      icon={<Icon color="#dc2626" as={AntDesign} name="delete" size="lg" />}
     />
+    </ScrollView>
     </LinearGradient>
     </NativeBaseProvider>
     )

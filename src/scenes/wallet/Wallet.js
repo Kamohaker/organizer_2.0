@@ -46,15 +46,14 @@ const Wallet = ({route,navigation}) => {
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState('');
 
-
   function getFirstLetterFrom(value) {
-  return value.slice(0, 1).toUpperCase();
+    return value.slice(0, 1).toUpperCase();
   }
  
   function randomColor() {
-  let hex = Math.floor(Math.random() * 0xFFFFFF);
-  let color = "#" + hex.toString(16);
-  return color;
+    let hex = Math.floor(Math.random() * 0xFFFFFF);
+    let color = "#" + hex.toString(16);
+    return color;
   }
 
   useEffect(()=>{
@@ -72,84 +71,85 @@ const Wallet = ({route,navigation}) => {
 
 
   const clearString = (value) => {
-  return value.replace(/\s/g, '').toLowerCase();
+    return value.replace(/\s/g, '').toLowerCase();
   }
 
   const checkTitles = (value) => {
-  return clearString(value.nazwa).indexOf(clearString(filter)) >= 0
+    return clearString(value.nazwa).indexOf(clearString(filter)) >= 0
   }
 
   const filterList = (value) => {
-  setFilter(value);
+    setFilter(value);
   }
 
   return (
   <NativeBaseProvider>
     <LinearGradient
-        colors={['#0c4a6e', '#7dd3fc']}
+        colors={[colors.grayBlue, colors.whiteBlue]}
         style={styles.root}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
-        <Input variant="rounded" mx='10' my='5' marginTop={8} 
-        onChangeText={filterList} 
-        InputRightElement={
-          <Icon as={<AntDesign name="search1" />
-        } size={5} mr="3" color="muted.400" />}
+      <Input variant="rounded" mx='10' my='5' marginTop={8} 
         placeholder="Wyszukaj" 
-        backgroundColor={colors.grayBlue} borderColor={colors.limone}
+        onChangeText={filterList}
+        backgroundColor={colors.grayBlue} borderColor={colors.limone} 
+        InputRightElement={
+          <Icon as={<AntDesign name="search1" />} 
+          size={5} mr="3" color="muted.400" />
+        }
         _light={{
           placeholderTextColor: colors.limone,
           color:colors.limone
-          }} 
-        />
-        <HStack space={[2, 3]} justifyContent="space-between">
-          <Text style= {styles.title}>
+        }} 
+      />
+      <HStack space={[2, 3]} justifyContent="space-between">
+        <Text style= {styles.title}>
             Nazwa
-          </Text>
-          <Divider orientation="vertical" mx="2" _light={{
+        </Text>
+        <Divider orientation="vertical" mx="2" _light={{
             bg: "muted.800"
-          }}  />
-          <Text style= {styles.title}>
+        }}/>
+        <Text style= {styles.title}>
             Numer telefonu
-          </Text>
-          <Divider orientation="vertical" mx="2" _light={{
+        </Text>
+        <Divider orientation="vertical" mx="2" _light={{
             bg: "muted.800"
-          }} />
-          <Text style= {styles.title}>
+        }} />
+        <Text style= {styles.title}>
            Numer konta
-          </Text>
-        </HStack> 
-        <FlatList data={data.filter(checkTitles)} renderItem={({item}) => 
-          <Pressable onPress={() =>
+        </Text>
+      </HStack> 
+      <FlatList data={data.filter(checkTitles)} renderItem={({item}) => 
+        <Pressable onPress={() =>
             navigation.navigate('PortfelEdytuj',{nazwa:item.nazwa , num_konta:item.num_konta, num_telefonu:item.num_telefonu})
-            }>
-            <Box style={styles.boxes} shadow={9}>
-              <HStack py='1' >
-                <Avatar size="60px" mx='1' backgroundColor={randomColor()}>{getFirstLetterFrom(item.nazwa)}</Avatar>
-                <Text  numberOfLines={1} ellipsizeMode='tail'  bold mx='4' my='4'>
+        }>
+          <Box style={styles.boxes} shadow={9}>
+            <HStack py='1' >
+              <Avatar size="60px" mx='1' backgroundColor={randomColor()}>{getFirstLetterFrom(item.nazwa)}</Avatar>
+              <Text  numberOfLines={1} ellipsizeMode='tail'  bold mx='4' my='4'>
                   { ((item.nazwa).length > 7) ? 
                   (((item.nazwa).substring(0,7)) + '...') : item.nazwa }
-                </Text>
-                <Divider orientation="vertical" mx="2" _light={{
+              </Text>
+              <Divider orientation="vertical" mx="2" _light={{
                   background:colors.blue
-                }}  />
-                <Text  mx='4' my='4'>
+              }}  />
+              <Text  mx='4' my='4'>
                   {item.num_telefonu}
-                </Text>
-                <Divider orientation="vertical" mx="2" _light={{
+              </Text>
+              <Divider orientation="vertical" mx="2" _light={{
                   background:colors.blue
-                }}  />
-                <Text  mx='4' my='4'>
+              }}  />
+              <Text  mx='4' my='4'>
                 { ((item.num_konta).length > 10) ? 
                  (((item.num_konta).substring(0,7)) + '...') : item.num_konta }
-                </Text>
-              </HStack>
-            </Box>
-          </Pressable>
+              </Text>
+            </HStack>
+          </Box>
+        </Pressable>
           } keyExtractor={item => item.id} 
-        />
-        <Fab  shadow={4} bgColor={colors.darkGreyBlue} 
+      />
+      <Fab  shadow={4} bgColor={colors.darkGreyBlue} 
           onPress={()=>{navigation.navigate('PortfelStrona')}}
           icon={<Icon color={colors.limone} as={AntDesign} name="plus" size="lg" />} />
 
