@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { StyleSheet, View, StatusBar } from "react-native";
-import { NativeBaseProvider,Pressable,Icon, Box,VStack,Fab, Button, Image, Text,ScrollView, FlatList, HStack } from "native-base";
+import { NativeBaseProvider,Icon, Box,Fab,Text, FlatList, HStack } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 import { Calendar,Agenda } from "react-native-calendars";
 import { useState ,useEffect} from "react";
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#0c4a6e"
+    backgroundColor: colors.grayBlue
    
   },
   title: {
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     marginTop:20,
     marginLeft:10 ,
     paddingRight:10,
-    width:'100%',
+    width:325,
     height:80,
     alignItems:'center',
     paddingTop:18
@@ -58,8 +58,6 @@ const Shedule = ({ route,navigation }) => {
   //const url = 'http://192.168.1.209/organizer/index_schedule.php';//aka
 
   const [data, setData] = useState([]);
-  const [daneNazwa,setNazwa] = useState('');
-  const [daneDaty,setDaty] = useState('');
   const [items, setItems] = useState({});
 
   useEffect(()=>{
@@ -107,18 +105,15 @@ const Shedule = ({ route,navigation }) => {
 const renderItem = (item) => {
   return (
      <View style={styles.root}>
-      
-          <FlatList data={data.filter(obj=>obj.kiedy==item.name)}  renderItem={({item}) => 
-           <Box style={styles.boxes} shadow={9}>
+        <FlatList data={data.filter(obj=>obj.kiedy==item.name)}  renderItem={({item}) => 
+          <Box style={styles.boxes} shadow={9}>
             <HStack space={10}>
-          <Text style={styles.text_box} > {item.nazwa}</Text>
-          <Text style={styles.text_box} > {item.kiedy}</Text>
-         </HStack>
+              <Text style={styles.text_box} > {item.nazwa}</Text>
+              <Text style={styles.text_box} > {item.kiedy}</Text>
+            </HStack>
           </Box> }
-          keyExtractor={item => item.id} 
-          
-          />         
-      
+          keyExtractor={item => item.id}   
+        />         
       </View>
   );
 }
@@ -127,7 +122,7 @@ const renderItem = (item) => {
   return(
   <NativeBaseProvider>
    <LinearGradient
-        colors={['#0c4a6e', '#7dd3fc']}
+        colors={[colors.grayBlue, colors.whiteBlue]}
         style={styles.root}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
@@ -155,9 +150,9 @@ const renderItem = (item) => {
                 refreshing={true}
                 renderItem={renderItem}
             />
-       <Fab  shadow={4} bgColor={'#002851'} 
+       <Fab  shadow={4} bgColor={colors.darkGreyBlue} 
           onPress={() => navigation.navigate('PlanStrona')}
-          icon={<Icon color="#a3e635" as={AntDesign} name="plus" size="lg" />} />
+          icon={<Icon color={colors.limone} as={AntDesign} name="plus" size="lg" />} />
           
         
 

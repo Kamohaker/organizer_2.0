@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { StyleSheet } from "react-native";
-import { NativeBaseProvider,Pressable, View,Icon, Box,VStack, Text, FlatList, HStack } from "native-base";
+import { NativeBaseProvider,View,Icon, Box,Text, FlatList, HStack } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 import { Calendar,Agenda } from "react-native-calendars";
 import { useState ,useEffect} from "react";
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
    
     marginTop:20,
     marginLeft:8,
-    width:'100%',
+    width:330,
     height:80,
     alignItems:'center',
     paddingTop:18,
@@ -42,12 +42,10 @@ const styles = StyleSheet.create({
   }
 });
 
-
 const timeToString = (time) => {
   const date = new Date(time);
   return date.toISOString().split('T')[0];
 }
-
 
 const Home = ({ route,navigation }) => {
   const from = route?.params?.from
@@ -73,7 +71,6 @@ const Home = ({ route,navigation }) => {
 
 
   const loadItems = (day) => {
-
     setTimeout(() => {
         for (let i = -15; i < 85; i++) {
             const time = day.timestamp + i * 24 * 60 * 60 * 1000;
@@ -102,54 +99,48 @@ const Home = ({ route,navigation }) => {
     }, 1000);
 }
 
-const Color=(item)=>{
-  if(item.plan==='plan')
-  {
-   return colors.green
-  }else if(item.plan==='todo'){
-    return colors.red
-  }else{
-    return colors.blue
-  }
-}
-
-const Icons=(item)=>{
-
-  if(item.plan==='plan')
-  {
-   return "calendar"
-  }else if(item.plan==='todo'){
-    return "carryout"
-  }else{
-    return "form"
+  const Color=(item)=>{
+    if(item.plan==='plan')
+    {
+    return colors.green
+    }else if(item.plan==='todo'){
+      return colors.red
+    }else{
+      return colors.blue
+    }
   }
 
-}
+  const Icons=(item)=>{
+
+    if(item.plan==='plan')
+    {
+    return "calendar"
+    }else if(item.plan==='todo'){
+      return "carryout"
+    }else{
+      return "form"
+    }
+
+  }
 
 const renderItem = (item) => {
   return (
     <NativeBaseProvider>
-     <View style={styles.root}>
+      <View style={styles.root}>
         <FlatList  data={data.filter(obj=>obj.kiedy==item.name)} renderItem={({item}) => 
-    
+          
           <Box  style={styles.boxes} backgroundColor={Color(item)} shadow={9} >
             <HStack space={8}>
-           
-            <Icon
-                      as={<AntDesign name={Icons(item)} />}
-                      size={8}
-                     
-                      color={"white"}/>
-
+              <Icon
+                as={<AntDesign name={Icons(item)} />}
+                size={8}
+                color={colors.yellow}/>
               <Text style={styles.text_box} bold> {item.nazwa}</Text>
               <Text  mt='6' color={"white"}> {item.kiedy}</Text>
- 
             </HStack>
           </Box>
-       
-           }
-          keyExtractor={item => item.nazwa} 
-          
+        }
+        keyExtractor={item => item.nazwa} 
         />         
       </View>
     </NativeBaseProvider>
@@ -176,7 +167,7 @@ const renderItem = (item) => {
 
               }}
                 items={items}
-                loadItemsForMonth={loadItems }
+                loadItemsForMonth={loadItems}
                 showClosingKnob={true}
                 refreshing={true}
                 renderItem={renderItem}

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { StyleSheet, View, StatusBar } from "react-native";
-import { NativeBaseProvider,Pressable,Checkbox, Icon, Box,VStack, Button, Image, Text,ScrollView, FlatList, HStack, Fab } from "native-base";
+import { NativeBaseProvider, Icon, Box,Text, FlatList, HStack, Fab } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 import { Calendar,Agenda } from "react-native-calendars";
 import { useState ,useEffect} from "react";
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#0c4a6e"
+    backgroundColor: colors.grayBlue
    
   },
   title: {
@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
     borderRadius:20,
     backgroundColor:colors.blue,
     marginTop:20,
-    width:'100%',
+    marginLeft:10,
+    width:325,
     height:80,
     alignItems:'center',
     paddingTop:18,
@@ -55,10 +56,8 @@ const Timetable = ({ route,navigation }) => {
   //const url = 'http://192.168.1.209/organizer/index_timetable.php';//aka
 
   const [data, setData] = useState([]);
-  const [daneNazwa,setNazwa] = useState('');
-  const [daneDaty,setDaty] = useState('');
   const [items, setItems] = useState({});
-  const [filter, setFilter] = useState('');
+
  
   useEffect(()=>{
     const focusHandler = navigation.addListener('focus', () => {
@@ -108,31 +107,25 @@ const Timetable = ({ route,navigation }) => {
 
 const renderItem = (item) => {
   return (
-     <View style={styles.root}>
-     
-          <FlatList  data={data.filter(obj=>obj.kiedy==item.name)} renderItem={({item}) => 
-    
-           <Box style={styles.boxes} shadow={9} marginLeft={5}>
-            <HStack space={10}>
-          <Text style={styles.text_box} > {item.nazwa}</Text>
-          <Text style={styles.text_box} > {item.kiedy}</Text>
- 
-         </HStack>
-          </Box>
-       
-           }
-          keyExtractor={item => item.id} 
-          
-          />         
-      
-      </View>
+    <View style={styles.root}>
+      <FlatList  data={data.filter(obj=>obj.kiedy==item.name)} renderItem={({item}) => 
+        <Box style={styles.boxes} shadow={9} >
+          <HStack space={10}>
+            <Text style={styles.text_box} > {item.nazwa}</Text>
+            <Text style={styles.text_box} > {item.kiedy}</Text>
+          </HStack>
+        </Box>
+      }
+        keyExtractor={item => item.id}   
+      />         
+    </View>
   );
 }
 
   return(
   <NativeBaseProvider>
    <LinearGradient
-        colors={['#0c4a6e', '#7dd3fc']}
+        colors={[colors.grayBlue, colors.whiteBlue]}
         style={styles.root}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
