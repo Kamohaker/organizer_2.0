@@ -31,8 +31,7 @@ const styles = StyleSheet.create({
     borderColor:colors.orange,
     backgroundColor:colors.lightOrange,
     marginTop:12,
-    marginLeft:18,
-    width:'90%',
+    width:400,
     height:100,
     alignItems:'center',
     
@@ -45,18 +44,14 @@ const Maile = ({route,navigation}) => {
  // const url = 'http://192.168.1.209/organizer/index_mails.php';//aka
  
 
-  const [showModal, setShowModal] = useState(false);
+
   const [data, setData] = useState([]);
-  const [daneNazwa,setNazwa] = useState('');
-  const [daneMail,setMail] = useState('');
-  const [list, setList] = useState([]);
-    const [filter, setFilter] = useState('');
+  const [filter, setFilter] = useState('');
  
   function getFirstLetterFrom(value) {
     return value.slice(0, 1).toUpperCase();
   }
 
- 
   function randomColor() {
     let hex = Math.floor(Math.random() * 0xFFFFFF);
     let color = "#" + hex.toString(16);
@@ -64,7 +59,6 @@ const Maile = ({route,navigation}) => {
     return color;
   }
 
-  
   useEffect(()=>{
     const focusHandler = navigation.addListener('focus', () => {
       axios.get(url).then(response =>{
@@ -79,83 +73,72 @@ const Maile = ({route,navigation}) => {
   
   const clearString = (value) => {
     return value.replace(/\s/g, '').toLowerCase();
-}
+  }
 
-const checkTitles = (value) => {
-    return clearString(value.nazwa).indexOf(clearString(filter)) >= 0
-}
+  const checkTitles = (value) => {
+      return clearString(value.nazwa).indexOf(clearString(filter)) >= 0
+  }
 
-const filterList = (value) => {
-    setFilter(value);
-}
-
+  const filterList = (value) => {
+      setFilter(value);
+  }
 
   return (
   <NativeBaseProvider>
-   <LinearGradient
-        colors={[colors.grayBlue, colors.whiteBlue]}
-        style={styles.root}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
+    <LinearGradient
+      colors={[colors.grayBlue, colors.whiteBlue]}
+      style={styles.root}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
       >
-        <Input  onChangeText={filterList} 
+      <Input  onChangeText={filterList} 
         variant="rounded" mx='10' my='5' marginTop={8} InputRightElement={
-        <Icon as={<AntDesign name="search1" />} size={5} mr="3" color="muted.400" />}
+          <Icon as={<AntDesign name="search1" />} size={5} mr="3" color="muted.400" />}
         placeholder="Wyszukaj" 
-        backgroundColor="#0c4a6e" borderColor="#a3e635" 
+        backgroundColor={colors.grayBlue} borderColor={colors.limone}  
         _light={{
-          placeholderTextColor: "#a3e635",
-          color:colors.limone
-          }} 
-        />
-         <Box marginTop = '5' marginBottom = '5'>
-          <HStack>
-        <Text style={styles.title}>
-          Nazwa
-        </Text>
-        <Divider orientation="vertical" mx="20" _light={{
-          bg: "muted.800"
-        }}  />
+          placeholderTextColor: colors.limone,
+          color:colors.limone}} 
+      />
+      <Box marginTop = '5' marginBottom = '5'>
+        <HStack>
+          <Text style={styles.title}>
+            Nazwa
+          </Text>
+          <Divider orientation="vertical" mx="20" _light={{
+            bg: "muted.800"
+          }}  />
          <Text style={styles.title}>
-          Mail
-        </Text>
+            Mail
+          </Text>
         </HStack>
-         </Box>
-      <Box>
-        <FlatList data={data.filter(checkTitles)}  renderItem={({item}) => 
+      </Box>
+      <FlatList data={data.filter(checkTitles)}  renderItem={({item}) => 
         <Pressable onPress={()=>{navigation.navigate('MailEdytuj',{nazwa:item.nazwa,mail:item.email})}}>
           <Box style={styles.boxes} shadow={9}>
             <HStack>
               <Avatar my= '3' mx='3' backgroundColor={randomColor()} size="60px" >{getFirstLetterFrom(item.nazwa)}</Avatar> 
-              
-               <Text my= '7' mx='4' fontSize='xl' bold>
+              <Text my= '7' mx='4' fontSize='xl' bold>
                { ((item.nazwa).length > 10) ? 
                  (((item.nazwa).substring(0,7)) + '...') : 
                  item.nazwa }
-                </Text>
-                <Divider orientation="vertical" mx="6" my="1" _light={{
-          background:colors.orange
-        }}  />
-                <Text my= '7' mx='3' >
-             <Link href="https://mail.google.com" isExternal _text={{
-        color: "#002851"
-      }}>
-     
-     { ((item.email).length > 18) ? 
-                 (((item.email).substring(0,15)) + '...') : 
-                 item.email }
-                  </Link>
-                </Text>
-               
+              </Text>
+              <Divider orientation="vertical" mx="6" my="1" _light={{
+                background:colors.orange
+              }}  />
+              <Text my= '7' mx='3' >
+                <Link href="https://mail.google.com" isExternal _text={{color: colors.darkGreyBlue}}>
+                  { ((item.email).length > 18) ? 
+                  (((item.email).substring(0,15)) + '...') : 
+                  item.email }
+                </Link>
+              </Text>
             </HStack>
           </Box>
-          </Pressable>} keyExtractor={item => item.id} />
-          <Fab  shadow={4} bgColor={colors.darkGreyBlue} 
+        </Pressable>} keyExtractor={item => item.id} />
+        <Fab  shadow={4} bgColor={colors.darkGreyBlue} 
           onPress={() => navigation.navigate('MailStrona')}
           icon={<Icon color={colors.limone} as={AntDesign} name="plus" size="lg" />} />
-          
-          
-    </Box>
     </LinearGradient>
     </NativeBaseProvider>
     )

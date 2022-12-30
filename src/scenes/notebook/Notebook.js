@@ -16,13 +16,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.grayBlue
    
   },
-
   title: {
     marginTop:10,
     fontSize: 20,
     marginBottom: 20,
   },
-
   boxes: {
     borderBottomWidth:5,
     borderTopWidth:5,
@@ -32,7 +30,9 @@ const styles = StyleSheet.create({
     borderColor:colors.darkLimone ,
     backgroundColor:colors.limone,
     marginTop:'10%',
-    width:220,
+    marginRight:10,
+    marginLeft:10,
+    width:200,
     height:120,
     alignItems:'center',
     paddingTop:'5%'
@@ -44,7 +44,7 @@ const Notebook = ({ route, navigation }) => {
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState('');
 
-const url = 'http://192.168.0.186/organizer/index_notebook.php';//dom
+  const url = 'http://192.168.0.186/organizer/index_notebook.php';//dom
  // const url = 'http://192.168.1.209/organizer/index_notebook.php';//aka
 
 
@@ -59,67 +59,66 @@ const url = 'http://192.168.0.186/organizer/index_notebook.php';//dom
           })
         .catch(err=> console.log(err))
   } ); 
-  return (focusHandler)
+    return (focusHandler)
   },[])
 
- const onSubmit=()=>
-  {
+ const onSubmit=()=>{
     navigation.navigate('NotatnikStrona')
   }
 
   
-const clearString = (value) => {
-  return value.replace(/\s/g, '').toLowerCase();
-}
+  const clearString = (value) => {
+    return value.replace(/\s/g, '').toLowerCase();
+  }
 
-const checkTitles = (value) => {
-  return clearString(value.nazwa).indexOf(clearString(filter)) >= 0
-}
+  const checkTitles = (value) => {
+    return clearString(value.nazwa).indexOf(clearString(filter)) >= 0
+  }
 
-const filterList = (value) => {
-  setFilter(value);
-}
+  const filterList = (value) => {
+    setFilter(value);
+  }
 
   return(
   <NativeBaseProvider>
     <LinearGradient
-        colors={['#0c4a6e', '#7dd3fc']}
+        colors={[colors.grayBlue, colors.whiteBlue]}
         style={styles.root}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
-       <Input variant="rounded" mx='10' my='5' marginTop={8} 
+      <Input variant="rounded" mx='10' my='5' marginTop={8} 
         onChangeText={filterList} 
-        InputRightElement={
-          <Icon as={
-            <AntDesign name="search1" />} 
-          size={5} mr="3" color="muted.400" />}
         placeholder="Wyszukaj" 
         backgroundColor={colors.grayBlue} borderColor={colors.limone} 
+        InputRightElement={
+          <Icon as={<AntDesign name="search1" />} 
+          size={5} mr="3" color="muted.400" />}
         _light={{
           placeholderTextColor: colors.limone,
           color:colors.limone
           }} 
-        />
+      />
       <FlatList data={data.filter(checkTitles)} 
-      renderItem={({ item })=>(
-        <Pressable onPress={() =>
-          navigation.navigate('NotatnikEdytuj',{nazwa:item.nazwa , opis:item.opis})
-        }>
-          <Box style={styles.boxes} shadow={9}>
-           <Text style={styles.title}numberOfLines={1} ellipsizeMode='tail' >
-              {item.nazwa}
-            </Text>
-            <Text color={colors.darkGreyBlue} numberOfLines={1} ellipsizeMode='tail'>{item.opis}</Text>
-          </Box>
-        </Pressable>
-    )}
+        numColumns={2}
+        columnWrapperStyle={{justifyContent:'space-around'}}
+        renderItem={({ item })=>(
+          <Pressable onPress={() =>
+            navigation.navigate('NotatnikEdytuj',{nazwa:item.nazwa , opis:item.opis})
+          }>
+            <Box style={styles.boxes} shadow={9}>
+              <Text style={styles.title}numberOfLines={1} ellipsizeMode='tail' >
+                {item.nazwa}
+              </Text>
+              <Text color={colors.darkGreyBlue} numberOfLines={1} ellipsizeMode='tail'>{item.opis}</Text>
+            </Box>
+          </Pressable>
+        )}
         keyExtractor={(item)=>item.id.toString()}>
-        
       </FlatList>
-      <Fab  shadow={4} right={50} bgColor={'#002851'} onPress={onSubmit
-        }
-          icon={<Icon color="#a3e635" as={AntDesign} name="plus" size="lg" />}/>
+      <Fab  shadow={4} right={50} bgColor={colors.darkGreyBlue} onPress={onSubmit}
+        icon={<Icon color={colors.limone} as={AntDesign} name="plus" size="lg" />}
+      />
   
     </LinearGradient>
   </NativeBaseProvider>

@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.grayBlue
   },
   
- 
 });
 
 
@@ -36,18 +35,7 @@ const NotebookPage = ({route, navigation }) => {
   const [daneNazwa,setNazwa] = useState('');
   const [daneOpis,setOpis] = useState('');
 
-  useEffect(()=>{
-    const focusHandler = navigation.addListener('focus', () => {
-      axios.get(url).then(response =>{
-    
-        setData(response.data) 
-    
-          })
-        .catch(err=> console.log(err))
-  } ); 
-  return (focusHandler)
-  },[])
-  
+
   const postData = () =>{
   
     axios.post(url,{
@@ -86,7 +74,7 @@ const NotebookPage = ({route, navigation }) => {
       </HStack>
     </View>
     <LinearGradient
-        colors={['#0c4a6e', '#7dd3fc']}
+        colors={[colors.grayBlue, colors.whiteBlue]}
         style={styles.root}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}

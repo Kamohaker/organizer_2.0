@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { StyleSheet, View, StatusBar ,TouchableOpacity} from "react-native";
-import { NativeBaseProvider,Pressable,Switch, Checkbox, Icon, Box,VStack,IconButton, Button, Image, Text,ScrollView, FlatList, HStack, Fab } from "native-base";
+import { NativeBaseProvider,Pressable,Icon, Box,VStack,IconButton, Button, Image, Text,ScrollView, FlatList, HStack, Fab } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 import { Calendar,Agenda } from "react-native-calendars";
 import { useState ,useEffect} from "react";
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   listItem: {
     backgroundColor: colors.darkRed,
     marginBottom: 10,
-    borderRadius: 20,
+    borderRadius: 30,
     overflow: 'hidden',
   },
   overlay: {
@@ -224,6 +224,7 @@ const renderItem = (item) => {
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
+        
        <Agenda
                
                theme={{ 

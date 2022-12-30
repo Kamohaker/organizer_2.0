@@ -93,73 +93,69 @@ const WalletPage = ({route,navigation}) => {
       </HStack>
     </View>
     <LinearGradient
-        colors={['#0c4a6e', '#7dd3fc']}
+        colors={[colors.grayBlue, colors.whiteBlue]}
         style={styles.root}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
-        <ScrollView>
-      <Avatar my= "5" marginLeft={20} size={150} background={colors.lightBlue}>
-        <Icon name="adduser" size={70}  /> 
-      </Avatar>
-      <VStack py='4'>
-       
-        <FormControl isInvalid>
-           
+      <ScrollView>
+        <Avatar my= "5" marginLeft={20} size={150} background={colors.lightBlue}>
+          <Icon name="adduser" size={70}  /> 
+        </Avatar>
+        <VStack py='4'>
+          <FormControl isInvalid>
             <Text fontSize={20} color={colors.limone}>
-          Nazwa
-        </Text>
-        <Input value={daneNazwa} variant="rounded" marginTop={2} placeholder="Nazwa" 
-          w={300} backgroundColor={colors.grayBlue} borderColor={colors.limone}
-          onChangeText={text => setNazwa(text)} 
-          _light={{
-          placeholderTextColor: colors.limone,
-          color:colors.limone
-          }} >
-        </Input>
+              Nazwa
+            </Text>
+            <Input value={daneNazwa} variant="rounded" marginTop={2} placeholder="Nazwa" 
+              w={300} backgroundColor={colors.grayBlue} borderColor={colors.limone}
+              onChangeText={text => setNazwa(text)} 
+              _light={{
+              placeholderTextColor: colors.limone,
+              color:colors.limone
+              }} >
+            </Input>
             <FormControl.ErrorMessage >
-            {errors.name}
+              {errors.name}
             </FormControl.ErrorMessage>
           </FormControl>
-        <FormControl isInvalid>
-        <Text fontSize={20} color={colors.limone}>
-          Numer telefonu
-        </Text>
+          <FormControl isInvalid>
+            <Text fontSize={20} color={colors.limone}>
+              Numer telefonu
+            </Text>
             <Input value={daneNumTel} variant="rounded"  marginTop={2}
-          placeholder="Numer telefonu" w="100%" backgroundColor={colors.grayBlue}
-          borderColor={colors.limone}
-          keyboardType='numeric'
-          onChangeText={text => setNumTel(text)} 
-          _light={{
-          placeholderTextColor: colors.limone,
-          color:colors.limone
-          }} >
-        </Input>
-           
+              placeholder="Numer telefonu" w="100%" backgroundColor={colors.grayBlue}
+              borderColor={colors.limone}
+              keyboardType='numeric'
+              onChangeText={text => setNumTel(text)} 
+              _light={{
+              placeholderTextColor: colors.limone,
+              color:colors.limone
+              }} >
+            </Input>
             <FormControl.ErrorMessage >
-            {errors.name}
+              {errors.name}
             </FormControl.ErrorMessage>
           </FormControl>
-        <FormControl isInvalid>
-        <Text fontSize={20} color={colors.limone}>
-          Numer konta
-        </Text>  
+          <FormControl isInvalid>
+            <Text fontSize={20} color={colors.limone}>
+              Numer konta
+            </Text>  
             <Input value={daneNumKon} variant="rounded"  marginTop={2}
-          placeholder="Numer konta" w="100%" backgroundColor={colors.grayBlue}
-          borderColor={colors.limone}
-          keyboardType='numeric'
-          onChangeText={text => setNumKon(text)} 
-          _light={{
-          placeholderTextColor: colors.limone,
-          color:colors.limone
-          }} >
-        </Input>
-      
+              placeholder="Numer konta" w="100%" backgroundColor={colors.grayBlue}
+              borderColor={colors.limone}
+              keyboardType='numeric'
+              onChangeText={text => setNumKon(text)} 
+              _light={{
+              placeholderTextColor: colors.limone,
+              color:colors.limone
+              }} >
+            </Input>
             <FormControl.ErrorMessage >
-             {errors.name}
+              {errors.name}
             </FormControl.ErrorMessage>
           </FormControl>
-      </VStack>
+        </VStack>
       </ScrollView>
     </LinearGradient>
   </NativeBaseProvider>

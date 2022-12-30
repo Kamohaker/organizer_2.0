@@ -46,10 +46,7 @@ const Links = ({route,navigation}) => {
   const url = 'http://192.168.0.186/organizer/index_links.php';//dpm
  // const url = 'http://192.168.1.209/organizer/index_links.php';//aka
  
-  const [showModal, setShowModal] = useState(false);
   const [data, setData] = useState([]);
-  const [daneNazwa,setNazwa] = useState('');
-  const [daneLink,setLink] = useState('');
   const [filter, setFilter] = useState('');
 
   useEffect(()=>{
@@ -79,18 +76,19 @@ const filterList = (value) => {
   return (
   <NativeBaseProvider>
     <LinearGradient
-        colors={['#0c4a6e', '#7dd3fc']}
+        colors={[colors.grayBlue, colors.whiteBlue]}
         style={styles.root}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
       >
       <Input  onChangeText={filterList} 
-        variant="rounded" mx='10' my='5' marginTop={8} InputRightElement={
-        <Icon as={<AntDesign name="search1" />} size={5} mr="3" color="muted.400" />}
         placeholder="Wyszukaj" 
-        backgroundColor="#0c4a6e" borderColor="#a3e635" 
+        backgroundColor={colors.grayBlue} borderColor={colors.limone} 
+        variant="rounded" mx='10' my='5' marginTop={8} 
+        InputRightElement={
+          <Icon as={<AntDesign name="search1" />} size={5} mr="3" color="muted.400" />}
         _light={{
-          placeholderTextColor: "#a3e635",
+          placeholderTextColor:colors.limone,
           color:colors.limone
           }} 
       />
@@ -124,7 +122,7 @@ const filterList = (value) => {
                   color: colors.darkGreyBlue
                   }}>
                   { ((item.links).length > 20) ? 
-                  (((item.links).substring(0,15)) + '...') : 
+                  (((item.links).substring(0,40)) + '...') : 
                   item.links }
                 </Link>
               </Text>
@@ -132,9 +130,9 @@ const filterList = (value) => {
           </Box>
         </Pressable>
       } keyExtractor={item => item.id} />
-      <Fab right={50} bgColor={'#002851'} 
+      <Fab right={50} bgColor={colors.darkGreyBlue} 
         onPress={() => navigation.navigate('LinkiStrona')}
-        icon={<Icon color="#a3e635" as={AntDesign} name="plus" size="lg" />} /> 
+        icon={<Icon color={colors.limone} as={AntDesign} name="plus" size="lg" />} /> 
     </LinearGradient>
   </NativeBaseProvider>
   )
