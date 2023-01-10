@@ -71,8 +71,8 @@ const timeToString = (time) => {
 
 const ToDo = ({ route,navigation }) => {
   const from = route?.params?.from
-  const url = 'http://192.168.0.186/organizer/index_todo.php';//dom
-  //const url = 'http://192.168.1.209/organizer/index_todo.php';//aka
+  //const url = 'http://192.168.0.186/organizer/index_todo.php';//dom
+  const url = 'http://192.168.1.209/organizer/index_todo.php';//aka
 
   const [data, setData] = useState([]);
   const [daneNazwa,setNazwa] = useState('');
@@ -143,7 +143,9 @@ const ListItem = ({item, selected, onPress, onLongPress}) => (
                       size={8}
                      
                       color={colors.yellow}/>
-        <Text style={{fontSize: 22, color: '#fff'}}>{item.nazwa}</Text>
+        <Text style={{fontSize: 22, color: '#fff'}}> { ((item.nazwa).length > 10) ? 
+                  (((item.nazwa).substring(0,7)) + '...') : 
+                  item.nazwa }</Text>
         <Text marginTop={10}>{item.kiedy}</Text>
        
         </HStack>
@@ -155,7 +157,9 @@ const ListItem = ({item, selected, onPress, onLongPress}) => (
                       size={8}
                      
                       color={colors.yellow}/>
-      <Text fontSize= '22' color= {colors.red} strikeThrough>{item.nazwa}</Text>
+      <Text fontSize= '22' color= {colors.red} strikeThrough> { ((item.nazwa).length > 10) ? 
+                  (((item.nazwa).substring(0,7)) + '...') : 
+                  item.nazwa }</Text>
         <Text marginTop={10}>{item.kiedy}</Text>
       
           </HStack>
@@ -250,7 +254,7 @@ const renderItem = (item) => {
             />
       
       <Fab  shadow={4} bgColor={'#002851'} 
-          onPress={() => navigation.navigate('ToDoStrona')}
+          onPress={() => navigation.navigate('Dodaj ToDo')}
           icon={<Icon color="#a3e635" as={AntDesign} name="plus" size="lg" />} />
           
           

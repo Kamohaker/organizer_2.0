@@ -40,8 +40,8 @@ const styles = StyleSheet.create({
 
 const Maile = ({route,navigation}) => {
   const from = route?.params?.from
-  const url = 'http://192.168.0.186/organizer/index_mails.php';//dom
- // const url = 'http://192.168.1.209/organizer/index_mails.php';//aka
+ // const url = 'http://192.168.0.186/organizer/index_mails.php';//dom
+  const url = 'http://192.168.1.209/organizer/index_mails.php';//aka
  
 
 
@@ -114,7 +114,7 @@ const Maile = ({route,navigation}) => {
         </HStack>
       </Box>
       <FlatList data={data.filter(checkTitles)}  renderItem={({item}) => 
-        <Pressable onPress={()=>{navigation.navigate('MailEdytuj',{nazwa:item.nazwa,mail:item.email})}}>
+        <Pressable onPress={()=>{navigation.navigate('Edytuj Mail',{nazwa:item.nazwa,mail:item.email})}}>
           <Box style={styles.boxes} shadow={9}>
             <HStack>
               <Avatar my= '3' mx='3' backgroundColor={randomColor()} size="60px" >{getFirstLetterFrom(item.nazwa)}</Avatar> 
@@ -137,7 +137,7 @@ const Maile = ({route,navigation}) => {
           </Box>
         </Pressable>} keyExtractor={item => item.id} />
         <Fab  shadow={4} bgColor={colors.darkGreyBlue} 
-          onPress={() => navigation.navigate('MailStrona')}
+          onPress={() => navigation.navigate('Dodaj Mail')}
           icon={<Icon color={colors.limone} as={AntDesign} name="plus" size="lg" />} />
     </LinearGradient>
     </NativeBaseProvider>

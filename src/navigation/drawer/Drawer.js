@@ -44,35 +44,35 @@ export function DrawerNavigator  ()  {
       state: {
         ...props.state,
         routeNames: props.state.routeNames.filter(
-         (routeName) => routeName !== 'NotatnikStrona',
-         (routeName) => routeName !== 'NotatnikEdytuj',
-         (routeName) => routeName !== 'PortfelEdytuj',
-         (routeName) => routeName !== 'PortfelStorna',
-         (routeName) => routeName !== 'LinkiStrona',
-         (routeName) => routeName !== 'LinkiEdytuj',
-         (routeName) => routeName !== 'MailStrona',
-         (routeName) => routeName !== 'MailEdytuj',
-         (routeName) => routeName !== 'ProwadzacyStrona',
-         (routeName) => routeName !== 'ProwadzacyEdytuj',
-         (routeName) => routeName !== 'ToDoStorna',
-         (routeName) => routeName !== 'TerminarzStorna',
-         (routeName) => routeName !== 'PlanStorna',
+         (routeName) => routeName !== 'Dodaj Notatki',
+         (routeName) => routeName !== 'Edytuj Notatki',
+         (routeName) => routeName !== 'Edytuj Kontakt',
+         (routeName) => routeName !== 'Dodaj Kontakt',
+         (routeName) => routeName !== 'Dodaj Linki',
+         (routeName) => routeName !== 'Edytuj Linki',
+         (routeName) => routeName !== 'Dodaj Mail',
+         (routeName) => routeName !== 'Edytuj Mail',
+         (routeName) => routeName !== 'Dodaj Prowadzących',
+         (routeName) => routeName !== 'Edytuj Prowadzących',
+         (routeName) => routeName !== 'Dodaj ToDo',
+         (routeName) => routeName !== 'Dodaj Terminarz',
+         (routeName) => routeName !== 'Dodaj Plan',
         ),
         routes: props.state.routes.filter(
           (route) =>
-            route.name !== 'NotatnikStrona' &&
-            route.name !== 'NotatnikEdytuj' &&
-            route.name !== 'PortfelEdytuj' &&
-            route.name !== 'PortfelStrona' &&
-            route.name !== 'LinkiStrona' &&
-            route.name !== 'LinkiEdytuj' &&
-            route.name !== 'MailStrona' &&
-            route.name !== 'MailEdytuj' &&
-            route.name !== 'ProwadzacyStrona' &&
-            route.name !== 'ProwadzacyEdytuj' &&
-            route.name !== 'ToDoStrona' &&
-            route.name !== 'TerminarzStrona' &&
-            route.name !== 'PlanStrona'
+            route.name !== 'Dodaj Notatni' &&
+            route.name !== 'Edytuj Notatki' &&
+            route.name !== 'Edytuj Kontakt' &&
+            route.name !== 'Dodaj Kontakt' &&
+            route.name !== 'Dodaj Linki' &&
+            route.name !== 'Edytuj Mail' &&
+            route.name !== 'Dodaj Mail' &&
+            route.name !== 'Edytuj Mail' &&
+            route.name !== 'Dodaj Prowadzących' &&
+            route.name !== 'Edytuj Prowadzących' &&
+            route.name !== 'Dodaj ToDo' &&
+            route.name !== 'Dodaj Terminarz' &&
+            route.name !== 'Dodaj Plan'
 
 
         ),
@@ -176,67 +176,67 @@ export function DrawerNavigator  ()  {
       component={NotebookScreen}
       />
       <Drawer.Screen
-      name="NotatnikStrona"
+      name="Dodaj Notatki"
       
       component={NotebookPageScreen}
       />
        <Drawer.Screen
-      name="NotatnikEdytuj"
+      name="Edytuj Notatki"
       
       component={NotebookEditScreen}
       />
        <Drawer.Screen
-      name="PortfelEdytuj"
+      name="Edytuj Kontakt"
       
       component={WalletEditScreen}
       />
        <Drawer.Screen
-      name="PortfelStrona"
+      name="Dodaj Kontakt"
       
       component={WalletPageScreen}
       />
        <Drawer.Screen
-      name="LinkiStrona"
+      name="Dodaj Linki"
       
       component={LinksPageScreen}
       />
        <Drawer.Screen
-      name="LinkiEdytuj"
+      name="Edytuj Linki"
       
       component={LinksEditScreen}
       />
       <Drawer.Screen
-      name="MailStrona"
+      name="Dodaj Mail"
       
       component={MailsPageScreen}
       />
     <Drawer.Screen
-      name="MailEdytuj"
+      name="Edytuj Mail"
       
       component={MailsEditScreen}
       />
       <Drawer.Screen
-      name="ProwadzacyEdytuj"
+      name="Edytuj Prowadzących"
       
       component={LecturesEditScreen}
       />
       <Drawer.Screen
-      name="ProwadzacyStrona"
+      name="Dodaj Prowadzących"
       
       component={LecturesPageScreen}
       />
       <Drawer.Screen
-      name="ToDoStrona"
+      name="Dodaj ToDo"
       
       component={ToDoPageScreen}
       />
       <Drawer.Screen
-      name="TerminarzStrona"
+      name="Dodaj Terminarz"
       
       component={TimetablePageScreen}
       />
       <Drawer.Screen
-      name="PlanStrona"
+      name="Dodaj Plan"
       
       component={SchedulePageScreen}
       />

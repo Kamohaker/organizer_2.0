@@ -40,8 +40,8 @@ const styles = StyleSheet.create({
 const Wallet = ({route,navigation}) => {
   const from = route?.params?.from
 
-  const url = 'http://192.168.0.186/organizer/index_wallet.php';//dom
- // const url = 'http://192.168.1.209/organizer/index_wallet.php';//aka
+  //const url = 'http://192.168.0.186/organizer/index_wallet.php';//dom
+  const url = 'http://192.168.1.209/organizer/index_wallet.php';//aka
 
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState('');
@@ -122,7 +122,7 @@ const Wallet = ({route,navigation}) => {
       </HStack> 
       <FlatList data={data.filter(checkTitles)} renderItem={({item}) => 
         <Pressable onPress={() =>
-            navigation.navigate('PortfelEdytuj',{nazwa:item.nazwa , num_konta:item.num_konta, num_telefonu:item.num_telefonu})
+            navigation.navigate('Edytuj Kontakt',{nazwa:item.nazwa , num_konta:item.num_konta, num_telefonu:item.num_telefonu})
         }>
           <Box style={styles.boxes} shadow={9}>
             <HStack py='1' >
@@ -150,7 +150,7 @@ const Wallet = ({route,navigation}) => {
           } keyExtractor={item => item.id} 
       />
       <Fab  shadow={4} bgColor={colors.darkGreyBlue} 
-          onPress={()=>{navigation.navigate('PortfelStrona')}}
+          onPress={()=>{navigation.navigate('Dodaj Kontakt')}}
           icon={<Icon color={colors.limone} as={AntDesign} name="plus" size="lg" />} />
 
     </LinearGradient>

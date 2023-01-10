@@ -28,10 +28,7 @@ const styles = StyleSheet.create({
     marginLeft:10
   },
   boxes:{
-    borderBottomWidth:5,
-    borderTopWidth:5,
-    borderLeftWidth:5,
-    borderRightWidth:5,
+    
     borderRadius:20,
     borderColor:colors.darkGreen,
     backgroundColor:colors.green,
@@ -54,8 +51,8 @@ const timeToString = (time) => {
 
 const Shedule = ({ route,navigation }) => {
   const from = route?.params?.from
-  const url = 'http://192.168.0.186/organizer/index_schedule.php';//dom
-  //const url = 'http://192.168.1.209/organizer/index_schedule.php';//aka
+ //const url = 'http://192.168.0.186/organizer/index_schedule.php';//dom
+  const url = 'http://192.168.1.209/organizer/index_schedule.php';//aka
 
   const [data, setData] = useState([]);
   const [items, setItems] = useState({});
@@ -151,7 +148,7 @@ const renderItem = (item) => {
                 renderItem={renderItem}
             />
        <Fab  shadow={4} bgColor={colors.darkGreyBlue} 
-          onPress={() => navigation.navigate('PlanStrona')}
+          onPress={() => navigation.navigate('Dodaj Plan')}
           icon={<Icon color={colors.limone} as={AntDesign} name="plus" size="lg" />} />
           
         

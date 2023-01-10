@@ -43,8 +43,8 @@ const styles = StyleSheet.create({
 const Links = ({route,navigation}) => {
   const from = route?.params?.from
  
-  const url = 'http://192.168.0.186/organizer/index_links.php';//dpm
- // const url = 'http://192.168.1.209/organizer/index_links.php';//aka
+  //const url = 'http://192.168.0.186/organizer/index_links.php';//dpm
+  const url = 'http://192.168.1.209/organizer/index_links.php';//aka
  
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState('');
@@ -106,7 +106,7 @@ const filterList = (value) => {
         </HStack>
       </Box>
       <FlatList data={data.filter(checkTitles)} renderItem={({item}) => 
-        <Pressable onPress={()=>{navigation.navigate("LinkiEdytuj",{nazwa:item.nazwa,link:item.links})}}>
+        <Pressable onPress={()=>{navigation.navigate("Edytuj Linki",{nazwa:item.nazwa,link:item.links})}}>
           <Box style={styles.boxes}>
             <HStack space={[2, 3]} justifyContent="space-between">
               <Text   bold fontSize="20">
@@ -131,7 +131,7 @@ const filterList = (value) => {
         </Pressable>
       } keyExtractor={item => item.id} />
       <Fab right={50} bgColor={colors.darkGreyBlue} 
-        onPress={() => navigation.navigate('LinkiStrona')}
+        onPress={() => navigation.navigate('Dodaj Linki')}
         icon={<Icon color={colors.limone} as={AntDesign} name="plus" size="lg" />} /> 
     </LinearGradient>
   </NativeBaseProvider>

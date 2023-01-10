@@ -44,8 +44,8 @@ const Notebook = ({ route, navigation }) => {
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState('');
 
-  const url = 'http://192.168.0.186/organizer/index_notebook.php';//dom
- // const url = 'http://192.168.1.209/organizer/index_notebook.php';//aka
+  //const url = 'http://192.168.0.186/organizer/index_notebook.php';//dom
+  const url = 'http://192.168.1.209/organizer/index_notebook.php';//aka
 
 
   
@@ -63,7 +63,7 @@ const Notebook = ({ route, navigation }) => {
   },[])
 
  const onSubmit=()=>{
-    navigation.navigate('NotatnikStrona')
+    navigation.navigate('Dodaj Notatki')
   }
 
   
@@ -104,7 +104,7 @@ const Notebook = ({ route, navigation }) => {
         columnWrapperStyle={{justifyContent:'space-around'}}
         renderItem={({ item })=>(
           <Pressable onPress={() =>
-            navigation.navigate('NotatnikEdytuj',{nazwa:item.nazwa , opis:item.opis})
+            navigation.navigate('Edytuj Notatki',{nazwa:item.nazwa , opis:item.opis})
           }>
             <Box style={styles.boxes} shadow={9}>
               <Text style={styles.title}numberOfLines={1} ellipsizeMode='tail' >
