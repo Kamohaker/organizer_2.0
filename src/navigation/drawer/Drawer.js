@@ -60,12 +60,12 @@ export function DrawerNavigator  ()  {
         ),
         routes: props.state.routes.filter(
           (route) =>
-            route.name !== 'Dodaj Notatni' &&
+            route.name !== 'Dodaj Notatki' &&
             route.name !== 'Edytuj Notatki' &&
             route.name !== 'Edytuj Kontakt' &&
             route.name !== 'Dodaj Kontakt' &&
             route.name !== 'Dodaj Linki' &&
-            route.name !== 'Edytuj Mail' &&
+            route.name !== 'Edytuj Linki' &&
             route.name !== 'Dodaj Mail' &&
             route.name !== 'Edytuj Mail' &&
             route.name !== 'Dodaj Prowadzących' &&

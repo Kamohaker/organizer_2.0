@@ -52,8 +52,8 @@ const timeToString = (time) => {
 
 const Timetable = ({ route,navigation }) => {
   const from = route?.params?.from
-  //const url = 'http://192.168.0.186/organizer/index_timetable.php';//dom
-  const url = 'http://192.168.1.209/organizer/index_timetable.php';//aka
+  const url = 'http://192.168.0.186/organizer/index_timetable.php';//dom
+  //const url = 'http://192.168.1.209/organizer/index_timetable.php';//aka
 
   const [data, setData] = useState([]);
   const [items, setItems] = useState({});

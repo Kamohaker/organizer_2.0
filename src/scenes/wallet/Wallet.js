@@ -40,8 +40,8 @@ const styles = StyleSheet.create({
 const Wallet = ({route,navigation}) => {
   const from = route?.params?.from
 
-  //const url = 'http://192.168.0.186/organizer/index_wallet.php';//dom
-  const url = 'http://192.168.1.209/organizer/index_wallet.php';//aka
+  const url = 'http://192.168.0.186/organizer/index_wallet.php';//dom
+  //const url = 'http://192.168.1.209/organizer/index_wallet.php';//aka
 
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState('');
@@ -128,14 +128,15 @@ const Wallet = ({route,navigation}) => {
             <HStack py='1' >
               <Avatar size="60px" mx='1' backgroundColor={randomColor()}>{getFirstLetterFrom(item.nazwa)}</Avatar>
               <Text  numberOfLines={1} ellipsizeMode='tail'  bold mx='4' my='4'>
-                  { ((item.nazwa).length > 7) ? 
-                  (((item.nazwa).substring(0,7)) + '...') : item.nazwa }
+                  { ((item.nazwa).length > 5) ? 
+                  (((item.nazwa).substring(0,5)) + '...') : item.nazwa }
               </Text>
               <Divider orientation="vertical" mx="2" _light={{
                   background:colors.blue
               }}  />
               <Text  mx='4' my='4'>
-                  {item.num_telefonu}
+              { ((item.num_telefonu).length > 7) ? 
+                  (((item.num_telefonu).substring(0,7)) + '...') : item.num_telefonu }
               </Text>
               <Divider orientation="vertical" mx="2" _light={{
                   background:colors.blue
