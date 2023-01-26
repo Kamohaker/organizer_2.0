@@ -136,14 +136,14 @@ const Wallet = ({route,navigation}) => {
               }}  />
               <Text  mx='4' my='4'>
               { ((item.num_telefonu).length > 7) ? 
-                  (((item.num_telefonu).substring(0,7)) + '...') : item.num_telefonu }
+                  (((item.num_telefonu).substring(0,0)) + '*******') : item.num_telefonu }
               </Text>
               <Divider orientation="vertical" mx="2" _light={{
                   background:colors.blue
               }}  />
               <Text  mx='4' my='4'>
                 { ((item.num_konta).length > 10) ? 
-                 (((item.num_konta).substring(0,7)) + '...') : item.num_konta }
+                 (((item.num_konta).substring(0,0)) + '###########') : item.num_konta }
               </Text>
             </HStack>
           </Box>

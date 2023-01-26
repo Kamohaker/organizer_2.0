@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
 const Links = ({route,navigation}) => {
   const from = route?.params?.from
  
-  const url = 'http://192.168.0.186/organizer/index_links.php';//dpm
+  const url = 'http://192.168.0.186/organizer/index_links.php';//dom
   //const url = 'http://192.168.1.209/organizer/index_links.php';//aka
  
   const [data, setData] = useState([]);
@@ -52,10 +52,7 @@ const Links = ({route,navigation}) => {
   useEffect(()=>{
     const focusHandler = navigation.addListener('focus', () => {
       axios.get(url).then(response =>{
-    
-        setData(response.data) 
-       // console.log(response.data)
-    
+        setData(response.data)          
           })
         .catch(err=> console.log(err))
   } ); 

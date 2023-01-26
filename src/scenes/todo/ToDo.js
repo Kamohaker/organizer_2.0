@@ -178,7 +178,6 @@ const handleOnPress = contact => {
   if (selectedItems.length) {
     return selectItems(contact);
   }
-  // here you can add you code what do you want if user just do single tap
   console.log('pressed');
 };
 
