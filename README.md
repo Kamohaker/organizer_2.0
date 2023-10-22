@@ -7,7 +7,11 @@ Phone app to manage time. App is create to support students. Aplication include 
 App is build with React Native framework. Main language is JavaScript. In project I used Native Base library.  
 
 ### Instalation 
-To run aplication Node.js, Expo are require.
+To run aplication Node.js, Expo and Xampp are require.
+
+Database setup:
+1.Copy organizer folder from database folder to htdocs on your pc.
+2.Run file organizer.sql in your database on Xampp server.
 
 Project download:
 1. Clone a Git repository with the command: git clone https://github.com/Kamohaker/organizer_2.0.git
